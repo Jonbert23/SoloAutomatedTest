@@ -1,0 +1,64 @@
+<div id="provider_filter_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Provider Filter Test</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Searched Provider</th>
+                            <th>Patient</th>
+                            <th>Procedure</th>
+                            <th>Unsearch Provider</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Wunsch, Cicero</td>
+                            <td>Cleta Quitzon</td>
+                            <td>D0120, D0272, D1120, D1208</td>
+                            <td>None</td>
+                            <td>Pass</td>
+                        </tr>
+                        <tr>
+                            <td>Wehner, Elsa</td>
+                            <td>Rosalia Harber</td>
+                            <td>D2391, D2393</td>
+                            <td>None</td>
+                            <td>Pass</td>
+                        </tr>
+                        <tr>
+                            <td>Murray, Cloyd</td>
+                            <td>Corene Bednar</td>
+                            <td>N/A</td>
+                            <td>Wehner, Elsa</td>
+                            <td>Fail</td>
+                        </tr>
+                        <tr>
+                            <td>Murray, Cloyd</td>
+                            <td>Susie Schoen</td>
+                            <td>D2393</td>
+                            <td>None</td>
+                            <td>Pass</td>
+                        </tr>
+                        <tr>
+                            <td>Lang, Santino</td>
+                            <td>Jarrod Mertz</td>
+                            <td>D0120</td>
+                            <td>Murray, Cloyd</td>
+                            <td>Fail</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

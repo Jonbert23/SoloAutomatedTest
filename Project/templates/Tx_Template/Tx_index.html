@@ -1,0 +1,33 @@
+{% extends "Layout_template.html" %}
+
+{% block header %}  Tx Miner {% endblock header%}
+
+{% block test_button %} 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Mh_test_modal">
+        Run Test
+    </button>
+{% endblock test_button %}
+
+{% block content%}
+    <!--Search Section-->
+    {% include "Tx_template/Sections/Search_section.html" %}
+    <!--Info Section-->
+    {% include "Tx_template/Sections/Info_section.html" %}
+    <!--Breakdown Graph Section-->
+    {% include "Tx_template/Sections/Brk_graph_section.html" %} 
+    <!--Filter Graph Section-->
+    {% include "Tx_template/Sections/Filter_graph_section.html" %}
+    
+    {% include "Tx_template/Modal/Pending_sched_modal.html" %}
+    {% include "Tx_template/Modal/Pending_unsched_modal.html" %}
+    {% include "Tx_template/Modal/Active_production_modal.html" %}
+    {% include "Tx_template/Modal/Provider_filter_test.html" %}
+    {% include "Tx_template/Modal/Procedure_filter_test.html" %}
+    {% include "Tx_template/Modal/Patient_filter_modal.html" %}
+   
+{% endblock content%}
+
+{% block chart %}
+    <script src="{{ url_for('static', filename='charts/tx_brk_chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='charts/tx_filter_chart.js') }}"></script>
+{% endblock chart %}

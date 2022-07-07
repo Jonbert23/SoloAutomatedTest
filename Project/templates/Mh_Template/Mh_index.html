@@ -1,0 +1,57 @@
+{% extends "Layout_template.html" %}
+
+{% block header %}  Morning Huddle {% endblock header%}
+
+{% block test_button %} 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Mh_test_modal">
+        Run Test
+    </button>
+{% endblock test_button %}
+
+{% block content %}
+    
+    <!--Search Section-->
+    {% include "Mh_Template/Sections/Search_section.html" %}
+    <!--Info Section-->
+    {% include "Mh_Template/Sections/Info_section.html" %}
+    <div id="module">
+        <!--Breakdown Graph Section-->
+        {% include "Mh_Template/Sections/Breakdown_graph_section.html" %}
+        <!--Today breakdown Section-->
+        {% include "Mh_Template/Sections/Yesterday_brk_section.html" %}
+        <!--Yesterday breakdown Section-->
+        {% include "Mh_Template/Sections/Today_brk_section.html" %}
+        <!--Yesterday breakdown Section-->
+        {% include "Mh_Template/Sections/Tomorrow_brk_section.html" %}
+    </div>
+    <div id="mail">
+        <!--Mail Graph Section-->
+        {% include "Mh_Template/Sections/Mail_graph-section.html" %}
+        <!--Today Mail Section-->
+        {% include "Mh_Template/Sections/Yesterday_mail_section.html" %}
+        <!--Yesterday Mail Section-->
+        {% include "Mh_Template/Sections/Today_mail_section.html" %}
+        <!--Yesterday Mail Section-->
+        {% include "Mh_Template/Sections/Tomorrow_mail_section.html" %}
+    </div>
+    <div id="scorecard">
+        <!--Scorecard Graph Section-->
+        {% include "Mh_Template/Sections/Scorecard_graph_section.html" %}
+        <!--Yesterday Scorecard Section-->
+        {% include "Mh_Template/Sections/Yesterday_sc_section.html" %}
+        <!--Today Scorecard Section-->
+        {% include "Mh_Template/Sections/Today_sc_section.html" %}
+        <!--Today Scorecard Section-->
+        {% include "Mh_Template/Sections/Tomorrow_sc_section.html" %}
+    </div>
+    <!--Test Modal-->
+    {% include "Mh_Template/Modal/Mh_test_modal.html" %}
+
+{% endblock content %}
+
+{% block chart %}
+    <script src="{{ url_for('static', filename='charts/mh_brk_chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='charts/mh_display.js') }}"></script>
+    <script src="{{ url_for('static', filename='charts/mh_mail_chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='charts/mh_scorecard_chart.js') }}"></script>
+{% endblock chart %}

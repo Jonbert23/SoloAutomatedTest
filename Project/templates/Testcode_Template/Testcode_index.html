@@ -1,0 +1,121 @@
+{% extends "Layout_template.html"%}
+
+{% block header %}  Test Code {% endblock header%}
+
+{% block test_button %} 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generate-code-modal">
+        Generate Test Code
+    </button>
+{% endblock test_button %}
+
+{% block content %}
+     <div class="row">
+         <div class="col-xl-12">
+            <div class="card m-b-30">
+                <div class="card-body">  
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="test_code">Search Test Date</label> 
+                            <input type="month" class="form-control ml-4" id="test_code" placeholder="Enter Test Code Here">
+                        </div>
+                        <button type="submit" class="btn btn-primary ml-2">Search</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> 
+
+    <div class="row">
+        <div class="col-xl-4 align-items-stretch">
+            <div class="card">
+                <div class="card-heading p-4">
+                    <div class="mini-stat-icon float-right">
+                        <i class="mdi mdi-cube-outline bg-primary  text-white"></i>
+                    </div>
+                    <div>
+                        <h5 class="font-16">Total Test</h5>
+                    </div>
+                    <h3 class="mt-4">30</h3>
+                    <hr>
+                    <p class="text-muted mt-2 mb-0 pb-2">Month: Search Month</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 align-items-stretch">
+            <div class="card">
+                <div class="card-heading p-4">
+                    <div class="mini-stat-icon float-right">
+                        <i class="mdi mdi-cube-outline bg-primary  text-white"></i>
+                    </div>
+                    <div>
+                        <h5 class="font-16">Performed Test</h5>
+                    </div>
+                    <h3 class="mt-4">5 Test</h3>
+                    <hr>
+                    <p class="text-muted mt-2 mb-0 pb-2">Total Test :<span> 7 </span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 align-items-stretch">
+            <div class="card">
+                <div class="card-heading p-4">
+                    <div class="mini-stat-icon float-right">
+                        <i class="mdi mdi-briefcase-check bg-success text-white"></i>
+                    </div>
+                    <div>
+                        <h5 class="font-16">Total Revenue</h5>
+                    </div>
+                    <h3 class="mt-4">$73,265</h3>
+                    <hr>
+                    <p class="text-muted mt-2 mb-0 pb-2">Previous period<span class="float-right">88%</span></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+     <div class="row">
+        <div class="col-12">
+            <div class="card m-b-30">
+                <div class="card-body">
+                    <table id="test_code_table" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                        <tr>
+                            <th>Test Code</th>
+                            <th>Client</th>
+                            <th>Test Date</th>
+                            <th>Test Module</th>
+                            <th>Test Performed Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for test_code in test_code %}
+                            <tr>
+                                <td>{{test_code['test_code']}}</td>
+                                <td>{{test_code['client_name']}}</td>
+                                <td>{{test_code['test_date_from']}} - {{test_code['test_date_to']}}</td>
+                                <td>{{test_code['test_modules']}} out 7</td>
+                                <td>{{test_code.created_at.strftime("%d %b, %Y")}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->   
+
+    <!-- Modals --> 
+    {% include "Testcode_Template/Testcode_Modals/Testcode_modal.html" %}
+{% endblock content %}
+
+{% block datatable %}
+    <script>
+        $(document).ready(function () {
+            $('#test_code_table').DataTable();
+        });</script>
+{% endblock datatable %}

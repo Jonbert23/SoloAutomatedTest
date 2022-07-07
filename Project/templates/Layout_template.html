@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>UI Automation</title>
+    <meta content="Responsive admin theme build on top of Bootstrap 4" name="description" />
+    <meta content="Themesdesign" name="author" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}">
+
+    <!-- DataTables -->
+    <link href="{{ url_for('static', filename='css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
+
+    <!--SweetAlert js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Responsive datatable examples -->
+    <link href="{{ url_for('static', filename='css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/metismenu.min.css') }}" type="text/css">
+    <link href="{{ url_for('static', filename='css/icons.css') }}" rel="stylesheet  " type="text/css">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet " type="text/css">
+
+</head>
+
+<body><!-- Preloader -->
+    <div id="preloader">
+        <div class="text-center">
+            <img src="{{url_for('static', filename='images/preloader.gif')}}">
+            <p id="preloader-text">Running Automated Test</p>
+        </div>
+    </div>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Top Bar Start -->
+        <div class="topbar">
+
+            <!-- LOGO -->
+            <div class="topbar-left">
+                <a href="#" class="logo">
+                    <span class="logo-light">
+                            <!--<i class="mdi mdi-camera-control"></i>-->
+                            <img src="{{url_for('static', filename='images/logo.svg')}}" alt="user" style="width:20%">
+                             UI Automation
+                        </span>
+                    <span class="logo-sm">
+                            <!--<i class="mdi mdi-camera-control"></i>-->
+                            <img src="{{url_for('static', filename='images/logo.svg')}}" alt="user" style="width:50%">
+                        </span>
+                </a>
+            </div>
+
+            <nav class="navbar-custom">
+                <ul class="navbar-right list-inline float-right mb-0">
+
+                    <!-- full screen -->
+                    <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
+                        <a class="nav-link waves-effect" href="#" id="btn-fullscreen">
+                            <i class="mdi mdi-arrow-expand-all noti-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="dropdown notification-list list-inline-item">
+                        <div class="dropdown notification-list nav-pro-img">
+                            <a class="dropdown-toggle nav-link arrow-none nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="{{url_for('static', filename='images/user_pic.png')}}" alt="user" class="rounded-circle">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                <!-- item-->
+                                <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle"></i> Profile</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#register_user"><i class="mdi mdi-wallet"></i> Register User</a>
+                                <a class="dropdown-item d-block" href="#"><span class="badge badge-success float-right">11</span><i class="mdi mdi-settings"></i> Settings</a>
+                                <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline"></i> Lock screen</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="{{ url_for('auth.logout') }}"><i class="mdi mdi-power text-danger"></i> Logout</a>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <ul class="list-inline menu-left mb-0">
+                    <li class="float-left">
+                        <button class="button-menu-mobile open-left waves-effect">
+                            <i class="mdi mdi-menu"></i>
+                        </button>
+                    </li>
+                </ul>
+
+            </nav>
+
+        </div>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+            <div class="slimscroll-menu" id="remove-scroll">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu" id="side-menu">
+                        <li class="menu-title">Menu</li>
+                        <li>
+                            <a href="{{url_for('tcc.testcode')}}" class="waves-effect"><i class="fas fa-code-branch"></i><span> Test Code </span></a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url_for('cal.calendar') }}" class="waves-effect"><i class="icon-calendar"></i><span> Calendar </span></a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('dash.dashboard') }}" class="waves-effect"><i class="fas fa-chart-line"></i><span> Dashboard </span></a>
+                        </li>
+                        
+                        <li>
+                            <a href="{{ url_for('eod.eodForm') }}" class="waves-effect"><i class="mdi mdi-weather-sunset"></i><span> EOD Form </span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="waves-effect"><i class="fab fa-megaport"></i><span> Front Office </span></a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('mh.morning_huddle') }}" class="waves-effect"><i class="fas fa-cloud-sun"></i><span> Morning Huddle </span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="waves-effect"><i class="fas fa-users-cog"></i><span> Patient Portal </span></a>
+                        </li>
+                        
+                        <li>
+                            <a href="{{ url_for('tx.txMiner') }}" class="waves-effect"><i class="fas fa-file-medical-alt  "></i><span> Tx Miner </span></a>
+                        </li>
+
+                        <li>
+                            <a href="{{url_for('fm.figuresMatching')}}" class="waves-effect"><i class="fab fa-hubspot"></i><span> Figures Matching </span></a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url_for('test2.testing') }}" class="waves-effect"><i class="mdi mdi-beta"></i><span> Test Route </span></a>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <!-- Sidebar -->
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!-- Left Sidebar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="page-title-box">
+                        <div class="row align-items-center pb-3">
+                            <div class="col-sm-6">
+                                <h4 class="page-title">{% block header %} {% endblock %}</h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="breadcrumb float-right">
+                                    {% block test_button%}{% endblock %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% block content%} {% endblock %}
+                        <!-- end row -->
+                    </div>
+                    <!-- end page-title -->
+
+                </div>
+                <!-- container-fluid -->
+
+            </div>
+            <!-- content -->
+
+            <footer class="footer">
+                Automated Testing <span class="d-none d-sm-inline-block"> - Jarvis Analytics</span>
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+        {% include 'Auth/Register_modal.html'%}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for categories, message in messages %}
+                <script>
+                    Swal.fire({
+                        title:"{{ categories.title() }}!",
+                        text: "{{ message }}",
+                        icon: "{{ categories }}" == "danger" ? "error" : "{{ categories }}"
+                    })
+                </script>
+                {% endfor %}
+            {% endif%}
+        {% endwith%}
+
+        {% block swal %} {% endblock%}
+    </div>
+
+    
+    <!-- END wrapper -->
+
+    <!-- jQuery  -->
+    
+    <script src="{{ url_for('static', filename='js/unmin.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/metismenu.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slimscroll.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/waves.min.js') }}"></script>
+
+    <!-- App js -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+    <!-- Chart js -->
+    <script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
+    {% block chart %} {% endblock %}
+
+    <!-- Required datatable js -->
+    <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/responsive.bootstrap4.min.js') }}"></script>
+    {% block datatable %} {% endblock %}
+
+    {% block scripts %} {% endblock %}
+    <script>
+        document.getElementById("preloader").hidden=true;
+
+        function loader(){
+            $(document).ready(function(){
+                $("#preloader").fadeOut()
+            });
+        }
+    </script>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+{% extends "Layout_template.html" %}
+
+{% block header %}  Figures Matching {% endblock header%}
+
+{% block test_button %} 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Fm_test_modal">
+        Run Test
+    </button>
+{% endblock test_button %}
+
+{% block content %}
+    <!--Seacrh Section-->
+    {% include "Figures_Template/Sections/Search_section.html" %}
+    <!--Infro Section-->
+    {% include "Figures_Template/Sections/Info_section.html" %}
+
+    <!--Test Modal-->
+    {% include "Figures_Template/Modal/Fm_test_modal.html" %}
+
+    {% for data in dash_data%}
+       <p>{{  dash_data}}</p>
+    {% endfor %}
+    
+{% endblock content %}
+
+
+{% block swal %} 
+<script>
+    function info()
+    {
+        Swal.fire
+        ({ 
+            title: 'Ways of Running Figures Matching Test', 
+            html:' <div class="text-left"><p class="text-muted mt-2 mb-0">1. Pull data from database using testcode</p> <p class="text-muted mt-2 mb-0">2. Manually run the automation test</p></div>',
+            icon: 'info'
+        })
+    }
+</script>
+
+{% endblock%}

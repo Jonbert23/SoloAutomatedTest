@@ -1,0 +1,35 @@
+{% extends "Layout_template.html" %}
+
+{% block header %}  EOD Form {% endblock header%}
+
+{% block test_button %} 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eod_test_modal">
+        Run Test
+    </button>
+{% endblock test_button %}
+
+{% block content %}
+    
+    <!--Search Section-->
+    {% include "Eod_Template/Sections/Search_section.html" %}
+
+    <!--Info Section-->
+    {% include "Eod_Template/Sections/Info_section.html" %}
+
+    <!--Graph Section-->
+    {% include "Eod_Template/Sections/Graph_test_section.html" %}
+
+    <!--Breakdown Section-->
+    {% include "Eod_Template/Sections/Breakdown_test_section.html" %}
+
+    <!--Mail Section-->
+    {% include "Eod_Template/Sections/Mail_test_section.html" %}
+    
+    <!--Test Modal-->
+    {% include "Eod_Template/Modal/Eod_modal.html" %}
+
+{% endblock content %}
+
+{% block chart %}
+    <script src="{{ url_for('static', filename='charts/eod_form_chart.js') }}"></script>
+{% endblock chart %}

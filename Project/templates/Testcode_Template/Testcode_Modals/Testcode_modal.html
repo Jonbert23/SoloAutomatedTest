@@ -1,0 +1,118 @@
+
+<!-- /.Test Code Form----------------------------------------------------------------------------------------------------------------->
+<div id="generate-code-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Generate Test Code</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                 <form action="{{ url_for('tcc.add_testcode') }}" method="POST" enctype="multipart/form-data">
+                    
+                    <div class="form-group">
+                        <label>Client Name</label>
+                        <div class="pb-3">
+                            <input type="text" class="form-control" required name="client_name" placeholder="Enter Client Name"/>
+                        </div>
+                        <label>Client Link</label>
+                        <div class="pb-3">
+                            <input type="text" class="form-control" required name="client_link" placeholder="https://sample.stage.jarvisanalytics.com/"/>
+                        </div>
+
+                        <fieldset class="border p-2 pb-2">
+                            <legend  class="w-auto" style="font-size:13px; font-weight:bold">Client Login Credentials</legend>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Client Username</label>
+                                        <div class="pb-3">
+                                            <input type="text" placeholder="Enter Client Username" name="client_username" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Client Password</label>
+                                        <div class="pb-3">
+                                            <input type="password" placeholder="Enter Client Password" name="client_password"  class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                        </fieldset>
+                        <br>
+                        <fieldset class="border p-2">
+                            <legend  class="w-auto" style="font-size:13px; font-weight:bold">Test Date With Range Date Picker</legend>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Test Date: From</label>
+                                        <div class="pb-3">
+                                            <input type="text" placeholder="Enter Start Date" onfocus="(this.type='date')" name="test_date_from" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Test Date: To</label>
+                                        <div class="pb-3">
+                                            <input type="text" placeholder="Enter End Date" onfocus="(this.type='date')" name="test_date_to" class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                        </fieldset>
+
+                        <fieldset class="border p-2 mt-3">
+                            <legend  class="w-auto" style="font-size:13px; font-weight:bold">Test Date With Month Date Picker</legend>
+                            <label>Test Month</label>
+                            <div class="pb-3">
+                                <input type="text" placeholder="Enter Month" onfocus="(this.type='month')" name="test_month" class="form-control" required />
+                            </div>  
+                                
+                        </fieldset>
+
+                        <fieldset class="border p-2 mt-3">
+                            <legend  class="w-auto" style="font-size:13px; font-weight:bold">Test Date With Single Date Picker</legend>
+                            <label>Test Date</label>
+                            <div class="pb-3">
+                                <input type="text" placeholder="Enter Date" onfocus="(this.type='date')" name="test_date" class="form-control" required />
+                            </div>  
+                        </fieldset>
+                    </div>
+
+                    <div class="form-group m-b-0 float-right">
+                        <div>
+                            <button type="button" class="btn btn-secondary waves-effect m-l-5" data-dismiss="modal">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light" >
+                                Generate
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- /.Genarated Code----------------------------------------------------------------------------------------------------------------->
+<!-- <div id="generated_code" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Generated Test Code</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                 <div class="text-center">
+                    <h4> Your Test Code </h4>
+                    <h6 class="text-muted"> 4234FDDGDFG7678FGD </h6>
+                 </div>
+
+            </div>
+        </div>
+    </div>
+</div> -->
