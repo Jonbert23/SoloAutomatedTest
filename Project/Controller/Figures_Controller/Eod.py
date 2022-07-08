@@ -1,11 +1,11 @@
 import time
 from selenium.webdriver.common.by import By
-from Project.Controller.Figures_Controller.Figures_xpath import DashboardXpath
+from Project.Controller.Figures_Controller.Figures_xpath import EodXpath
 
-class Dashboard:
+class Eod:
     
     def main(driver, metrics):
-        print('Dashboard Data -------------------------------------------------------------------------')
+        print('EOD Data -------------------------------------------------------------------------')
         driver.implicitly_wait(1000000)
         net_prod = 'null'
         gross_prod = 'null'
@@ -13,30 +13,30 @@ class Dashboard:
         adj = 'null'
         npt = 'null'
         pts = 'null'
-        
+            
         for metric in metrics:
             if metric == "net_prod":
-                net_prod = Dashboard.netProd(driver)
+                net_prod = Eod.netProd(driver)
                 print(net_prod)
                 
             if metric == "gross_prod":
-                gross_prod = Dashboard.grossProd(driver)
+                gross_prod = Eod.grossProd(driver)
                 print(gross_prod)
                 
             if metric == "collection":
-                collection = Dashboard.collection(driver)
+                collection = Eod.collection(driver)
                 print(collection)
                 
             if metric == "adj":
-                adj = Dashboard.adjustment(driver)
+                adj = Eod.adjustment(driver)
                 print(adj)
                 
             if metric == "npt":
-                npt = Dashboard.npt(driver)
+                npt = Eod.npt(driver)
                 print(npt)
                 
             if metric == "pts":
-                pts = Dashboard.pts(driver)
+                pts = Eod.pts(driver)
                 print(pts)
                 
         data = {
@@ -51,27 +51,27 @@ class Dashboard:
         return data
 
     def netProd(driver):
-        net_prod = driver.find_element(By.XPATH, DashboardXpath.net_prod).text
+        net_prod = driver.find_element(By.XPATH, EodXpath.net_prod).get_attribute('value')
         return net_prod
     
     def grossProd(driver):
-        gross_prod = driver.find_element(By.XPATH, DashboardXpath.gross_prod).text
+        gross_prod = driver.find_element(By.XPATH, EodXpath.gross_prod).get_attribute('value')
         return gross_prod
     
     def collection(driver):
-        collection = driver.find_element(By.XPATH, DashboardXpath.collection).text
+        collection = driver.find_element(By.XPATH, EodXpath.collection).get_attribute('value')
         return collection
     
     def adjustment(driver):
-        adj = driver.find_element(By.XPATH, DashboardXpath.adj).text
+        adj = driver.find_element(By.XPATH, EodXpath.adj).get_attribute('value')
         return adj
     
     def npt(driver):
-        npt = driver.find_element(By.XPATH, DashboardXpath.npt).text
+        npt = driver.find_element(By.XPATH, EodXpath.npt).get_attribute('value')
         return npt
     
     def pts(driver):
-        pts = driver.find_element(By.XPATH, DashboardXpath.pts).text
+        pts = driver.find_element(By.XPATH, EodXpath.pts).get_attribute('value')
         return pts
     
     
