@@ -26,6 +26,7 @@
 
 {% block swal %} 
 <script>
+    
     function info()
     {
         Swal.fire
@@ -35,6 +36,32 @@
             icon: 'info'
         })
     }
+    document.getElementById("daily").hidden = true;
+    document.getElementById("monthly").hidden = true;
+
+    function type_of_test() {
+        var monthly_radio = document.getElementById("monthly_radio");
+        var daily_radio = document.getElementById("daily_radio");
+        
+        if (monthly_radio.checked == true){
+            document.getElementById("morning_huddle").hidden = true;
+            document.getElementById("daily").hidden = true;
+            document.getElementById("monthly").hidden = false;
+            document.getElementById("test_month").required = true;
+            document.getElementById("test_date").required = false;
+            document.getElementById("daily_radio").checked = false;
+        } 
+        if (daily_radio.checked == true){
+            document.getElementById("morning_huddle").hidden = false;
+            document.getElementById("daily").hidden = false;
+            document.getElementById("test_date").required = true;
+            document.getElementById("monthly").hidden = true;
+            document.getElementById("test_month").required = false;
+            document.getElementById("monthly_radio").checked = false;
+        } 
+    }
+    
 </script>
+
 
 {% endblock%}

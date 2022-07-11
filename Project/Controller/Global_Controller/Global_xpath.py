@@ -28,3 +28,17 @@ class DatePicker:
     def end_date_xpath(row, column):
         date = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr['+str(row)+']/td['+ str(column)+']'
         return date
+    
+
+class SinglePickerXpath:
+    month_year_xpath = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div/div/table/thead/tr/th[2]'
+    back_arrow = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div/div/table/thead/tr/th[1]'
+    next_arrow = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div/div/table/thead/tr/th[3]'
+    picker = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div'
+    
+    def single_date_xpath(row, column):
+        date = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div/div/table/tbody/tr['+str(row)+']/td['+str(column)+']'
+        return date
+    
+        
+    

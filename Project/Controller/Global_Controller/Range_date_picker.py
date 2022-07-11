@@ -1,24 +1,26 @@
 import time
+import datetime
 from selenium.webdriver.common.by import By
 from Project.Controller.Global_Controller.Global_xpath import DatePicker
 
 class DateFilter:
     
-    def rangePicker(driver):
-        driver.get('https://solo.next.jarvisanalytics.com/solo/results')
-        time.sleep(5) 
+    def rangePicker(driver, start_date, end_date):
+        time.sleep(3)
         driver.implicitly_wait(1000000)
+        
+        start_date = datetime.datetime.strptime(start_date,'%Y-%m-%d')
+        end_date = datetime.datetime.strptime(end_date,'%Y-%m-%d')
+        
         driver.find_element(By.XPATH, DatePicker.date_filter_button).click()
-        DateFilter.startYearMonth(driver)
-        driver.find_element(By.XPATH, DateFilter.start_day(driver, 1)).click()
-        DateFilter.endYearMonth(driver)
-        driver.find_element(By.XPATH, DateFilter.end_day(driver, 30)).click()
-        driver.find_element(By.XPATH, DatePicker.update_button).click()
         
+        DateFilter.startYearMonth(driver, start_date.month, start_date.year )
+        driver.find_element(By.XPATH, DateFilter.start_day(driver, start_date.day)).click()
         
+        DateFilter.endYearMonth(driver, end_date.month, end_date.year)
+        driver.find_element(By.XPATH, DateFilter.end_day(driver, end_date.day)).click()
         
-        time.sleep(10)
-        
+        # driver.find_element(By.XPATH, DatePicker.update_button).click()
         
         
     def start_day(driver, start_date):
@@ -67,10 +69,7 @@ class DateFilter:
         return end_date_xpath
     
     
-    def startYearMonth(driver):
-        start_month = DateFilter.monthConverter('June')
-        startyear = 2022
-        
+    def startYearMonth(driver, start_month, startyear):
         done = 'false'
         
         for i in range(5000):
@@ -89,6 +88,7 @@ class DateFilter:
                     if int(start_month) < int(month):
                         arrow_back = driver.find_element(By.XPATH, DatePicker.start_arrow_back)
                         arrow_back.click()
+
                     
                     if int(start_month) > int(month):
                         arrow_next = driver.find_element(By.XPATH, DatePicker.start_arrow_next)
@@ -103,10 +103,7 @@ class DateFilter:
             if done == 'true':
                 break
             
-    def endYearMonth(driver):
-        end_month = DateFilter.monthConverter('June')
-        end_year = 2022
-        
+    def endYearMonth(driver, end_month, end_year):
         done = 'false'
         
         for i in range(5000):
