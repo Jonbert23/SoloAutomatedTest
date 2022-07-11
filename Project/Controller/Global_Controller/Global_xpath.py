@@ -39,6 +39,11 @@ class SinglePickerXpath:
     def single_date_xpath(row, column):
         date = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div/div/table/tbody/tr['+str(row)+']/td['+str(column)+']'
         return date
-    
-        
-    
+
+class CalendarDateRangeXpath:
+    # --Calendar Date Range
+    date_picker = '//*[@class="vue-daterange-picker"]'
+    curr_monthfrom = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/thead/tr/th[2]"
+    curr_yearfrom = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/thead/tr/th[2]/div/input"
+    curr_monthto = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[2]/div/select"
+    curr_yearto = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[2]/div/input"
