@@ -1,29 +1,82 @@
 import time
 import datetime
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from Project.Controller.Global_Controller.Global_xpath import SinglePickerXpath
 
-class SingePicker:
+class SinglePicker:
     
-    def singleDatePicker(driver):
-        driver.get('https://solo.next.jarvisanalytics.com/end-of-day')
-        driver.implicitly_wait(1000000)
-        time.sleep(5)
+    def MH_DatePicker(driver, date):
+        date = datetime.datetime.strptime(date,'%Y-%m-%d')
+        wait = WebDriverWait(driver, 60)
+        element = wait.until(EC.element_to_be_clickable((By.XPATH, SinglePickerXpath.mh_loader)))
+        time.sleep(3)
         
         driver.find_element(By.XPATH, SinglePickerXpath.picker).click()
-        SingePicker.monthYearPicker(driver, 7, 2017)
-        SingePicker.dayPicker(driver, 15)
+        SinglePicker.MH_monthYearPicker(driver, date.month, date.year)
+        SinglePicker.dayPicker(driver, date.day)
+    
+    def EOD_DatePicker(driver, date):
+        date = datetime.datetime.strptime(date,'%Y-%m-%d')
+        driver.implicitly_wait(1000000)
+        wait = WebDriverWait(driver, 10)
+        element = wait.until(EC.visibility_of_element_located((By.XPATH, SinglePickerXpath.eod_loader)))
+        time.sleep(3)
+        
+        driver.find_element(By.XPATH, SinglePickerXpath.picker).click()
+        SinglePicker.EOD_monthYearPicker(driver, date.month, date.year)
+        SinglePicker.dayPicker(driver, date.day)
         
         
-        time.sleep(10)
-        
-    def monthYearPicker(driver, month, year):
+    def EOD_monthYearPicker(driver, month, year):
         done = 'false'
-        
+        month_year = driver.find_element(By.XPATH, SinglePickerXpath.month_year_xpath).text
         for i in range(5000):
             scrip_year = driver.find_element(By.XPATH, SinglePickerXpath.month_year_xpath).text
             cal_year = scrip_year[4:10]
+
+            if int(year) < int(cal_year):
+                arrow_back = driver.find_element(By.XPATH, SinglePickerXpath.back_arrow)
+                arrow_back.click()
+                #print('(year) < (cal_year):' +str(year)+' '+str(cal_year))
+                
+            if int(year) > int(cal_year):
+                arrow_next = driver.find_element(By.XPATH,SinglePickerXpath.next_arrow)
+                arrow_next.click()
+                #print('(year) > (cal_year):' +str(year)+' '+str(cal_year))
+                
+            if int(year) == int(cal_year):
+                #print('(year) < (cal_year):' +str(year)+' '+str(cal_year))
+                for i in range(13):
+                    scrip_month = driver.find_element(By.XPATH, SinglePickerXpath.month_year_xpath).text
+                    cal_month = SinglePicker.monthConverter(scrip_month[0:3])
+                    if int(month) < int(cal_month):
+                        arrow_back = driver.find_element(By.XPATH, SinglePickerXpath.back_arrow)
+                        arrow_back.click()
+                        #print('(month) < (cal_month):' +str(month)+' '+str(cal_month))
+                        
+                    if int(month) > int(cal_month):
+                        arrow_next = driver.find_element(By.XPATH,SinglePickerXpath.next_arrow)
+                        arrow_next.click()
+                        #print('(month) > (cal_month):' +str(month)+' '+str(cal_month))
+                        
+                    if int(month) == int(cal_month):
+                        #print('(month) == (cal_month):' +str(month)+' '+str(cal_month))
+                        done = 'true'
+                    
+                    if done == 'true':
+                        break 
+                
+            if done == 'true':
+                break 
             
+    def MH_monthYearPicker(driver, month, year):
+        done = 'false'
+        
+        for i in range(5000):
+            cal_year = driver.find_element(By.XPATH, SinglePickerXpath.year).get_attribute('value')
             if int(year) < int(cal_year):
                 arrow_back = driver.find_element(By.XPATH, SinglePickerXpath.back_arrow)
                 arrow_back.click()
@@ -34,8 +87,7 @@ class SingePicker:
                 
             if int(year) == int(cal_year):
                 for i in range(13):
-                    scrip_month = driver.find_element(By.XPATH, SinglePickerXpath.month_year_xpath).text
-                    cal_month = SingePicker.monthConverter(scrip_month[0:3])
+                    cal_month = driver.find_element(By.XPATH, SinglePickerXpath.month).get_attribute('value')
                     if int(month) < int(cal_month):
                         arrow_back = driver.find_element(By.XPATH, SinglePickerXpath.back_arrow)
                         arrow_back.click()
@@ -51,7 +103,7 @@ class SingePicker:
                         break 
                 
             if done == 'true':
-                break 
+                break
             
     def dayPicker(driver, day):
         see_start_date = 'false'
@@ -85,7 +137,7 @@ class SingePicker:
         if month == 'Mar':
             month_value = 3
         if month == 'Apr':
-            month_value == 4
+            month_value = 4
         if month == 'May':
             month_value = 5
         if month == 'Jun':

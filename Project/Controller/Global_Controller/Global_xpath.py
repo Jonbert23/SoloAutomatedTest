@@ -15,6 +15,7 @@ class DatePicker:
     start_arrow_next = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/thead/tr/th[3]'
     start_year = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/thead/tr/th[2]/div/input'
     start_month = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/thead/tr/th[2]/div/select'
+                  
     
     end_arrow_back = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[1]'
     end_arrow_next = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[3]'
@@ -35,6 +36,16 @@ class SinglePickerXpath:
     back_arrow = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div/div/table/thead/tr/th[1]'
     next_arrow = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div/div/table/thead/tr/th[3]'
     picker = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div'
+    eod_loader = '/html/body/div[1]/main/div[2]/div[3]/div[1]/div/form/div/div[2]/div[9]/div[2]/input'
+    mh_loader = '/html/body/div[1]/main/div[1]/div/div/div/div[4]/button'
+    
+    #Morning Huddle
+    year = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div/div/table/thead/tr/th[2]/div/input'
+    month = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div/div/table/thead/tr/th[2]/div/select'
+    
+    #Module name
+    mh_title = '/html/body/div[1]/main/div[1]/div/h2'
+    eod_title = '/html/body/div[1]/main/div[1]/div/h1'
     
     def single_date_xpath(row, column):
         date = '/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div/div/table/tbody/tr['+str(row)+']/td['+str(column)+']'

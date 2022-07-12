@@ -1,5 +1,5 @@
 #Importing Flask Dependecies
-from flask import Blueprint, render_template, url_for, request, redirect
+from flask import Blueprint, render_template, url_for, request, redirect,flash
 from flask_login import login_required, current_user
 import time
 import datetime
@@ -15,7 +15,9 @@ from Project.Controller.Global_Controller.Global_test import Login
 from Project.Controller.Figures_Controller.Dashboard import Dashboard
 from Project.Controller.Figures_Controller.Eod import Eod
 from Project.Controller.Figures_Controller.Calendar import Calendar
-from Project.Controller.Global_Controller.Single_date_picker import SingePicker
+from Project.Controller.Global_Controller.Single_date_picker import SinglePicker
+from Project.Controller.Global_Controller.Range_date_picker import DateFilter
+
 fm = Blueprint('fm', __name__)
 
 @fm.route("/figures-matching",methods=['GET', 'POST'])
@@ -39,22 +41,20 @@ def figuresMatching():
         
         # Calling Login Global Test -----------------------------------------------------------------
         Login.login(driver, client_url, client_username, client_password)
-        driver.implicitly_wait(1000000)
         
-        SingePicker.singleDatePicker(driver)
         
        
-        # for module in modules:
-        #     if module == "eod":
-        #         driver.get('https://solo.next.jarvisanalytics.com/end-of-day')
-        #         Eod.main(driver, metrics)
+        for module in modules:
+            if module == "eod":
+                driver.get('https://solo.next.jarvisanalytics.com/end-of-day')
+                Eod.main(driver, metrics, test_day)
                 
-        #     if module == "dashboard":
-        #         Dashboard.main(driver, metrics, client_url, test_type, test_month, test_day)
+            if module == "dashboard":
+                Dashboard.main(driver, metrics, client_url, test_type, test_month, test_day)
                 
-        #     if module == "calendar":
-        #         driver.get('https://solo.next.jarvisanalytics.com/calendar/appointments')
-        #         Calendar.main(driver, metrics)
+            if module == "calendar":
+                driver.get('https://solo.next.jarvisanalytics.com/calendar/appointments')
+                Calendar.main(driver, metrics, test_day)
         
         driver.quit()
         

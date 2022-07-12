@@ -1,10 +1,11 @@
 import time
 from selenium.webdriver.common.by import By
 from Project.Controller.Figures_Controller.Figures_xpath import EodXpath
+from Project.Controller.Global_Controller.Single_date_picker import SinglePicker
 
 class Eod:
     
-    def main(driver, metrics):
+    def main(driver, metrics, test_day):
         print('EOD Data -------------------------------------------------------------------------')
         driver.implicitly_wait(1000000)
         net_prod = 'null'
@@ -13,7 +14,9 @@ class Eod:
         adj = 'null'
         npt = 'null'
         pts = 'null'
-            
+        
+        SinglePicker.EOD_DatePicker(driver, test_day)
+
         for metric in metrics:
             if metric == "net_prod":
                 net_prod = Eod.netProd(driver)
