@@ -8,12 +8,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                 <form action="#">
+                 <form action="{{ url_for('eod.eodForm') }}" method="POST" enctype="multipart/form-data">
                     
                     <div class="form-group">
                         <label>Test Code</label>
                         <div>
-                            <input type="text" class="form-control" required placeholder="Enter The Test Code"/>
+                            <input name="testcode" type="text" class="form-control" required placeholder="Enter The Test Code"/>
                         </div>
                     </div>
 
