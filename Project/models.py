@@ -80,6 +80,32 @@ class CalendarApptPerDayTest(UserMixin, db.Model):
     status = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False)
+    
+class EodBreakdownTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    collection_main = db.Column(db.String(100))
+    collection_bd = db.Column(db.String(100))
+    adjustments_main = db.Column(db.String(100))
+    adjustments_bd = db.Column(db.String(100))
+    case_accpt_main = db.Column(db.String(100))
+    case_accpt_bd = db.Column(db.String(100))
+    miss_ref_main = db.Column(db.String(100))
+    miss_ref_bd = db.Column(db.String(100))
+    no_show_main = db.Column(db.String(100))
+    no_show_bd = db.Column(db.String(100))
+    daily_coll_main = db.Column(db.String(100))
+    daily_coll_bd = db.Column(db.String(100))
+    hyg_reapp_main = db.Column(db.String(100))
+    hyg_reapp_bd = db.Column(db.String(100))
+    new_patient_main = db.Column(db.String(100))
+    new_patient_bd = db.Column(db.String(100))
+    sd_treat_main = db.Column(db.String(100))
+    sd_treat_bd = db.Column(db.String(100))
+    pt_portion_main = db.Column(db.String(100))
+    pt_portion_bd = db.Column(db.String(100))
+
 
 
     
