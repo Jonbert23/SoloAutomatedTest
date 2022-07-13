@@ -25,7 +25,7 @@ def providerFilterTest(driver, test_code):
 
     getProvider = CalendarFilterUse.query.filter_by(test_code=test_code).filter_by(filter_name='Provider Filter').order_by(CalendarFilterUse.id.desc()).first()
 
-    stopperGetLoc = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div/div[1]/table/tbody/tr[1]/td[1]/span/span/span").text
+    stopperGetLoc = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div[1]/table/tbody/tr[1]/td[1]/span/span").text
 
     clickProviderFilterButton = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[1]/div/div[1]/div/button")
     clickProviderFilterButton.click()
@@ -52,9 +52,9 @@ def providerFilterTest(driver, test_code):
         clickApplyButton = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[1]/div/div[1]/div/div/div[3]/button[2]")
         clickApplyButton.click()
 
-        stopperGetLoc = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div/div[1]/table/tbody/tr[1]/td[1]/span/span/span").text
+        stopperGetLoc = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div[1]/table/tbody/tr[1]/td[1]/span/span").text
 
-        getText = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div/div[2]/div[1]/div[2]/span").text
+        getText = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div[2]/div[1]/div[2]/span").text
         splitNumberOfItems = getText.split("-")
         countData = splitNumberOfItems[-1]
 
@@ -64,18 +64,18 @@ def providerFilterTest(driver, test_code):
         proc_code_fail = ''
         unsearch_provider = ''
         for y in range(int(countData)):  
-            getProviderTextTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div/div[1]/table/tbody/tr["+str(y+1)+"]/td[13]/span/span[1]/span").text
+            getProviderTextTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div[1]/table/tbody/tr["+str(y+1)+"]/td[13]/span/span[1]/span").text
             
             if getProviderText == getProviderTextTable:
-                pts_name_pass = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div/div[1]/table/tbody/tr["+str(y+1)+"]/td[2]/span/span[1]/span").text
-                proc_code_pass = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div/div[1]/table/tbody/tr["+str(y+1)+"]/td[14]").text
+                pts_name_pass = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div[1]/table/tbody/tr["+str(y+1)+"]/td[2]/span/span[1]/span").text
+                proc_code_pass = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div[1]/table/tbody/tr["+str(y+1)+"]/td[14]").text
                 totalPass = totalPass + 1
             else:
-                pts_name_fail = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div/div[1]/table/tbody/tr["+str(y+1)+"]/td[2]/span/span[1]/span").text
-                proc_code_fail = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div/div[1]/table/tbody/tr["+str(y+1)+"]/td[14]").text
-                unsearch_provider = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div/div[1]/table/tbody/tr["+str(y+1)+"]/td[13]/span/span[1]/span").text
+                pts_name_fail = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div[1]/table/tbody/tr["+str(y+1)+"]/td[2]/span/span[1]/span").text
+                proc_code_fail = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div[1]/table/tbody/tr["+str(y+1)+"]/td[14]").text
+                unsearch_provider = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div[1]/table/tbody/tr["+str(y+1)+"]/td[13]/span/span[1]/span").text
                 totalFail = totalFail + 1
-        stopperGetLoc = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div/div[1]/table/tbody/tr[1]/td[1]/span/span/span").text
+        stopperGetLoc = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/span/div[2]/div/div[2]/div[1]/table/tbody/tr[1]/td[1]/span/span/span").text
 
         if totalFail == 0:
             new_calendar_testing = CalendarFilterTesting(user_id = current_user.id,
