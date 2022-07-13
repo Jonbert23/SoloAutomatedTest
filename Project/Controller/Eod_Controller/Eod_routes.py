@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Blueprint, render_template, url_for, request, redirect
 from flask_login import login_required, current_user
 from webdriver_manager.chrome import ChromeDriverManager
@@ -33,29 +32,35 @@ def eodForm():
         d = DesiredCapabilities.CHROME
         d['loggingPrefs'] = {'browser': 'ERROR'}
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), desired_capabilities=d)
-        Login.login(driver, f"{testcode_info.client_link}end-of-day", testcode_info.client_username, testcode_info.client_password)
+        login = Login.login(driver, f"{testcode_info.client_link}end-of-day", testcode_info.client_username, testcode_info.client_password)
         
-        if not driver:
-            return False
+        if login and driver:
 
-        date = {
-            "month": testcode_date[1],
-            "day": testcode_date[2],
-            "year": testcode_date[0]
-        }
+            date = {
+                "month": testcode_date[1],
+                "day": testcode_date[2],
+                "year": testcode_date[0]
+            }
 
-        result = testEod(driver, date)
-        storeTest(result, testcode)
+            # SET DATE IN EOD
+            setDate(driver, date['month'], date['day'], date['year'])
 
+            # TEST EOD METRICS
+            bd_result = breakdownTest(driver)
+            email_result = emailTest(driver)
+
+            driver.quit()
+
+            storeTest(bd_result, testcode)
     else:
-        testcode = request.args.get('testcode')
+        testcode = request.args.get('testcode').lower() if request.args.get('testcode') else None
 
-    last_test = EodBreakdownTest.query.order_by(EodBreakdownTest.id.desc()).first()
     if testcode and not testcode_info:
         testcode_info = TestCodes.query.filter_by(test_code=testcode).first()
+        last_test = EodBreakdownTest.query.filter_by(test_code=testcode).order_by(EodBreakdownTest.id.desc()).first()
     else:
-        if last_test:
-            testcode_info = TestCodes.query.filter_by(test_code=last_test.test_code).first()
+        last_test = EodBreakdownTest.query.order_by(EodBreakdownTest.id.desc()).first()
+        testcode_info = TestCodes.query.filter_by(test_code=last_test.test_code).first()
 
     return render_template('Eod_Template/Eod_index.html', last_test=last_test, testcode_info=testcode_info)
 
@@ -87,21 +92,21 @@ def storeTest(result, testcode):
     db.session.add(test_result)
     db.session.commit()
 
-def testEod(driver, date):
+def breakdownTest(driver):
     result = {}
 
     try:
-        month = date['month']
-        day = date['day']
-        year = date['year']
+        # month = date['month']
+        # day = date['day']
+        # year = date['year']
 
-        setDate(driver, month, day, year)
+        # setDate(driver, month, day, year)
 
         refresh_btn = ClickableElement('refresh_btn', EodSetupXpath.refresh_btn)
         refresh_btn.findElement(driver)
         refresh_btn.click(driver)
 
-        xpaths = getXpath()
+        xpaths = getBreakdownTestXpath()
 
         for metric in xpaths:
             
@@ -133,15 +138,27 @@ def testEod(driver, date):
             xpaths[metric]["breakdown"]["close_modal"].findElement(driver)
             xpaths[metric]["breakdown"]["close_modal"].click(driver)
 
-        print(result)
+        # print(result)
         result = cleanValues(result)
-        print(result)
+        # print(result)
         
     except Exception as e:
-        print(f"Some error in here {e}")
-    finally:
         driver.quit()
+        raise Exception(f"Exception while testing: {e}")
+    finally:
         return result
+
+def emailTest(driver):
+    main_xpath = getMainEmailTestXpath()
+
+    main_test_result = {}
+    for metric in main_xpath:
+        main_test_result[metric] = {}
+
+        main_xpath[metric].findElement(driver);
+        main_test_result[metric]['main'] = main_xpath[metric].getValue()
+
+    print(main_test_result)
 
 def setDate(driver, month, day, year):
     calendar_xpath = {
@@ -162,8 +179,7 @@ def setDate(driver, month, day, year):
     date_selector.initializeCalendar(driver)
     date_selector.selectDate(driver, date)
 
-
-def getXpath():
+def getBreakdownTestXpath():
     return {
         "collection": getMainBreakdown(EodXpath.collection, BreakdownXpath.collection, ModalMetricXpath.collection, ModalCloseBtnXpath.collection),
         "adjustments": getMainBreakdown(EodXpath.adjustments, BreakdownXpath.adjustments, ModalMetricXpath.adjustments, ModalCloseBtnXpath.adjustments),
@@ -193,3 +209,41 @@ def cleanValues(dict):
         dict[metric]['breakdown'] = round(float(re.sub("[^0-9.]", "", dict[metric]['breakdown'])))
     
     return dict
+
+def getMainEmailTestXpath():
+    return {
+        'booked_prod': EodXpath.booked_prod,
+        'daily_net_prod': EodXpath.daily_net_prod,
+        'daily_gross_prod': EodXpath.daily_gross_prod,
+        'ofc_sched_vs_goal': EodXpath.ofc_sched_vs_goal,
+        'general': EodXpath.general,
+        'ortho_prod': EodXpath.ortho_prod,
+        'perio_prod': EodXpath.perio_prod,
+        'endo': EodXpath.endo,
+        'oral_surgery_prod': EodXpath.oral_surgery_prod,
+        'clear_aligners': EodXpath.clear_aligners,
+        'num_providers': EodXpath.num_providers,
+        'adp': EodXpath.adp,
+        'specialty': EodXpath.specialty,
+        'total_pts_seen': EodXpath.total_pts_seen,
+        'total_office_visits': EodXpath.total_office_visits,
+        'total_appts_changed': EodXpath.total_appts_changed,
+        'total_appts_cancel': EodXpath.total_appts_cancel,
+        'guest_with_appt': EodXpath.guest_with_appt,
+        'hyg_reserve': EodXpath.hyg_reserve,
+        'hyg_cap': EodXpath.hyg_cap,
+        'react_made': EodXpath.react_made,
+        'unsched_treat': EodXpath.unsched_treat,
+        'restore_appts': EodXpath.restore_appts,
+        'recalls_made': EodXpath.recalls_made,
+        "collection": EodXpath.collection,
+        'adjustments': EodXpath.adjustments,
+        'case_acceptance': EodXpath.case_acceptance,
+        'missing_ref': EodXpath.missing_ref,
+        'no_show': EodXpath.no_show,
+        'daily_coll': EodXpath.daily_coll,
+        'hyg_reapp': EodXpath.hyg_reapp,
+        'new_patients': EodXpath.new_patients,
+        'same_day_treat': EodXpath.same_day_treat,
+        'pt_portion': EodXpath.pt_portion
+    }
