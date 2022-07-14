@@ -5,13 +5,19 @@ from sqlalchemy import null
 from Project.Controller.Figures_Controller.Figures_xpath import DashboardXpath
 from Project.Controller.Global_Controller.Range_date_picker import DateFilter
 from Project.Controller.Global_Controller.Global_xpath import DatePicker
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class Dashboard:
     
     def main(driver, metrics, client_url, test_type, test_month, test_day): 
         print('Dashboard Data -------------------------------------------------------------------------')
         driver.get(client_url+'/solo/results')
-        driver.implicitly_wait(1000000)
+        #driver.implicitly_wait(1000000)
+        
+        wait = WebDriverWait(driver, 60)
+        element = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/main/div[1]/div/div/div/div[4]/button')))
+        
         net_prod = 'null'
         gross_prod = 'null'
         collection = 'null'
@@ -28,23 +34,26 @@ class Dashboard:
             DateFilter.rangePicker(driver, start_date, end_date)
         
         driver.find_element(By.XPATH, DatePicker.update_button).click()
-        time.sleep(10)
         
         for metric in metrics:
             if metric == "net_prod":
-                net_prod = Dashboard.netProd(driver)
+                net_prod = Dashboard.getValue(driver, 'Net Production')
+                #net_prod = Dashboard.netProd(driver)
                 print(net_prod)
                 
             if metric == "gross_prod":
-                gross_prod = Dashboard.grossProd(driver)
+                gross_prod = Dashboard.getValue(driver, 'Gross Production')
+                #gross_prod = Dashboard.grossProd(driver)
                 print(gross_prod)
                 
             if metric == "collection":
-                collection = Dashboard.collection(driver)
+                collection = Dashboard.getValue(driver, 'Collection')
+                #collection = Dashboard.collection(driver)
                 print(collection)
                 
             if metric == "adj":
-                adj = Dashboard.adjustment(driver)
+                adj = Dashboard.getValue(driver, 'Adjustment')
+                #adj = Dashboard.adjustment(driver)
                 print(adj)
                 
             if metric == "npt":
@@ -54,17 +63,34 @@ class Dashboard:
             if metric == "pts":
                 pts = Dashboard.pts(driver)
                 print(pts)
-                
-        data = {
-            'GrossProd': gross_prod,
-            'NetProd': net_prod,
-            'Collection': collection,
-            'Adjustment': adj,
-            'Npt': npt,
-            'Pts': pts
-        }
-        print(data)
+        
+        data = []
+        data.append(gross_prod)
+        data.append(net_prod)
+        data.append(collection)
+        data.append(adj)
+        data.append(npt)
+        data.append(pts)
+        # print(data)
         return data
+    
+    def getValue(driver, metric_name):
+        value = 'null'
+        done = 'false'
+        rows = driver.find_elements(By.XPATH, DashboardXpath.metric_counter)
+        rows = len(rows)
+
+        for row in range(rows + 1):
+            if row > 0:
+                metric_row = driver.find_element(By.XPATH, DashboardXpath.metric_name(row)).text
+                #print(metric_row)
+                if metric_row == metric_name:
+                    value = driver.find_element(By.XPATH, DashboardXpath.metric_value(row)).text
+                    done = 'true'
+            if done == 'true':
+                break
+        return value
+    
 
     def netProd(driver):
         net_prod = driver.find_element(By.XPATH, DashboardXpath.net_prod).text

@@ -15,8 +15,10 @@ from Project.Controller.Global_Controller.Global_test import Login
 from Project.Controller.Figures_Controller.Dashboard import Dashboard
 from Project.Controller.Figures_Controller.Eod import Eod
 from Project.Controller.Figures_Controller.Calendar import Calendar
+from Project.Controller.Figures_Controller.Mh import MorningHuddle
 from Project.Controller.Global_Controller.Single_date_picker import SinglePicker
 from Project.Controller.Global_Controller.Range_date_picker import DateFilter
+
 
 fm = Blueprint('fm', __name__)
 
@@ -33,7 +35,9 @@ def figuresMatching():
         test_type = request.form['test_type'] 
         test_month = request.form['test_month']
         test_day = request.form['test_day']
-            
+        param = request.form['param']
+        
+        print(param)
         # Declaring Selenium driver--------------------------------------------------------------------
         options = Options()
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -42,19 +46,19 @@ def figuresMatching():
         # Calling Login Global Test -----------------------------------------------------------------
         Login.login(driver, client_url, client_username, client_password)
         
-        
-       
         for module in modules:
             if module == "eod":
-                driver.get('https://solo.next.jarvisanalytics.com/end-of-day')
-                Eod.main(driver, metrics, test_day)
+                eod_data = Eod.main(driver, metrics, client_url, test_type, test_month, test_day)
                 
             if module == "dashboard":
-                Dashboard.main(driver, metrics, client_url, test_type, test_month, test_day)
+                dash_data = Dashboard.main(driver, metrics, client_url, test_type, test_month, test_day)
+                print(dash_data[0])
                 
             if module == "calendar":
-                driver.get('https://solo.next.jarvisanalytics.com/calendar/appointments')
-                Calendar.main(driver, metrics, test_day)
+                calendar_data = Calendar.main(driver, metrics, client_url , test_month, param)
+                
+            if module == 'morning_huddle':
+                mh_data = MorningHuddle.main(driver, metrics, client_url, test_day, param)
         
         driver.quit()
         

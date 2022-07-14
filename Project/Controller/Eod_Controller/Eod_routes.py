@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # from crypt import methods
+=======
+#from crypt import methods
+>>>>>>> fe7594e4ed023e9b70310bd3e16b5c3864273bfe
 from flask import Blueprint, render_template, url_for, request, redirect
 from flask_login import login_required, current_user
 from webdriver_manager.chrome import ChromeDriverManager
