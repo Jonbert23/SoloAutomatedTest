@@ -80,6 +80,22 @@ class CalendarApptPerDayTest(UserMixin, db.Model):
     status = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False)
+
+class CalendarApptValidation(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    test_date_from = db.Column(db.String(100))
+    test_date_to = db.Column(db.String(100))
+    pts_name = db.Column(db.String(100))
+    pts_procedure = db.Column(db.String(100))
+    pts_providers = db.Column(db.String(100))
+    pts_appt_status = db.Column(db.String(100))
+    pts_amount = db.Column(db.String(100))
+    pts_date = db.Column(db.String(100))
+    pts_status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
     
 class EodBreakdownTest(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

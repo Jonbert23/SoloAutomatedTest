@@ -1,5 +1,5 @@
 <div id="procedure_filter_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mt-0" id="myModalLabel">Procedure Filter Test</h5>
@@ -20,42 +20,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            
-                            <td>D0120</td>
-                            <td>Wunsch, Cicero</td>
-                            <td>Cleta Quitzon</td>
-                            <td>None</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>D2391</td>
-                            <td>Wehner, Elsa</td>
-                            <td>Rosalia Harber</td>
-                            <td>None</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>D2393</td>
-                            <td>Corene Bednar</td>
-                            <td>Rosalia Harber</td>
-                            <td>D2393</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>D2393</td>
-                            <td>Susie Schoen</td>
-                            <td>Corene Bednar</td>
-                            <td>None</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>D2393</td>
-                            <td>Jarrod Mertz</td>
-                            <td>Wehner, Elsa</td>
-                            <td>N/A</td>
-                            <td>Fail</td>
-                        </tr>
+                        {% if getPassProcedureFilterTesting is defined %}
+                            {% for getPassProcedureFilterTesting in getPassProcedureFilterTesting %}
+                            <tr>
+                                <td>{{getPassProcedureFilterTesting['search_provider']}}</td>
+                                <td>{{getPassProcedureFilterTesting['patient_name']}}</td>
+                                <td>{{getPassProcedureFilterTesting['procedure_code']}}</td>
+                                <td>{{getPassProcedureFilterTesting['unsearch_provider']}}</td>
+                                <td>{{getPassProcedureFilterTesting['status']}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
 
