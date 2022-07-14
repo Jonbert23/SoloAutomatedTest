@@ -70,6 +70,9 @@ class EodBreakdownTest(UserMixin, db.Model):
     sd_treat_bd = db.Column(db.String(100))
     pt_portion_main = db.Column(db.String(100))
     pt_portion_bd = db.Column(db.String(100))
+    
+class FiguresMatching:
+    id = db.Column(db.Integer, primary_key=True)
 
 
 

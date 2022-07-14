@@ -58,3 +58,8 @@ class CalendarDateRangeXpath:
     curr_yearfrom = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/thead/tr/th[2]/div/input"
     curr_monthto = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[2]/div/select"
     curr_yearto = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[2]/div/input"
+    
+class CalendarMonthPicketXpath:
+    arrow_back = '/html/body/div[1]/main/div[2]/div/span/div[2]/div[2]/div/button[1]'
+    arrow_next = '/html/body/div[1]/main/div[2]/div/span/div[2]/div[2]/div/button[2]'
+    month_year = '/html/body/div[1]/main/div[2]/div/span/div[2]/div[2]/div/div/h4'
