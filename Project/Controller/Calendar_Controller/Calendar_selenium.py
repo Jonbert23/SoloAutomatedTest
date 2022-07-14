@@ -8,7 +8,10 @@ from flask import Blueprint, flash, render_template, url_for, request, redirect
 from .Calendar_Optional import calendar_provider
 from .Calendar_Optional import calendar_patient
 from .Calendar_Optional import calendar_procedure
+from .Calendar_Default import calendar_metric_test
+from .Calendar_Default import calendar_appt_per_day_test
 from ...models import CalendarFilterTesting
+from ...models import CalendarMetricTesting
 from ...models import CalendarFilterUse
 
 
@@ -29,32 +32,52 @@ def login(get_test_code, optional_test):
     loginButton.click()
     
     test_code = get_test_code.test_code
+    test_month = get_test_code.test_month
+    test_date = get_test_code.test_date
 
-    for option in optional_test:
-        print("--- "+option+" ---")
-        if option == "Provider Filter Test":
-            driver.implicitly_wait(1000000000)
-            driver.get('https://solo.next.jarvisanalytics.com/calendar/appointment-details')
+    checkIfAlreadyTestInMetric = CalendarMetricTesting.query.filter_by(test_code=test_code).first()
 
-            getProvider = CalendarFilterUse.query.filter_by(test_code=test_code).filter_by(filter_name='Provider Filter').order_by(CalendarFilterUse.id.desc()).first()
-            if getProvider:
-                driver.quit()
-                return "fail"
-            if not getProvider:
-                optionalData = calendar_provider.providerFilterTest(driver, test_code)
-        if option == "Procedure Filter Test":
-            driver.implicitly_wait(1000000000)
-            driver.get('https://solo.next.jarvisanalytics.com/calendar/appointment-details')
-            optionalData = calendar_procedure.procedureFilterTest(driver, test_code)
-        if option == "Patient Filter Test":
-            driver.implicitly_wait(1000000000)
-            driver.get('https://solo.next.jarvisanalytics.com/calendar/appointment-details')
 
-            getPatient = CalendarFilterUse.query.filter_by(test_code=test_code).filter_by(filter_name='Patient Filter').order_by(CalendarFilterUse.id.desc()).first()
-            if getProvider:
-                driver.quit()
-                return "fail"
-            if not getProvider:
-                optionalData = calendar_patient.patientFilterTest(driver, test_code)
+    if not checkIfAlreadyTestInMetric:
+        driver.implicitly_wait(1000000000)
+        driver.get('https://solo.next.jarvisanalytics.com/calendar/appointments')
+        optionalData = calendar_metric_test.metricTest(driver, test_code, test_month)
+
+
+    # driver.implicitly_wait(1000000000)
+    # driver.get('https://solo.next.jarvisanalytics.com/calendar/appointments/day')
+    # optionalData = calendar_appt_per_day_test.perDayTest(driver, test_code, test_date)
+
+    # for option in optional_test:
+    #     print("--- "+option+" ---")
+    #     if option == "Provider Filter":
+    #         driver.implicitly_wait(1000000000)
+    #         driver.get('https://solo.next.jarvisanalytics.com/calendar/appointment-details')
+
+    #         getProvider = CalendarFilterUse.query.filter_by(test_code=test_code).filter_by(filter_name='Provider Filter').order_by(CalendarFilterUse.id.desc()).first()
+    #         if getProvider:
+    #             driver.quit()
+    #             return "fail"
+    #         if not getProvider:
+    #             optionalData = calendar_provider.providerFilterTest(driver, test_code)
+    #     if option == "Procedure Filter":
+    #         driver.implicitly_wait(1000000000)
+    #         driver.get('https://solo.next.jarvisanalytics.com/calendar/appointment-details')
+    #         getProcedureCode = CalendarFilterUse.query.filter_by(test_code=test_code).filter_by(filter_name='Procedure Filter').order_by(CalendarFilterUse.id.desc()).first()
+    #         if getProvider:
+    #             driver.quit()
+    #             return "fail"
+    #         if not getProvider:
+    #             optionalData = calendar_procedure.procedureFilterTest(driver, test_code)
+    #     if option == "Patient Filter":
+    #         driver.implicitly_wait(1000000000)
+    #         driver.get('https://solo.next.jarvisanalytics.com/calendar/appointment-details')
+
+    #         getPatient = CalendarFilterUse.query.filter_by(test_code=test_code).filter_by(filter_name='Patient Filter').order_by(CalendarFilterUse.id.desc()).first()
+    #         if getProvider:
+    #             driver.quit()
+    #             return "fail"
+    #         if not getProvider:
+    #             optionalData = calendar_patient.patientFilterTest(driver, test_code)
 
     driver.quit()
