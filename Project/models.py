@@ -106,8 +106,33 @@ class EodBreakdownTest(UserMixin, db.Model):
     pt_portion_main = db.Column(db.String(100))
     pt_portion_bd = db.Column(db.String(100))
     
-class FiguresMatching:
+class FiguresMatching(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    test_code = db.Column(db.String(100), nullable=True)
+    client_url = db.Column(db.String(100), nullable=True)
+    test_type = db.Column(db.String(100), nullable=True)
+    query_param = db.Column(db.String(100), nullable=True)
+    test_date = db.Column(db.String(100), nullable=True)
+    dash_netProd = db.Column(db.String(100), nullable=True, default='N/A')
+    dash_grossProd = db.Column(db.String(100), nullable=True, default='N/A')
+    dash_collection = db.Column(db.String(100), nullable=True, default='N/A')
+    dash_adjusment = db.Column(db.String(100), nullable=True, default='N/A')
+    dash_npt = db.Column(db.String(100), nullable=True, default='N/A')
+    dash_pts = db.Column(db.String(100), nullable=True, default='N/A')
+    cal_netProd = db.Column(db.String(100), nullable=True, default='N/A')
+    cal_grossProd = db.Column(db.String(100), nullable=True, default='N/A')
+    cal_npt = db.Column(db.String(100), nullable=True, default='N/A')
+    eod_netProd = db.Column(db.String(100), nullable=True, default='N/A')
+    eod_grossProd = db.Column(db.String(100), nullable=True, default='N/A')
+    eod_collection = db.Column(db.String(100), nullable=True, default='N/A')
+    eod_adjusment = db.Column(db.String(100), nullable=True, default='N/A')
+    eod_npt = db.Column(db.String(100), nullable=True, default='N/A')
+    eod_pts = db.Column(db.String(100), nullable=True, default='N/A')
+    mh_netProd = db.Column(db.String(100), nullable=True, default='N/A')
+    mh_grossProd = db.Column(db.String(100), nullable=True, default='N/A')
+    mh_collection = db.Column(db.String(100), nullable=True, default='N/A')
+    mh_npt = db.Column(db.String(100), nullable=True, default='N/A')
+    mh_pts = db.Column(db.String(100), nullable=True, default='N/A')
 
 
 
