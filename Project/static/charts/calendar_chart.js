@@ -143,7 +143,7 @@
 (function app_val_per_day()
 {
     const sample = document.getElementById('app_val_per_day');
-    const myChart = new Chart(sample, {
+    const app_val_per_day = new Chart(sample, {
         type: 'doughnut',
         data: {
             labels: ['Pass', 'Fail'],
@@ -168,10 +168,10 @@
     });
 })();
 
-(function app_val_per_day()
+(function app_val()
 {
     const sample = document.getElementById('app_val');
-    const myChart = new Chart(sample, {
+    const app_val = new Chart(sample, {
         type: 'doughnut',
         data: {
             labels: ['Pass', 'Fail'],

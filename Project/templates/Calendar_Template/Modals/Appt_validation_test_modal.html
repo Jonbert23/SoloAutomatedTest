@@ -1,0 +1,45 @@
+<div id="appt_validation_test_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">METRIC TEST RESULT: PER MONTH</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                 
+                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Test Date From</th>
+                            <th>Test Date To</th>
+                            <th>PTS Name</th>
+                            <th>PTS Procedure Code</th>
+                            <th>PTS Provider</th>
+                            <th>PTS Date</th>
+                            <th>PTS Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if getApptValidation is defined %}
+                            {% for getApptValidation in getApptValidation %}
+                            <tr>
+                                <td>{{getApptValidation['test_date_from']}}</td>
+                                <td>{{getApptValidation['test_date_to']}}</td>
+                                <td>{{getApptValidation['pts_name']}}</td>
+                                <td>{{getApptValidation['pts_procedure']}}</td>
+                                <td>{{getApptValidation['pts_providers']}}</td>
+                                <td>{{getApptValidation['pts_date']}}</td>
+                                <td>{{getApptValidation['pts_status']}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>
