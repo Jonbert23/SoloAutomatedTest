@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, url_for, request, redirect,flash
 from flask_login import login_required, current_user
 import time
 import datetime
+import uuid
 #Importing Selenium Dependecies
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -18,13 +19,15 @@ from Project.Controller.Figures_Controller.Calendar import Calendar
 from Project.Controller.Figures_Controller.Mh import MorningHuddle
 from Project.Controller.Global_Controller.Single_date_picker import SinglePicker
 from Project.Controller.Global_Controller.Range_date_picker import DateFilter
+from Project.models import FiguresMatching
+from Project import db
+
 
 
 fm = Blueprint('fm', __name__)
 
 @fm.route("/figures-matching",methods=['GET', 'POST'])
 def figuresMatching():
-    
     if request.method == 'POST':
         #Request-------------------------------------------------------------------------------------
         modules = request.form.getlist('Module[]')
@@ -37,31 +40,97 @@ def figuresMatching():
         test_day = request.form['test_day']
         param = request.form['param']
         
-        print(param)
-        # Declaring Selenium driver--------------------------------------------------------------------
+        test_date = ''
+        if test_type == 'daily':
+            test_date = test_day
+        else:
+            test_date = test_month
+        
+        test_code = uuid.uuid4().hex
+        new_figures_matching = FiguresMatching(
+            user_id = current_user.id,
+            test_code = test_code,
+            client_url = client_url,
+            test_type  = test_type,
+            query_param  = param,
+            test_date  = test_date
+        )
+        db.session.add(new_figures_matching)
+        db.session.commit()
+        
+        #Declaring Selenium driver--------------------------------------------------------------------
         options = Options()
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
         
-        # Calling Login Global Test -----------------------------------------------------------------
+        #Calling Login Global Test -----------------------------------------------------------------
         Login.login(driver, client_url, client_username, client_password)
+        
         
         for module in modules:
             if module == "eod":
-                eod_data = Eod.main(driver, metrics, client_url, test_type, test_month, test_day)
+                eod_data = Eod.main(driver, metrics, client_url, test_type, test_month, test_day, test_code)
                 
             if module == "dashboard":
-                dash_data = Dashboard.main(driver, metrics, client_url, test_type, test_month, test_day)
-                print(dash_data[0])
+                dash_data = Dashboard.main(driver, metrics, client_url, test_type, test_month, test_day, test_code)
                 
             if module == "calendar":
-                calendar_data = Calendar.main(driver, metrics, client_url , test_month, param)
+                calendar_data = Calendar.main(driver, metrics, client_url , test_month, param, test_code)
                 
             if module == 'morning_huddle':
-                mh_data = MorningHuddle.main(driver, metrics, client_url, test_day, param)
+                mh_data = MorningHuddle.main(driver, metrics, client_url, test_day, param, test_code)
         
         driver.quit()
-        
-        return render_template('Figures_Template/Figures_index.html')
+        flash('Your Test Code: '+test_code, 'info')
     
-    return render_template('Figures_Template/Figures_index.html')
+    data = FiguresMatching.query.order_by(FiguresMatching.id.desc()).first()
+    net_prod_data = [data.dash_netProd, data.cal_netProd, data.eod_netProd, data.mh_netProd]
+    net_prod_result = Result.result(net_prod_data)
+    
+    gross_prod_data = [data.dash_grossProd, data.cal_grossProd, data.eod_grossProd, data.mh_grossProd ]
+    gross_prod_result = Result.result(gross_prod_data)
+    
+    collection_data = [data.dash_collection, data.eod_collection, data.mh_collection]
+    collection_result = Result.result(collection_data)
+    
+    adjustment_data = [data.dash_adjusment, data.eod_adjusment]
+    adjustment_result = Result.result(adjustment_data)
+    
+    pts_data = [data.dash_pts, data.eod_pts]
+    pts_result = Result.result(pts_data)
+    
+    npt_data = [data.dash_npt, data.cal_npt, data.eod_npt, data.mh_npt]
+    npt_result = Result.result(npt_data)
+    
+    
+    return render_template('Figures_Template/Figures_index.html', 
+                           data = data, 
+                           net_prod_result = net_prod_result,
+                           gross_prod_result = gross_prod_result,
+                           collection_result = collection_result,
+                           adjustment_result = adjustment_result,
+                           pts_result = pts_result,
+                           npt_result = npt_result)
+
+
+class Result:
+
+    def result(data_arary):
+        done = 'false'
+        test_result = 'N/A'       
+        for i in range(len(data_arary)):
+            for j in range(len(data_arary)):
+                if data_arary[i] != 'N/A' and data_arary[j] != 'N/A':
+                    data_arary[i] = data_arary[i].replace("$","").replace(",","").replace(" ","").replace("(","-").replace(")","")
+                    data_arary[j] = data_arary[j].replace("$","").replace(",","").replace(" ","").replace("(","-").replace(")","")
+                    
+                    if data_arary[i] ==  data_arary[j]:
+                        test_result = 'Pass'
+                    else:
+                        test_result = 'Fail'
+                        done = 'true'
+                if done == 'true':
+                    break
+            if done == 'true':
+                break
+        return test_result

@@ -124,6 +124,7 @@ class EodBreakdownTest(UserMixin, db.Model):
     
 class FiguresMatching(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
     test_code = db.Column(db.String(100), nullable=True)
     client_url = db.Column(db.String(100), nullable=True)
     test_type = db.Column(db.String(100), nullable=True)
@@ -149,6 +150,7 @@ class FiguresMatching(UserMixin, db.Model):
     mh_collection = db.Column(db.String(100), nullable=True, default='N/A')
     mh_npt = db.Column(db.String(100), nullable=True, default='N/A')
     mh_pts = db.Column(db.String(100), nullable=True, default='N/A')
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
 
 

@@ -9,10 +9,13 @@
 {% endblock test_button %}
 
 {% block content %}
+
     <!--Seacrh Section-->
     {% include "Figures_Template/Sections/Search_section.html" %}
     <!--Infro Section-->
     {% include "Figures_Template/Sections/Info_section.html" %}
+    <!--Figures Section-->
+    {% include "Figures_Template/Sections/Figures_section.html" %}
 
     <!--Test Modal-->
     {% include "Figures_Template/Modal/Fm_test_modal.html" %}
@@ -50,6 +53,7 @@
             document.getElementById("test_month").required = true;
             document.getElementById("test_date").required = false;
             document.getElementById("daily_radio").checked = false;
+            document.getElementById("calendar").hidden = false;
         } 
         if (daily_radio.checked == true){
             document.getElementById("morning_huddle").hidden = false;
@@ -58,9 +62,10 @@
             document.getElementById("monthly").hidden = true;
             document.getElementById("test_month").required = false;
             document.getElementById("monthly_radio").checked = false;
+            document.getElementById("calendar").hidden = true;
+            document.getElementById("calendar").checked = false;
         } 
     }
-    
 </script>
 
 
