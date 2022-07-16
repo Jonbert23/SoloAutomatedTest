@@ -3,7 +3,7 @@
 {% block header %}  Tx Miner {% endblock header%}
 
 {% block test_button %} 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Mh_test_modal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test_modal_txminer">
         Run Test
     </button>
 {% endblock test_button %}
@@ -24,6 +24,7 @@
     {% include "Tx_template/Modal/Provider_filter_test.html" %}
     {% include "Tx_template/Modal/Procedure_filter_test.html" %}
     {% include "Tx_template/Modal/Patient_filter_modal.html" %}
+    {% include "Tx_template/Modal/Test_modal.html" %}
    
 {% endblock content%}
 
