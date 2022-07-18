@@ -48,6 +48,8 @@ class Element:
         
 
 # InputElement, CollectionElement, and TextElement implements different getValue() and findElement().
+# These are mainly used for Breakdown test as some breakdown values(New patients and Missing referral) are in the form of list instead of indicating a total value.
+# However, it can be convenient to use these abstractions in order to wait for elements to load, and by simplifying actions like click()
 
 class InputElement(Element):
     def __init__(self, name, xpath):
@@ -225,12 +227,12 @@ class GmailXpath:
     @staticmethod
     def getEmailList():
         return CollectionElement('Emails', '/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[2]/div/div[1]/div/div/div[9]/div/div[1]/div[3]/div/table/tbody/tr')
-    
-    @staticmethod
-    def getArchiveBtn():
-        return ClickableElement('Archive', '//*[@id=":4"]/div[2]/div[1]/div/div[2]/div[3]/div')
 
-# Implementation that does not break when configuration is changed.
+    @staticmethod
+    def getFirstEmail():
+        # This will be used to get the email from EOD. A problem arises when the email arrives later than the opening of gmail itself.
+        return ClickableElement('First Email', '/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[2]/div/div[1]/div/div/div[8]/div/div[1]/div[3]/div/table/tbody/tr[1]')
+
 class EmailData:
     metrics_collection_xpath = '/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[2]/div/div[1]/div/div[2]/div/table/tr/td[1]/div[2]/div[2]/div/div[3]/div/div/div/div/div/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div/table[1]/tbody/tr/td/div/table/tbody/tr/td/div[2]/table/tbody/tr/td/div'
 

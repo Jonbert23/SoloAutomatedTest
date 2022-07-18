@@ -50,8 +50,8 @@ def eodForm():
             refresh_btn.click(driver)
 
             # TEST EOD METRICS
-            bd_result = breakdownTest(driver)
-            # email_result = emailTest(driver)
+            # bd_result = breakdownTest(driver)
+            email_result = emailTest(driver)
 
             driver.quit()
 
@@ -179,19 +179,16 @@ def emailTest(driver):
         send_eod["send_summary"].click(driver)
 
         driver.get("https://mail.google.com/")
-        gmail_login = getGmailXpath()
+        gmail_elements = getGmailXpath()
 
-        gmail_login['email'].findElement(driver)
-        gmail_login['email'].element.send_keys('eod.test.jap@gmail.com')
+        gmail_elements['email'].findElement(driver)
+        gmail_elements['email'].element.send_keys('eod.test.jap@gmail.com\n')
 
-        gmail_login['submit_btn'].findElement(driver)
-        gmail_login['submit_btn'].click(driver)
+        gmail_elements['password'].findElement(driver)
+        gmail_elements['password'].element.send_keys('ZsRL3Yk3crboXq\n')
 
-        gmail_login['password'].findElement(driver)
-        gmail_login['password'].element.send_keys('ZsRL3Yk3crboXq')
-
-        gmail_login['submit_btn'].findElement(driver)
-        gmail_login['submit_btn'].click(driver)
+        gmail_elements['first_email'].findElement(driver)
+        gmail_elements['first_email'].click(driver)
 
         metric_collection = EmailData.getMetricsCollection()
         metric_collection.findElement(driver)
@@ -207,9 +204,6 @@ def emailTest(driver):
             email_metric['value'].findElement(driver)
             value = email_metric['value'].getValue()
             main_test_result[name]['email'] = value
-
-        gmail_login['archive_btn'].findElement(driver)
-        gmail_login['archive_btn'].click(driver)
 
         print(main_test_result)
         return main_test_result
@@ -248,7 +242,7 @@ def getGmailXpath():
         'password': GmailXpath.getPasswd(),
         'submit_btn': GmailXpath.getSubmitBtn(),
         'email_list': GmailXpath.getEmailList(),
-        'archive_btn': GmailXpath.getArchiveBtn()
+        'first_email': GmailXpath.getFirstEmail()
     }
 
 def getSubmitEod():
