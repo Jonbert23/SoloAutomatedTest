@@ -6,9 +6,10 @@ from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 from Project.Controller.Global_Controller.Global_test import Login
 from Project.Controller.Global_Controller.One_date_picker import SpecificDateSelector
-from .Eod_xpath import EodXpath, BreakdownXpath, EodSetupXpath, ModalMetricXpath, ModalCloseBtnXpath, ClickableElement
+from .Eod_xpath import EodBreakdown, EodSetupXpath, ClickableElement, GmailXpath, EmailData, EodData
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 import re
 from ...models import TestCodes, User, EodBreakdownTest
@@ -44,14 +45,17 @@ def eodForm():
 
             # SET DATE IN EOD
             setDate(driver, date['month'], date['day'], date['year'])
+            refresh_btn = ClickableElement('refresh_btn', EodSetupXpath.refresh_btn)
+            refresh_btn.findElement(driver)
+            refresh_btn.click(driver)
 
             # TEST EOD METRICS
             bd_result = breakdownTest(driver)
-            email_result = emailTest(driver)
+            # email_result = emailTest(driver)
 
             driver.quit()
 
-            storeTest(bd_result, testcode)
+            # storeTest(bd_result, testcode)
     else:
         testcode = request.args.get('testcode').lower() if request.args.get('testcode') else None
 
@@ -93,72 +97,124 @@ def storeTest(result, testcode):
     db.session.commit()
 
 def breakdownTest(driver):
-    result = {}
-
     try:
-        # month = date['month']
-        # day = date['day']
-        # year = date['year']
+        modal_metrics = EodBreakdown.getModalMetrics()
+        bd_metric_collection = EodData.getBdMetricCollection()
+        bd_metric_collection.findElement(driver)
 
-        # setDate(driver, month, day, year)
+        num_of_bd_metric = bd_metric_collection.getValue()
 
-        refresh_btn = ClickableElement('refresh_btn', EodSetupXpath.refresh_btn)
-        refresh_btn.findElement(driver)
-        refresh_btn.click(driver)
+        bd_result = {}
 
-        xpaths = getBreakdownTestXpath()
+        for i in range(1, num_of_bd_metric+1):
+            metric = EodData.getMetricWithBreakdown(i)
+            close_modal = EodBreakdown.getCloseModal()
+            metric['name'].findElement(driver)
+            metric['value'].findElement(driver)
+            metric['open_bd'].findElement(driver)
+            name = metric['name'].getValue()
 
-        for metric in xpaths:
+            bd_result[name] = {}
             
-            result[metric] = {
-                "main": None,
-                "breakdown": "0"
-            }
+            value = metric['value'].getValue()
+            bd_result[name]['main'] = value
 
-            # Get main view metric value
-            xpaths[metric]["main"].findElement(driver)
-            result[metric]["main"] = xpaths[metric]["main"].getValue()
+            metric['open_bd'].click(driver)
 
-            # Open breakdown modal
-            xpaths[metric]["breakdown"]["open_modal"].findElement(driver)
-            xpaths[metric]["breakdown"]["open_modal"].click(driver)
+            modal_metrics[name].findElement(driver)
 
-            # Get modal metric value
-            xpaths[metric]["breakdown"]["metric"].findElement(driver)
+            bd_result[name]['breakdown'] = '0'
+            if modal_metrics[name].element != None and modal_metrics[name].instantiated:
+                breakdown_value = modal_metrics[name].getValue()
 
-            if xpaths[metric]["breakdown"]["metric"].element != None and xpaths[metric]["breakdown"]["metric"].instantiated:
-                temp = xpaths[metric]["breakdown"]["metric"].getValue()
-
-                if xpaths[metric]["breakdown"]["metric"].type == 'collection' and temp == 1 and "Nothing to show" in xpaths[metric]["breakdown"]["metric"].element[0].text:
-                    result[metric]['breakdown'] = "0"
+                if modal_metrics[name].type == 'collection' and breakdown_value == 1 and "Nothing to show" in modal_metrics[name].element[0].text:
+                    bd_result[name]['breakdown'] = '0'
                 else:
-                    result[metric]['breakdown'] = str(temp)
+                    bd_result[name]['breakdown'] = str(breakdown_value)    
 
-            # Close breakdown modal
-            xpaths[metric]["breakdown"]["close_modal"].findElement(driver)
-            xpaths[metric]["breakdown"]["close_modal"].click(driver)
-
-        # print(result)
-        result = cleanValues(result)
-        # print(result)
+            close_modal.findElement(driver)
+            close_modal.click(driver)
         
+        bd_result = cleanValues(bd_result)
+        print(bd_result)
     except Exception as e:
-        driver.quit()
+        print(e)
         raise Exception(f"Exception while testing: {e}")
     finally:
-        return result
+        return bd_result
 
 def emailTest(driver):
-    main_xpath = getMainEmailTestXpath()
+    try:
+        metrics_collection = EodData.getMetricsCollection()
+        metrics_collection.findElement(driver)
 
-    main_test_result = {}
-    for metric in main_xpath:
-        main_test_result[metric] = {}
+        num_of_metrics = metrics_collection.getValue()
 
-        main_xpath[metric].findElement(driver);
-        main_test_result[metric]['main'] = main_xpath[metric].getValue()
+        main_test_result = {}
+        for i in range(1, num_of_metrics + 1):
 
-    print(main_test_result)
+            # Get metric name from EOD
+            metric = EodData.getMetric(i)
+            metric['name'].findElement(driver)
+            name = metric['name'].getValue()
+
+            # Set dictionary for metric with key indicated by the name variable aforementioned.
+            main_test_result[name] = {}
+
+            # Get value from input element
+            metric['value'].findElement(driver)
+            value = metric['value'].getValue()
+            main_test_result[name]['main'] = value
+
+        send_eod = getSubmitEod()
+
+        send_eod["submit_btn"].findElement(driver)
+        send_eod["submit_btn"].click(driver)
+
+        send_eod["recipients"].findElement(driver)
+        send_eod["sndeod_email"].findElement(driver)
+        send_eod["sndeod_email"].element.send_keys("eod.test.jap@gmail.com\n")
+
+        send_eod["send_summary"].findElement(driver)
+        send_eod["send_summary"].click(driver)
+
+        driver.get("https://mail.google.com/")
+        gmail_login = getGmailXpath()
+
+        gmail_login['email'].findElement(driver)
+        gmail_login['email'].element.send_keys('eod.test.jap@gmail.com')
+
+        gmail_login['submit_btn'].findElement(driver)
+        gmail_login['submit_btn'].click(driver)
+
+        gmail_login['password'].findElement(driver)
+        gmail_login['password'].element.send_keys('ZsRL3Yk3crboXq')
+
+        gmail_login['submit_btn'].findElement(driver)
+        gmail_login['submit_btn'].click(driver)
+
+        metric_collection = EmailData.getMetricsCollection()
+        metric_collection.findElement(driver)
+
+        num_of_metrics = metric_collection.getValue()
+
+        for i in range(1, num_of_metrics+1):
+            email_metric = EmailData.getMetric(i)
+
+            email_metric['name'].findElement(driver)
+            name = email_metric['name'].getValue()
+
+            email_metric['value'].findElement(driver)
+            value = email_metric['value'].getValue()
+            main_test_result[name]['email'] = value
+
+        gmail_login['archive_btn'].findElement(driver)
+        gmail_login['archive_btn'].click(driver)
+
+        print(main_test_result)
+        return main_test_result
+    except Exception as e:
+        print(e)
 
 def setDate(driver, month, day, year):
     calendar_xpath = {
@@ -179,30 +235,6 @@ def setDate(driver, month, day, year):
     date_selector.initializeCalendar(driver)
     date_selector.selectDate(driver, date)
 
-def getBreakdownTestXpath():
-    return {
-        "collection": getMainBreakdown(EodXpath.collection, BreakdownXpath.collection, ModalMetricXpath.collection, ModalCloseBtnXpath.collection),
-        "adjustments": getMainBreakdown(EodXpath.adjustments, BreakdownXpath.adjustments, ModalMetricXpath.adjustments, ModalCloseBtnXpath.adjustments),
-        "case_acceptance": getMainBreakdown(EodXpath.case_acceptance, BreakdownXpath.case_acceptance, ModalMetricXpath.case_acceptance, ModalCloseBtnXpath.case_acceptance),
-        "missing_ref": getMainBreakdown(EodXpath.missing_ref, BreakdownXpath.missing_ref, ModalMetricXpath.missing_ref, ModalCloseBtnXpath.missing_ref),
-        "no_show": getMainBreakdown(EodXpath.no_show, BreakdownXpath.no_show, ModalMetricXpath.no_show, ModalCloseBtnXpath.no_show),
-        "daily_coll": getMainBreakdown(EodXpath.daily_coll, BreakdownXpath.daily_coll, ModalMetricXpath.daily_coll, ModalCloseBtnXpath.daily_coll),
-        "hyg_reapp": getMainBreakdown(EodXpath.hyg_reapp, BreakdownXpath.hyg_reapp, ModalMetricXpath.hyg_reapp, ModalCloseBtnXpath.hyg_reapp),
-        "new_patients": getMainBreakdown(EodXpath.new_patients, BreakdownXpath.new_patients, ModalMetricXpath.new_patients, ModalCloseBtnXpath.new_patients),
-        "same_day_treat": getMainBreakdown(EodXpath.same_day_treat, BreakdownXpath.same_day_treat, ModalMetricXpath.same_day_treat, ModalCloseBtnXpath.same_day_treat),
-        "pt_portion": getMainBreakdown(EodXpath.pt_portion, BreakdownXpath.pt_portion, ModalMetricXpath.pt_portion, ModalCloseBtnXpath.pt_portion)
-    }
-
-def getMainBreakdown(main, open_brkdn, breakdown, close_btn):
-    return {
-        "main": main,
-        "breakdown": {
-            "open_modal": open_brkdn,
-            "metric": breakdown,
-            "close_modal": close_btn
-        }
-    }
-
 def cleanValues(dict):
     for metric in dict:
         dict[metric]['main'] = round(float(re.sub("[^0-9.]", "", dict[metric]['main'])))
@@ -210,40 +242,19 @@ def cleanValues(dict):
     
     return dict
 
-def getMainEmailTestXpath():
+def getGmailXpath():
     return {
-        'booked_prod': EodXpath.booked_prod,
-        'daily_net_prod': EodXpath.daily_net_prod,
-        'daily_gross_prod': EodXpath.daily_gross_prod,
-        'ofc_sched_vs_goal': EodXpath.ofc_sched_vs_goal,
-        'general': EodXpath.general,
-        'ortho_prod': EodXpath.ortho_prod,
-        'perio_prod': EodXpath.perio_prod,
-        'endo': EodXpath.endo,
-        'oral_surgery_prod': EodXpath.oral_surgery_prod,
-        'clear_aligners': EodXpath.clear_aligners,
-        'num_providers': EodXpath.num_providers,
-        'adp': EodXpath.adp,
-        'specialty': EodXpath.specialty,
-        'total_pts_seen': EodXpath.total_pts_seen,
-        'total_office_visits': EodXpath.total_office_visits,
-        'total_appts_changed': EodXpath.total_appts_changed,
-        'total_appts_cancel': EodXpath.total_appts_cancel,
-        'guest_with_appt': EodXpath.guest_with_appt,
-        'hyg_reserve': EodXpath.hyg_reserve,
-        'hyg_cap': EodXpath.hyg_cap,
-        'react_made': EodXpath.react_made,
-        'unsched_treat': EodXpath.unsched_treat,
-        'restore_appts': EodXpath.restore_appts,
-        'recalls_made': EodXpath.recalls_made,
-        "collection": EodXpath.collection,
-        'adjustments': EodXpath.adjustments,
-        'case_acceptance': EodXpath.case_acceptance,
-        'missing_ref': EodXpath.missing_ref,
-        'no_show': EodXpath.no_show,
-        'daily_coll': EodXpath.daily_coll,
-        'hyg_reapp': EodXpath.hyg_reapp,
-        'new_patients': EodXpath.new_patients,
-        'same_day_treat': EodXpath.same_day_treat,
-        'pt_portion': EodXpath.pt_portion
+        'email': GmailXpath.getEmail(),
+        'password': GmailXpath.getPasswd(),
+        'submit_btn': GmailXpath.getSubmitBtn(),
+        'email_list': GmailXpath.getEmailList(),
+        'archive_btn': GmailXpath.getArchiveBtn()
+    }
+
+def getSubmitEod():
+    return {
+        "submit_btn": EodSetupXpath.getSubmitBtn(),
+        "sndeod_email": EodSetupXpath.getSendEodEmail(),
+        "send_summary": EodSetupXpath.getSendEmail(),
+        "recipients": EodSetupXpath.getEmailList()
     }

@@ -87,7 +87,7 @@ class Login:
             element = WebDriverWait(driver, 120).until(
                 EC.presence_of_element_located((By.XPATH, LoginXpath.logo_xpath))
             )
-            print(f"Valid URL {element}")
+            print(f"Valid URL")
         except Exception as e:
             print("Invalid Url")
             return {
