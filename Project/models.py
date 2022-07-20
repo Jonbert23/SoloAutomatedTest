@@ -148,8 +148,20 @@ class EodTestResults(UserMixin, db.Model):
     res_apps_main = db.Column(db.String(100))
     res_apps_email = db.Column(db.String(100))
 
-    _main = db.Column(db.String(100))
-    _email = db.Column(db.String(100))
+    endo_main = db.Column(db.String(100))
+    endo_email = db.Column(db.String(100))
+    
+    clear_aligners_main = db.Column(db.String(100))
+    clear_aligners_email = db.Column(db.String(100))
+
+    guest_appt_main = db.Column(db.String(100))
+    guest_appt_email = db.Column(db.String(100))
+
+    unsched_treat_main = db.Column(db.String(100))
+    unsched_treat_email = db.Column(db.String(100))
+
+    recalls_main = db.Column(db.String(100))
+    recalls_email = db.Column(db.String(100))
 
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False)

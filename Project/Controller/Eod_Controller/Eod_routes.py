@@ -1,4 +1,3 @@
-import email
 from flask import Blueprint, render_template, url_for, request, redirect
 from flask_login import login_required, current_user
 from webdriver_manager.chrome import ChromeDriverManager
@@ -13,9 +12,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 import re
-from ...models import TestCodes, User, EodBreakdownTest
+from ...models import TestCodes, User, EodTestResults
 from ... import db
 from werkzeug.security import generate_password_hash
+from datetime import datetime
 
 eod = Blueprint('eod', __name__)
 
@@ -68,39 +68,362 @@ def eodForm():
     else:
         testcode = request.args.get('testcode').lower() if request.args.get('testcode') else None
 
-    if testcode and not testcode_info:
-        testcode_info = TestCodes.query.filter_by(test_code=testcode).first()
-        last_test = EodBreakdownTest.query.filter_by(test_code=testcode).order_by(EodBreakdownTest.id.desc()).first()
-    else:
-        last_test = EodBreakdownTest.query.order_by(EodBreakdownTest.id.desc()).first()
-        testcode_info = TestCodes.query.filter_by(test_code=last_test.test_code).first()
+    # if testcode and not testcode_info:
+    #     testcode_info = TestCodes.query.filter_by(test_code=testcode).first()
+    #     last_test = EodTestResults.query.filter_by(test_code=testcode).order_by(EodTestResults.id.desc()).first()
+    # else:
+    #     last_test = EodTestResults.query.order_by(EodTestResults.id.desc()).first()
+    #     testcode_info = TestCodes.query.filter_by(test_code=last_test.test_code).first()
 
     return render_template('Eod_Template/Eod_index.html', last_test=last_test, testcode_info=testcode_info)
 
 def storeTest(result, testcode):
-    test_result = EodBreakdownTest(
+
+    if result.get('Collection'):
+        collection_main = result["Collection"]["main"]
+        collection_bd = result["Collection"]["breakdown"]
+        collection_email = result["Collection"]["email"]
+    else:
+        collection_main = 'Not found'
+        collection_bd = 'Not found'
+        collection_email = 'Not found'
+
+    if result.get('Adjustments'):
+        adjustments_main = result["Adjustments"]["main"]
+        adjustments_bd = result["Adjustments"]["breakdown"]
+        adjustments_email = result["Adjustments"]["email"]
+    else:
+        adjustments_main = 'Not found'
+        adjustments_bd = 'Not found'
+        adjustments_email = 'Not found'
+
+    if result.get('Case acceptance (%)'):
+        case_accpt_main = result["Case acceptance (%)"]["main"]
+        case_accpt_bd = result["Case acceptance (%)"]["breakdown"]
+        case_accpt_email = result["Case acceptance (%)"]["email"]
+    else:
+        case_accpt_main = 'Not found'
+        case_accpt_bd = 'Not found'
+        case_accpt_email = 'Not found'
+
+    if result.get('Patients w/ Missing Referral'):
+        miss_ref_main = result["Patients w/ Missing Referral"]["main"]
+        miss_ref_bd = result["Patients w/ Missing Referral"]["breakdown"]
+        miss_ref_email = result["Patients w/ Missing Referral"]["email"]
+    else:
+        miss_ref_main = 'Not found'
+        miss_ref_bd = 'Not found'
+        miss_ref_email = 'Not found'
+
+    if result.get('No Show'):
+        no_show_main = result["No Show"]["main"]
+        no_show_bd = result["No Show"]["breakdown"]
+        no_show_email = result["No Show"]["email"]
+    else:
+        no_show_main = 'Not found'
+        no_show_bd = 'Not found'
+        no_show_email = 'Not found'
+
+    if result.get('Daily Collection'):
+        daily_coll_main = result["Daily Collection"]["main"]
+        daily_coll_bd = result["Daily Collection"]["breakdown"]
+        daily_coll_email = result["Daily Collection"]["email"]
+    else:
+        daily_coll_main = 'Not found'
+        daily_coll_bd = 'Not found'
+        daily_coll_email = 'Not found'
+
+    if result.get('Hyg Reappointment'):
+        hyg_reapp_main = result["Hyg Reappointment"]["main"]
+        hyg_reapp_bd = result["Hyg Reappointment"]["breakdown"]
+        hyg_reapp_email =result["Hyg Reappointment"]["email"]
+    else:
+        hyg_reapp_main = 'Not found'
+        hyg_reapp_bd = 'Not found'
+        hyg_reapp_email = 'Not found'
+
+    if result.get('New Patients'):
+        new_patient_main = result["New Patients"]["main"]
+        new_patient_bd = result["New Patients"]["breakdown"]
+        new_patient_email = result["New Patients"]["email"]
+    else:
+        new_patient_main = 'Not found'
+        new_patient_bd = 'Not found'
+        new_patient_email = 'Not found'
+
+    if result.get('Same Day Treatment'):
+        sd_treat_main = result["Same Day Treatment"]["main"]
+        sd_treat_bd = result["Same Day Treatment"]["breakdown"]
+        sd_treat_email = result["Same Day Treatment"]["email"]
+    else:
+        sd_treat_main = 'Not found'
+        sd_treat_bd = 'Not found'
+        sd_treat_email = 'Not found'
+
+    if result.get('PT Portion Collections % Today Collected'):
+        pt_portion_main = result["PT Portion Collections % Today Collected"]["main"]
+        pt_portion_bd = result["PT Portion Collections % Today Collected"]["breakdown"]
+        pt_portion_email = result["PT Portion Collections % Today Collected"]["email"]
+    else:
+        pt_portion_main = 'Not found'
+        pt_portion_bd = 'Not found'
+        pt_portion_email = 'Not found'
+
+    if result.get('Booked production'):
+        booked_prod_main = result["Booked production"]["main"]
+        booked_prod_email = result["Booked production"]["email"]
+    else:
+        booked_prod_main = 'Not found'
+        booked_prod_email = 'Not found'
+
+    if result.get('Daily Net Production'):
+        daily_net_main = result["Daily Net Production"]["main"]
+        daily_net_email = result["Daily Net Production"]["email"]
+    else:
+        daily_net_main = 'Not found'
+        daily_net_email = 'Not found'
+
+    if result.get('Daily Gross Production'):
+        daily_gross_main = result["Daily Gross Production"]["main"]
+        daily_gross_email = result["Daily Gross Production"]["email"]
+    else:
+        daily_gross_main = 'Not found'
+        daily_gross_email = 'Not found'
+
+    if result.get('Office Scheduled VS Goal (monthly)'):
+        sched_vs_goal_main = result["Office Scheduled VS Goal (monthly)"]["main"]
+        sched_vs_goal_email = result["Office Scheduled VS Goal (monthly)"]["email"]
+    else:
+        sched_vs_goal_main = 'Not found'
+        sched_vs_goal_email = 'Not found'
+    
+    if result.get('General'):
+        general_main = result["General"]["main"]
+        general_email = result["General"]["email"]
+    else:
+        general_main = 'Not found'
+        general_email = 'Not found'
+
+    if result.get('Ortho Production'):
+        ortho_prod_main = result["Ortho Production"]["main"]
+        ortho_prod_email = result["Ortho Production"]["email"]
+    else:
+        ortho_prod_main = 'Not found'
+        ortho_prod_email = 'Not found'
+
+    if result.get('Perio Production'):
+        perio_prod_main = result["Perio Production"]["main"]
+        perio_prod_email = result["Perio Production"]["email"]
+    else:
+        perio_prod_main = 'Not found'
+        perio_prod_email = 'Not found'
+
+    if result.get('Oral Surgery Production'):
+        oral_surgery_main = result["Oral Surgery Production"]["main"]
+        oral_surgery_email = result["Oral Surgery Production"]["email"]
+    else:
+        oral_surgery_main = 'Not found'
+        oral_surgery_email = 'Not found'
+
+    if result.get('Number of Providers'):
+        num_prod_main = result["Number of Providers"]["main"]
+        num_prod_email = result["Number of Providers"]["email"]
+    else:
+        num_prod_main = 'Not found'
+        num_prod_email = 'Not found'
+
+    if result.get('Office Adjusted Daily Production (ADP)'):
+        adp_main = result["Office Adjusted Daily Production (ADP)"]["main"]
+        adp_email = result["Office Adjusted Daily Production (ADP)"]["email"]
+    else:
+        adp_main = 'Not found'
+        adp_email = 'Not found'
+
+    if result.get('Specialty'):
+        specialty_main = result["Specialty"]["main"]
+        specialty_email = result["Specialty"]["email"]
+    else:
+        specialty_main = 'Not found'
+        specialty_email = 'Not found'
+
+    if result.get('Total Pts Seen'):
+        total_pts_main = result["Total Pts Seen"]["main"]
+        total_pts_email = result["Total Pts Seen"]["email"]
+    else:
+        total_pts_main = 'Not found'
+        total_pts_email = 'Not found'
+
+    if result.get('Total Office Visits'):
+        total_office_main = result["Total Office Visits"]["main"]
+        total_office_email = result["Total Office Visits"]["email"]
+    else:
+        total_office_main = 'Not found'
+        total_office_email = 'Not found'
+
+    if result.get('Total Appointments Changed'):
+        appts_changed_main = result["Total Appointments Changed"]["main"]
+        appts_changed_email = result["Total Appointments Changed"]["email"]
+    else:
+        appts_changed_main = 'Not found'
+        appts_changed_email = 'Not found'
+
+    if result.get('Total Appts Cancelled w/o Rescheduling'):
+        appts_cancel_main = result["Total Appts Cancelled w/o Rescheduling"]["main"]
+        appts_cancel_email = result["Total Appts Cancelled w/o Rescheduling"]["email"]
+    else:
+        appts_cancel_main = 'Not found'
+        appts_cancel_email = 'Not found'
+
+    if result.get('Hyg Reservation (Next 7 Days)'):
+        hyg_reserve_main = result["Hyg Reservation (Next 7 Days)"]["main"]
+        hyg_reserve_email = result["Hyg Reservation (Next 7 Days)"]["email"]
+    else:
+        hyg_reserve_main = 'Not found'
+        hyg_reserve_email = 'Not found'
+
+    if result.get('Hygiene Appointment Capacity'):
+        hyg_cap_main = result["Hygiene Appointment Capacity"]["main"]
+        hyg_cap_email = result["Hygiene Appointment Capacity"]["email"]
+    else:
+        hyg_cap_main = 'Not found'
+        hyg_cap_email = 'Not found'
+
+    if result.get('Reactivation Calls Made'):
+        react_calls_main = result["Reactivation Calls Made"]["main"]
+        react_calls_email = result["Reactivation Calls Made"]["email"]
+    else:
+        react_calls_main = 'Not found'
+        react_calls_email = 'Not found'
+
+    if result.get('Total $ Amount Of Restorative Appts Made Today'):
+        res_apps_main = result["Total $ Amount Of Restorative Appts Made Today"]["main"]
+        res_apps_email = result["Total $ Amount Of Restorative Appts Made Today"]["email"]
+    else:
+        res_apps_main = 'Not found'
+        res_apps_email = 'Not found'
+
+    if result.get('Endo'):
+        endo_main = result["Endo"]["main"]
+        endo_email = result["Endo"]["email"]
+    else:
+        endo_main = 'Not found'
+        endo_email = 'Not found'
+    
+    if result.get('Clear Aligners'):
+        clear_aligners_main = result["Clear Aligners"]["main"]
+        clear_aligners_email = result["Clear Aligners"]["email"]
+    else:
+        clear_aligners_main = 'Not found'
+        clear_aligners_email = 'Not found'
+
+    if result.get('Total Guests From Today With Future Hyg Appt'):
+        guest_appt_main = result["Total Guests From Today With Future Hyg Appt"]["main"]
+        guest_appt_email = result["Total Guests From Today With Future Hyg Appt"]["email"]
+    else:
+        guest_appt_main = 'Not found'
+        guest_appt_email = 'Not found'
+
+    if result.get('Number of unscheduled treatment calls made today'):
+        unsched_treat_main = result["Number of unscheduled treatment calls made today"]["main"]
+        unsched_treat_email = result["Number of unscheduled treatment calls made today"]["email"]
+    else:
+        unsched_treat_main = 'Not found'
+        unsched_treat_email = 'Not found'
+
+    if result.get('# of Recalls Made'):
+        recalls_main = result["# of Recalls Made"]["main"]
+        recalls_email = result["# of Recalls Made"]["email"]
+    else:
+        recalls_main = 'Not found'
+        recalls_email = 'Not found'
+
+    
+    created_at = datetime.now()
+    updated_at = datetime.now()
+
+    test_result = EodTestResults(
         user_id = current_user.id,
         test_code = testcode,
-        collection_main = result["collection"]["main"],
-        collection_bd = result["collection"]["breakdown"],
-        adjustments_main = result['adjustments']['main'],
-        adjustments_bd = result['adjustments']['breakdown'],
-        case_accpt_main = result['case_acceptance']['main'],
-        case_accpt_bd = result['case_acceptance']['breakdown'],
-        miss_ref_main = result['missing_ref']['main'],
-        miss_ref_bd = result['missing_ref']['breakdown'],
-        no_show_main = result['no_show']['main'],
-        no_show_bd = result['no_show']['breakdown'],
-        daily_coll_main = result['daily_coll']['main'],
-        daily_coll_bd = result['daily_coll']['breakdown'],
-        hyg_reapp_main = result['hyg_reapp']['main'],
-        hyg_reapp_bd = result['hyg_reapp']['breakdown'],
-        new_patient_main = result['new_patients']['main'],
-        new_patient_bd = result['new_patients']['breakdown'],
-        sd_treat_main = result['same_day_treat']['main'],
-        sd_treat_bd = result['same_day_treat']['breakdown'],
-        pt_portion_main = result['pt_portion']['main'],
-        pt_portion_bd = result['pt_portion']['breakdown'],
+        collection_main = collection_main,
+        collection_bd = collection_bd,
+        collection_email = collection_email,
+        adjustments_main = adjustments_main,
+        adjustments_bd = adjustments_bd,
+        adjustments_email = adjustments_email,
+        case_accpt_main = case_accpt_main,
+        case_accpt_bd = case_accpt_bd,
+        case_accpt_email = case_accpt_email,
+        miss_ref_main = miss_ref_main,
+        miss_ref_bd = miss_ref_bd,
+        miss_ref_email = miss_ref_email,
+        no_show_main = no_show_main,
+        no_show_bd = no_show_bd,
+        no_show_email = no_show_email,
+        daily_coll_main = daily_coll_main,
+        daily_coll_bd = daily_coll_bd,
+        daily_coll_email = daily_coll_email,
+        hyg_reapp_main = hyg_reapp_main,
+        hyg_reapp_bd = hyg_reapp_bd,
+        hyg_reapp_email = hyg_reapp_email,
+        new_patient_main = new_patient_main,
+        new_patient_bd = new_patient_bd,
+        new_patient_email = new_patient_email,
+        sd_treat_main = sd_treat_main,
+        sd_treat_bd = sd_treat_bd,
+        sd_treat_email = sd_treat_email,
+        pt_portion_main = pt_portion_main,
+        pt_portion_bd = pt_portion_bd,
+        pt_portion_email = pt_portion_email,
+        booked_prod_main = booked_prod_main,
+        booked_prod_email = booked_prod_email,
+        daily_net_main = daily_net_main,
+        daily_net_email = daily_net_email,
+        daily_gross_main = daily_gross_main,
+        daily_gross_email = daily_gross_email,
+        sched_vs_goal_main = sched_vs_goal_main,
+        sched_vs_goal_email = sched_vs_goal_email,
+        general_main = general_main,
+        general_email = general_email,
+        ortho_prod_main = ortho_prod_main,
+        ortho_prod_email = ortho_prod_email,
+        perio_prod_main = perio_prod_main,
+        perio_prod_email = perio_prod_email,
+        oral_surgery_main = oral_surgery_main,
+        oral_surgery_email = oral_surgery_email,
+        num_prod_main = num_prod_main,
+        num_prod_email = num_prod_email,
+        adp_main = adp_main,
+        adp_email = adp_email,
+        specialty_main = specialty_main,
+        specialty_email = specialty_email,
+        total_pts_main = total_pts_main,
+        total_pts_email = total_pts_email,
+        total_office_main = total_pts_email,
+        total_office_email = total_office_email,
+        appts_changed_main = appts_changed_main,
+        appts_changed_email = appts_changed_email,
+        appts_cancel_main = appts_cancel_main,
+        appts_cancel_email = appts_cancel_email,
+        hyg_reserve_main = hyg_reserve_main,
+        hyg_reserve_email = hyg_reserve_email,
+        hyg_cap_main = hyg_cap_main,
+        hyg_cap_email = hyg_cap_email,
+        react_calls_main = react_calls_main,
+        react_calls_email = react_calls_email,
+        res_apps_main = res_apps_main,
+        res_apps_email = res_apps_email,
+        endo_main = endo_main,
+        endo_email = endo_email,
+        clear_aligners_main = clear_aligners_main,
+        clear_aligners_email = clear_aligners_email,
+        guest_appt_main = guest_appt_main,
+        guest_appt_email = guest_appt_email,
+        unsched_treat_main = unsched_treat_main,
+        unsched_treat_email = unsched_treat_email,
+        recalls_main = recalls_main,
+        recalls_email = recalls_email,
+        created_at = created_at,
+        updated_at = updated_at
     )
     db.session.add(test_result)
     db.session.commit()
@@ -244,9 +567,19 @@ def setDate(driver, month, day, year):
 
 def cleanValues(dict):
     for metric in dict:
-        dict[metric]['main'] = re.sub("[^0-9.a-zA-Z\s/]", "", dict[metric]['main'])
-        dict[metric]['breakdown'] = re.sub("[^0-9.a-zA-Z\s/]", "", dict[metric]['breakdown'])
-        dict[metric]['email'] = re.sub("[^0-9.a-zA-Z\s/x`]", "", dict[metric]['email'])
+        dict[metric]['main'] = re.sub("[^-0-9.a-zA-Z/\s()]", "", dict[metric]['main']).strip()
+        dict[metric]['breakdown'] = re.sub("[^-0-9.a-zA-Z/\s()]", "", dict[metric]['breakdown']).strip()
+        dict[metric]['email'] = re.sub("[^-0-9.a-zA-Z/\s()]", "", dict[metric]['email']).strip()
+        if re.search("\(.*\)", dict[metric]['main']):
+            dict[metric]['main'] = re.sub('[()]', "", dict[metric]['main'])
+            dict[metric]['main'] = "-" + dict[metric]['main']
+        if re.search("\(.*\)", dict[metric]['breakdown']):
+            dict[metric]['breakdown'] = re.sub('[()]', "", dict[metric]['breakdown'])
+            print(dict[metric]['breakdown'])
+            dict[metric]['breakdown'] = "-" + dict[metric]['breakdown']
+        if re.search("\(.*\)", dict[metric]['email']):
+            dict[metric]['email'] = re.sub('[()]', "", dict[metric]['email'])
+            dict[metric]['email'] = "-" + dict[metric]['email']
     
     return dict
 
@@ -273,8 +606,8 @@ def bundleResults(bd_result, email_result):
     bundled_result = {}
     for key in keys:
         bundled_result[key] = {}
-        bundled_result[key]["main"] = (email_result[key]['main'] if email_result[key]['main'] == "" else "0") if email_result[key].get('main') else bd_result[key]['main']
-        bundled_result[key]["breakdown"] = (bd_result[key]['breakdown'] if email_result[key]['main'] == "" else "0") if bd_result.get(key) and bd_result[key].get('breakdown') else "No breakdown for this metric."
-        bundled_result[key]["email"] = (email_result[key]['email'] if email_result[key]['email'] == "" else "0") if email_result[key].get('email') else "Not in email."
+        bundled_result[key]["main"] = (email_result[key]['main'] if email_result[key]['main'] != "-" else "0") if email_result[key].get('main') else bd_result[key]['main']
+        bundled_result[key]["breakdown"] = (bd_result[key]['breakdown'] if email_result[key]['main'] != "-" else "0") if bd_result.get(key) and bd_result[key].get('breakdown') else "No breakdown for this metric."
+        bundled_result[key]["email"] = (email_result[key]['email'] if email_result[key]['email'] != "-" else "0") if email_result[key].get('email') else "Not in email."
 
     return bundled_result
