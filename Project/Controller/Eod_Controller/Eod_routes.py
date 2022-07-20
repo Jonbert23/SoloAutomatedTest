@@ -1,3 +1,4 @@
+import email
 from flask import Blueprint, render_template, url_for, request, redirect
 from flask_login import login_required, current_user
 from webdriver_manager.chrome import ChromeDriverManager
@@ -49,13 +50,21 @@ def eodForm():
             refresh_btn.findElement(driver)
             refresh_btn.click(driver)
 
-            # TEST EOD METRICS
-            # bd_result = breakdownTest(driver)
+            # BREAKDOWN AND EMAIL TESTS
+            bd_result = breakdownTest(driver)
             email_result = emailTest(driver)
+
+            # print(bd_result)
+            # print(email_result)
+
+            bundled_result = bundleResults(bd_result, email_result)
+            clean_result = cleanValues(bundled_result)
+
+            print(clean_result)
 
             driver.quit()
 
-            # storeTest(bd_result, testcode)
+            storeTest(clean_result, testcode)
     else:
         testcode = request.args.get('testcode').lower() if request.args.get('testcode') else None
 
@@ -135,8 +144,7 @@ def breakdownTest(driver):
             close_modal.findElement(driver)
             close_modal.click(driver)
         
-        bd_result = cleanValues(bd_result)
-        print(bd_result)
+        # bd_result = cleanValues(bd_result)
     except Exception as e:
         print(e)
         raise Exception(f"Exception while testing: {e}")
@@ -150,6 +158,7 @@ def emailTest(driver):
 
         num_of_metrics = metrics_collection.getValue()
 
+        # GET MAIN PAGE VALUES
         main_test_result = {}
         for i in range(1, num_of_metrics + 1):
 
@@ -168,6 +177,7 @@ def emailTest(driver):
 
         send_eod = getSubmitEod()
 
+        # SEND EMAIL
         send_eod["submit_btn"].findElement(driver)
         send_eod["submit_btn"].click(driver)
 
@@ -178,6 +188,8 @@ def emailTest(driver):
         send_eod["send_summary"].findElement(driver)
         send_eod["send_summary"].click(driver)
 
+        # OPEN GMAIL THEN LOGIN
+        # Some cases may occur when google has some dialog. In this case, the test would fail.
         driver.get("https://mail.google.com/")
         gmail_elements = getGmailXpath()
 
@@ -187,6 +199,7 @@ def emailTest(driver):
         gmail_elements['password'].findElement(driver)
         gmail_elements['password'].element.send_keys('ZsRL3Yk3crboXq\n')
 
+        # OPEN FIRST EMAIL RECEIVED.
         gmail_elements['first_email'].findElement(driver)
         gmail_elements['first_email'].click(driver)
 
@@ -195,6 +208,7 @@ def emailTest(driver):
 
         num_of_metrics = metric_collection.getValue()
 
+        # GET EMAIL METRIC VALUES
         for i in range(1, num_of_metrics+1):
             email_metric = EmailData.getMetric(i)
 
@@ -205,7 +219,6 @@ def emailTest(driver):
             value = email_metric['value'].getValue()
             main_test_result[name]['email'] = value
 
-        print(main_test_result)
         return main_test_result
     except Exception as e:
         print(e)
@@ -231,8 +244,9 @@ def setDate(driver, month, day, year):
 
 def cleanValues(dict):
     for metric in dict:
-        dict[metric]['main'] = round(float(re.sub("[^0-9.]", "", dict[metric]['main'])))
-        dict[metric]['breakdown'] = round(float(re.sub("[^0-9.]", "", dict[metric]['breakdown'])))
+        dict[metric]['main'] = re.sub("[^0-9.a-zA-Z\s/]", "", dict[metric]['main'])
+        dict[metric]['breakdown'] = re.sub("[^0-9.a-zA-Z\s/]", "", dict[metric]['breakdown'])
+        dict[metric]['email'] = re.sub("[^0-9.a-zA-Z\s/x`]", "", dict[metric]['email'])
     
     return dict
 
@@ -252,3 +266,15 @@ def getSubmitEod():
         "send_summary": EodSetupXpath.getSendEmail(),
         "recipients": EodSetupXpath.getEmailList()
     }
+
+def bundleResults(bd_result, email_result):
+    keys = { *bd_result.keys(), *email_result.keys() }
+    
+    bundled_result = {}
+    for key in keys:
+        bundled_result[key] = {}
+        bundled_result[key]["main"] = (email_result[key]['main'] if email_result[key]['main'] == "" else "0") if email_result[key].get('main') else bd_result[key]['main']
+        bundled_result[key]["breakdown"] = (bd_result[key]['breakdown'] if email_result[key]['main'] == "" else "0") if bd_result.get(key) and bd_result[key].get('breakdown') else "No breakdown for this metric."
+        bundled_result[key]["email"] = (email_result[key]['email'] if email_result[key]['email'] == "" else "0") if email_result[key].get('email') else "Not in email."
+
+    return bundled_result

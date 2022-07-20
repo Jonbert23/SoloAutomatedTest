@@ -129,31 +129,6 @@ class ClickableElement(Element):
         if self.element == None: 
             raise Exception("Element not instantiated.")
         webdriver.ActionChains(driver).move_to_element(self.element).click(self.element).perform()
-        # self.element.click()
-
-# june 21 and some other dates for missing ref and new patients
-# class ModalMetricXpath:
-#                    collection = TextElement('collection', '/html/body/div[1]/main/div[3]/div[9]/div/div/div[3]/div[1]/div/table/tfoot/tr/td[6]') done
-#                  adjustments = TextElement('adjustments', '/html/body/div[1]/main/div[3]/div[2]/div/div/div[3]/div[1]/div/table/tfoot/tr/td[6]') done
-#          case_acceptance = TextElement('case_acceptance', '/html/body/div[1]/main/div[3]/div[9]/div/div/div[2]/div[1]/div/table/tfoot/tr[1]/td[6]') done
-#            missing_ref = CollectionElement('missing_ref', '/html/body/div[1]/main/div[3]/div[7]/div/div/div[2]/div[2]/div/table/tbody/tr') done
-#                          no_show = TextElement('no_show', '/html/body/div[1]/main/div[3]/div[4]/div/div/div[2]/div[2]/div/table/tr/td[2]/strong/span') done
-#                    daily_coll = TextElement('daily_coll', '/html/body/div[1]/main/div[3]/div[3]/div/div/div[2]/div[2]/div/table/tr/td[4]/strong/span') done
-#                      hyg_reapp = TextElement('hyg_reapp', '/html/body/div[1]/main/div[3]/div[8]/div/div/div[2]/div[2]/div/table/tr/td[3]/strong/span') done
-#          new_patients = CollectionElement('new_patients', '/html/body/div[1]/main/div[3]/div[6]/div/div/div[2]/table/tbody/tr') done
-#            same_day_treat = TextElement('same_day_treat', '/html/body/div[1]/main/div[3]/div[5]/div/div/div[2]/div[2]/div/table/tr[2]/td[5]/strong/span') done
-#                    pt_portion = TextElement('pt_portion', '/html/body/div[1]/main/div[3]/div[1]/div/div/div[2]/div[2]/div/table/tr[1]/td[2]/strong/span') done
-# class ModalCloseBtnXpath:
-#               collection = ClickableElement('collection', '/html/body/div[1]/main/div[3]/div[9]/div/div/div[1]/button')
-#             adjustments = ClickableElement('adjustments', '/html/body/div[1]/main/div[3]/div[2]/div/div/div[1]/button')
-#     case_acceptance = ClickableElement('case_acceptance', '/html/body/div[1]/main/div[3]/div[9]/div/div/div[1]/button')
-#             missing_ref = ClickableElement('missing_ref', '/html/body/div[1]/main/div[3]/div[7]/div/div/div[1]/button')
-#                     no_show = ClickableElement('no_show', '/html/body/div[1]/main/div[3]/div[4]/div/div/div[1]/button')
-#               daily_coll = ClickableElement('daily_coll', '/html/body/div[1]/main/div[3]/div[3]/div/div/div[1]/button')
-#                 hyg_reapp = ClickableElement('hyg_reapp', '/html/body/div[1]/main/div[3]/div[8]/div/div/div[1]/button')
-#           new_patients = ClickableElement('new_patients', '/html/body/div[1]/main/div[3]/div[6]/div/div/div[1]/button')
-#       same_day_treat = ClickableElement('same_day_treat', '/html/body/div[1]/main/div[3]/div[5]/div/div/div[1]/button')
-#               pt_portion = ClickableElement('pt_portion', '/html/body/div[1]/main/div[3]/div[1]/div/div/div[1]/button')
 
 class EodBreakdown:
     modal_collection = '/html/body/div[1]/main/div[3]/div'
