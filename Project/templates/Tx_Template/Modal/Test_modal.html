@@ -1,4 +1,4 @@
-<div id="test_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="test_modal_txminer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                 <form action="{{ url_for('cal.calendarTest') }}" method="POST" enctype="multipart/form-data">
+                 <form action="{{ url_for('tx.txminerTest') }}" method="POST" enctype="multipart/form-data">
                     
                     <div class="form-group">
                         <label>Test Code</label>
@@ -21,19 +21,19 @@
                         <label>Default Test</label>
                         <div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck1" name="defaultTest[]" data-parsley-multiple="groups"
+                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck1" name="defaultTestTx[]" data-parsley-multiple="groups"
                                         data-parsley-mincheck="2">
-                                <label class="custom-control-label" for="customCheck1">Metric Test: Per Month</label>
+                                <label class="custom-control-label" for="customCheck1">Pending Scheduled</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck2" name="defaultTest[]" data-parsley-multiple="groups"
+                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck2" name="defaultTestTx[]" data-parsley-multiple="groups"
                                         data-parsley-mincheck="2">
-                                <label class="custom-control-label" for="customCheck2">Appointment Validation</label>
+                                <label class="custom-control-label" for="customCheck2">Pending Unscheduled</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck3" name="defaultTest[]" data-parsley-multiple="groups"
+                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck3" name="defaultTestTx[]" data-parsley-multiple="groups"
                                         data-parsley-mincheck="2">
-                                <label class="custom-control-label" for="customCheck3">Appointment Validation: Per Day</label>
+                                <label class="custom-control-label" for="customCheck3">Active Production</label>
                             </div>
                             
                         </div>
@@ -41,19 +41,19 @@
                         <label>Optional Test</label>
                         <div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck4" name="optionalTest[]" value="Provider Filter" data-parsley-multiple="groups"
+                                <input type="checkbox" class="custom-control-input" id="customCheck4" name="optionalTestTx[]" value="Provider Filter" data-parsley-multiple="groups"
                                         data-parsley-mincheck="2">
                                 <label class="custom-control-label" for="customCheck4">Provider Filter Test</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck5" name="optionalTest[]" value="Procedure Filter" data-parsley-multiple="groups"
+                                <input type="checkbox" class="custom-control-input" id="customCheck5" name="optionalTestTx[]" value="Procedure Filter" data-parsley-multiple="groups"
                                         data-parsley-mincheck="2">
                                 <label class="custom-control-label" for="customCheck5">Procedure Filter test</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck6" name="optionalTest[]" value="Patient Filter" data-parsley-multiple="groups"
+                                <input type="checkbox" class="custom-control-input" id="customCheck6" name="optionalTestTx[]" value="Patient Filter" data-parsley-multiple="groups"
                                         data-parsley-mincheck="2">
-                                <label class="custom-control-label" for="customCheck6">patient Filter Test</label>
+                                <label class="custom-control-label" for="customCheck6">Patient Filter Test</label>
                             </div>
                             
                         </div>

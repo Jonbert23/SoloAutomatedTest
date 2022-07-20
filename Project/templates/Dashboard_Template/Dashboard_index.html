@@ -5,7 +5,7 @@
 {% endblock header%}
 
 {% block test_button %} 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test_modal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dash_test_modal">
         Run Test
     </button>
 {% endblock test_button %}
@@ -32,6 +32,9 @@
 
     <!-- LOB Test Result section -->
     {% include "Dashboard_Template/Sections/Lob_filter.html" %}
+
+    <!--Test Modal-->
+    {% include "Dashboard_Template/Modals/Dashboard_test_modal.html" %}
 
     <!-- Modals -->
     {% include "Dashboard_Template/Modals/Breakdown_test_modal.html" %}

@@ -1,0 +1,209 @@
+<div class="row">
+    
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    <h5 class="font-12 one-line-text">Net Production<span class="float-right">{{ net_prod_result }}</span></h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Calendar</p>
+                        <h3 class="text-center font-20">{{ data.cal_netProd }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Dashboard</p>
+                        <h3 class="text-center font-20">{{ data.dash_netProd }}</h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">EOD</p>
+                        <h3 class="text-center font-20">{{ data.eod_netProd }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Morning Huddle</p>
+                        <h3 class="text-center font-20">{{ data.mh_netProd }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    <h5 class="font-12 one-line-text">Gross Production<span class="float-right">{{ gross_prod_result }}</span></h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Calendar</p>
+                        <h3 class="text-center font-20">{{ data.cal_grossProd }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Dashboard</p>
+                        <h3 class="text-center font-20">{{ data.dash_grossProd }}</h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">EOD</p>
+                        <h3 class="text-center font-20">{{ data.eod_grossProd }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Morning Huddle</p>
+                        <h3 class="text-center font-20">{{data.mh_grossProd}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    <h5 class="font-12 one-line-text">Collection<span class="float-right">{{ collection_result }}</span></h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Calendar</p>
+                        <h3 class="text-center font-20">Metric Not Exist</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Dashboard</p>
+                        <h3 class="text-center font-20">{{ data.dash_collection }}</h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">EOD</p>
+                        <h3 class="text-center font-20">{{ data.eod_collection }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Morning Huddle</p>
+                        <h3 class="text-center font-20">{{ data.mh_collection  }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    <h5 class="font-12 one-line-text">Adjustment<span class="float-right">{{ adjustment_result }}</span></h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Calendar</p>
+                        <h3 class="text-center font-20">Metric Not Exist</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Dashboard</p>
+                        <h3 class="text-center font-20">{{ data.dash_adjusment }}</h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">EOD</p>
+                        <h3 class="text-center font-20">{{ data.eod_adjusment }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Morning Huddle</p>
+                        <h3 class="text-center font-20">Metric Not Exist</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    <h5 class="font-12 one-line-text">Patient Visit<span class="float-right">{{ pts_result }}</span></h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Calendar</p>
+                        <h3 class="text-center font-20">Metric Not Exist</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Dashboard</p>
+                        <h3 class="text-center font-20">{{ data.dash_pts }}</h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">EOD</p>
+                        <h3 class="text-center font-20">{{ data.eod_pts }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Morning Huddle</p>
+                        <h3 class="text-center font-20">{{data.mh_pts }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    <h5 class="font-12 one-line-text">New Patient Visit<span class="float-right">{{ npt_result }}</span></h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Calendar</p>
+                        <h3 class="text-center font-20">{{data.cal_npt}}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Dashboard</p>
+                        <h3 class="text-center font-20">{{ data.dash_npt }}</h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">EOD</p>
+                        <h3 class="text-center font-20">{{ data.eod_npt }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Morning Huddle</p>
+                        <h3 class="text-center font-20">{{ data.mh_npt }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+</div> 

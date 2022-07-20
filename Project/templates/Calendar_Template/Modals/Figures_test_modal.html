@@ -19,36 +19,38 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% if getMetricTest is defined %}
                         <tr>
                             <td>Scheduled Amount</td>
-                            <td>$12,123</td>
-                            <td>$12,123</td>
-                            <td>Pass</td>
+                            <td>{{ getMetricTest.bd_sched_amount }}</td>
+                            <td>{{ getMetricTest.sd_sched_amount }}</td>
+                            <td>{{ getMetricTest.status_sched_amount }}</td>
                         </tr>
                         <tr>
                             <td>Goal</td>
-                            <td>$57,000.00</td>
-                            <td>$57,000.00</td>
-                            <td>Pass</td>
+                            <td>{{ getMetricTest.bd_goal }}</td>
+                            <td>{{ getMetricTest.sd_goal }}</td>
+                            <td>{{ getMetricTest.status_goal }}</td>
                         </tr>
                         <tr>
                             <td>Appointments</td>
-                            <td>330</td>
-                            <td>300</td>
-                            <td>Fail</td>
+                            <td>{{ getMetricTest.bd_appt }}</td>
+                            <td>{{ getMetricTest.sd_appt }}</td>
+                            <td>{{ getMetricTest.status_appt }}</td>
                         </tr>
                         <tr>
                             <td>New Patients</td>
-                            <td>123</td>
-                            <td>100</td>
-                            <td>Fail</td>
+                            <td>{{ getMetricTest.bd_npts }}</td>
+                            <td>{{ getMetricTest.sd_npts }}</td>
+                            <td>{{ getMetricTest.status_npts }}</td>
                         </tr>
                         <tr>
                             <td>Production</td>
-                            <td>$ 43,844.16</td>
-                            <td>$ 43,844.16</td>
-                            <td>Pass</td>
+                            <td>{{ getMetricTest.bd_production }}</td>
+                            <td>{{ getMetricTest.sd_production }}</td>
+                            <td>{{ getMetricTest.status_production }}</td>
                         </tr>
+                        {% endif %}
                     </tbody>
                 </table>
 

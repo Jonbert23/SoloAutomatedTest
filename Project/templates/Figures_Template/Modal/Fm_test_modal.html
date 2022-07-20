@@ -63,28 +63,47 @@
                                 
                             </div>
                         </div>
-                        
                         <hr>
-                        <label>List Of Modules</label>
-                        <div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="Module[]" value="calendar"/>
-                                <label class="form-check-label">Calendar</label>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>List Of Modules</label>
+                                <div>
+                                    <div class="form-check" id="calendar">
+                                        <input class="form-check-input" type="checkbox" name="Module[]" value="calendar"/>
+                                        <label class="form-check-label">Calendar</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="Module[]" value="dashboard"/>
+                                        <label class="form-check-label">Dashboard</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="Module[]" value="eod"/>
+                                        <label class="form-check-label">EOD Form</label>
+                                    </div>
+                                    <div class="form-check" id="morning_huddle">
+                                        <input class="form-check-input" type="checkbox" name="Module[]" value="morning_huddle"/>
+                                        <label class="form-check-label">Morning Huddle</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="Module[]" value="dashboard"/>
-                                <label class="form-check-label">Dashboard</label>
+
+                            <div class="col-md-6">
+                                <label>Production Param</label>
+                                <div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="param" value="net_true"/>
+                                        <label class="form-check-label">Net: True</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="param" value="net_false"/>
+                                        <label class="form-check-label">Net: False</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="Module[]" value="eod"/>
-                                <label class="form-check-label">EOD Form</label>
-                            </div>
-                            <div class="form-check" id="morning_huddle">
-                                <input class="form-check-input" type="checkbox" name="Module[]" value="morning_huddle"/>
-                                <label class="form-check-label">Morning Huddle</label>
-                            </div>
-                            
+
                         </div>
+                        
                         <hr>
                         <label>List Of Metrics</label>
                         <div class="row">
