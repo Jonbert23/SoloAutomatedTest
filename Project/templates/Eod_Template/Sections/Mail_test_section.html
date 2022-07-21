@@ -8,18 +8,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Booked Production<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Booked Production<span class="float-right">{{ 'PASS' if last_test.booked_prod_main == last_test.booked_prod_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.booked_prod_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.booked_prod_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -30,18 +30,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Daily Net Production<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Daily Net Production<span class="float-right">{{ 'PASS' if last_test.daily_net_main == last_test.daily_net_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.daily_net_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.daily_net_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -52,18 +52,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Daily Gross Production<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Daily Gross Production<span class="float-right">{{ 'PASS' if last_test.daily_gross_main == last_test.daily_gross_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.daily_gross_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.daily_gross_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -74,18 +74,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Office Scheduled VS Goal(monthly)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Office Scheduled VS Goal(monthly)<span class="float-right">{{ 'PASS' if last_test.sched_vs_goal_main == last_test.sched_vs_goal_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.sched_vs_goal_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.sched_vs_goal_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -96,18 +96,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">General<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">General<span class="float-right">{{ 'PASS' if last_test.general_main == last_test.general_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.general_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.general_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -118,18 +118,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Ortho Production<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Ortho Production<span class="float-right">{{ 'PASS' if last_test.ortho_prod_main == last_test.ortho_prod_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.ortho_prod_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.ortho_prod_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -140,18 +140,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Perio Production<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Perio Production<span class="float-right">{{ 'PASS' if last_test.perio_prod_main == last_test.perio_prod_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.perio_prod_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.perio_prod_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -162,18 +162,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Endo<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Endo<span class="float-right">{{ 'PASS' if last_test.endo_main == last_test.endo_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.endo_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.endo_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -184,18 +184,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Oral Surgery Production<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Oral Surgery Production<span class="float-right">{{ 'PASS' if last_test.oral_surgery_main == last_test.oral_surgery_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.oral_surgery_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.oral_surgery_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -206,18 +206,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Clear Aligners<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Clear Aligners<span class="float-right">{{ 'PASS' if last_test.clear_aligners_main == last_test.clear_aligners_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.clear_aligners_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.clear_aligners_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -228,18 +228,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Number of Providers<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Number of Providers<span class="float-right">{{ 'PASS' if last_test.num_prod_main == last_test.num_prod_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.num_prod_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.num_prod_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -250,18 +250,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Office Adjusted Daily Production (ADP)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Office Adjusted Daily Production (ADP)<span class="float-right">{{ 'PASS' if last_test.adp_main == last_test.adp_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.adp_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.adp_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -272,18 +272,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Specialty<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Specialty<span class="float-right">{{ 'PASS' if last_test.specialty_main == last_test.specialty_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.specialty_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.specialty_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -294,18 +294,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Total Pts Seen<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Total Pts Seen<span class="float-right">{{ 'PASS' if last_test.total_pts_main == last_test.total_pts_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.total_pts_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.total_pts_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -316,18 +316,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Total Office Visits<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Total Office Visits<span class="float-right">{{ 'PASS' if last_test.total_office_main == last_test.total_office_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.total_office_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.total_office_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -338,18 +338,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Total Appointments Changed<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Total Appointments Changed<span class="float-right">{{ 'PASS' if last_test.appts_changed_main == last_test.appts_changed_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.appts_changed_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.appts_changed_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -360,18 +360,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Total Appts Cancelled w/o Rescheduling<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Total Appts Cancelled w/o Rescheduling<span class="float-right">{{ 'PASS' if last_test.appts_cancel_main == last_test.appts_cancel_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.appts_cancel_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.appts_cancel_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -382,18 +382,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Total Guests From Today With Future Hyg Appt<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Total Guests From Today With Future Hyg Appt<span class="float-right">{{ 'PASS' if last_test.guest_appt_main == last_test.guest_appt_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.guest_appt_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.guest_appt_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -404,18 +404,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Hyg Reservation (Next 7 Days)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Hyg Reservation (Next 7 Days)<span class="float-right">{{ 'PASS' if last_test.hyg_reserve_main == last_test.hyg_reserve_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.hyg_reserve_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.hyg_reserve_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -426,18 +426,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Hygiene Appointment Capacity<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Hygiene Appointment Capacity<span class="float-right">{{ 'PASS' if last_test.hyg_cap_main == last_test.hyg_cap_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.hyg_cap_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.hyg_cap_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -448,18 +448,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Reactivation Calls Made<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Reactivation Calls Made<span class="float-right">{{ 'PASS' if last_test.react_calls_main == last_test.react_calls_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.react_calls_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.react_calls_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -470,18 +470,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Number of unscheduled treatement calls made today<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Number of unscheduled treatement calls made today<span class="float-right">{{ 'PASS' if last_test.unsched_treat_main == last_test.unsched_treat_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.unsched_treat_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.unsched_treat_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -492,18 +492,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Total $ Amoung Of Restorative Appts Made Today<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Total $ Amoung Of Restorative Appts Made Today<span class="float-right">{{ 'PASS' if last_test.res_apps_main == last_test.res_apps_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.res_apps_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.res_apps_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -514,18 +514,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text"># of Recalls Made<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text"># of Recalls Made<span class="float-right">{{ 'PASS' if last_test.recalls_main == last_test.recalls_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.recalls_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.recalls_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -536,18 +536,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Collection<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Collection<span class="float-right">{{ 'PASS' if last_test.collection_main == last_test.collection_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.collection_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.collection_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -558,18 +558,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">No Show<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">No Show<span class="float-right">{{ 'PASS' if last_test.no_show_main == last_test.no_show_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.no_show_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.no_show_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -580,18 +580,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">New Patients<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">New Patients<span class="float-right">{{ 'PASS' if last_test.new_patient_main == last_test.new_patient_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.new_patient_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.new_patient_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -602,18 +602,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Adjustments<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Adjustments<span class="float-right">{{ 'PASS' if last_test.adjustments_main == last_test.adjustments_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.adjustments_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.adjustments_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -624,18 +624,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Daily Collection<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Daily Collection<span class="float-right">{{ 'PASS' if last_test.daily_coll_main == last_test.daily_coll_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.daily_coll_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.daily_coll_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -646,18 +646,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Same Day Treatment<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Same Day Treatment<span class="float-right">{{ 'PASS' if last_test.sd_treat_main == last_test.sd_treat_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.sd_treat_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.sd_treat_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -668,18 +668,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Case Acceptance<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Case Acceptance<span class="float-right">{{ 'PASS' if last_test.case_accpt_main == last_test.case_accpt_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.case_accpt_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.case_accpt_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -690,18 +690,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Hyg Reappointment<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Hyg Reappointment<span class="float-right">{{ 'PASS' if last_test.hyg_reapp_main == last_test.hyg_reapp_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.hyg_reapp_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.hyg_reapp_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -712,18 +712,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">PT Portion Collections %<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">PT Portion Collections %<span class="float-right">{{ 'PASS' if last_test.pt_portion_main == last_test.pt_portion_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.pt_portion_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.pt_portion_email }}</h3>
                     </div>
                 </div>
             </div>
@@ -734,18 +734,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Patients w/ Missing Referral<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Patients w/ Missing Referral<span class="float-right">{{ 'PASS' if last_test.miss_ref_main == last_test.miss_ref_email else 'FAIL' }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main Data</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.miss_ref_main }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Mail</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ last_test.miss_ref_email }}</h3>
                     </div>
                 </div>
             </div>

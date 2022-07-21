@@ -172,19 +172,19 @@ class EodSetupXpath:
 
     @staticmethod
     def getSendEodEmail():
-        return InputElement('Email Input', '//h2[contains(text(), "Send EOD Data - Happy Tooth")]/../../form/div[1]/input')
+        return InputElement('Email Input', '//h2[contains(text(), "Send EOD Data")]/../../form/div[1]/input')
 
     @staticmethod
     def getSendEmail():
-        return ClickableElement('Send Summary', '//h2[contains(text(), "Send EOD Data - Happy Tooth")]/../../form/div[5]/button')
+        return ClickableElement('Send Summary', '//h2[contains(text(), "Send EOD Data")]/../../form/div[5]/button')
     
     @staticmethod
     def getSent():
-        return TextElement("Summary Sent", '//h2[contains(text(), "Send EOD Data - Happy Tooth")]/../../form/div[5]/span')
+        return TextElement("Summary Sent", '//h2[contains(text(), "Send EOD Data")]/../../form/div[5]/span')
 
     @staticmethod
     def getEmailList():
-        return CollectionElement("email list", '//h2[contains(text(), "Send EOD Data - Happy Tooth")]/../../form/div[1]/div[2]/span')
+        return CollectionElement("email list", '//h2[contains(text(), "Send EOD Data")]/../../form/div[1]/div[2]/span')
 
 class GmailXpath:
     @staticmethod

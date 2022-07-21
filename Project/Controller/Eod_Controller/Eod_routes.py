@@ -24,6 +24,7 @@ def eodForm():
     testcode = None
     testcode_info = None
     last_test = None
+    succ_vs_fail = None 
 
     if request.method == 'POST':
         testcode = request.form['testcode'].lower()
@@ -53,14 +54,8 @@ def eodForm():
             # BREAKDOWN AND EMAIL TESTS
             bd_result = breakdownTest(driver)
             email_result = emailTest(driver)
-
-            # print(bd_result)
-            # print(email_result)
-
             bundled_result = bundleResults(bd_result, email_result)
             clean_result = cleanValues(bundled_result)
-
-            print(clean_result)
 
             driver.quit()
 
@@ -68,14 +63,12 @@ def eodForm():
     else:
         testcode = request.args.get('testcode').lower() if request.args.get('testcode') else None
 
-    # if testcode and not testcode_info:
-    #     testcode_info = TestCodes.query.filter_by(test_code=testcode).first()
-    #     last_test = EodTestResults.query.filter_by(test_code=testcode).order_by(EodTestResults.id.desc()).first()
-    # else:
-    #     last_test = EodTestResults.query.order_by(EodTestResults.id.desc()).first()
-    #     testcode_info = TestCodes.query.filter_by(test_code=last_test.test_code).first()
+    last_test = getLastTest(testcode)
+    if last_test:
+        testcode_info = getTestCodeInfo(last_test.test_code)
+        succ_vs_fail = getGraphData(last_test)
 
-    return render_template('Eod_Template/Eod_index.html', last_test=last_test, testcode_info=testcode_info)
+    return render_template('Eod_Template/Eod_index.html', last_test=last_test, testcode_info=testcode_info, graph_vals=succ_vs_fail)
 
 def storeTest(result, testcode):
 
@@ -611,3 +604,462 @@ def bundleResults(bd_result, email_result):
         bundled_result[key]["email"] = (email_result[key]['email'] if email_result[key]['email'] != "-" else "0") if email_result[key].get('email') else "Not in email."
 
     return bundled_result
+
+def getLastTest(testcode=None):
+    last_test = None
+    if testcode:
+        last_test = EodTestResults.query.filter_by(test_code=testcode).order_by(EodTestResults.id.desc()).first()
+    else: 
+        last_test = EodTestResults.query.order_by(EodTestResults.id.desc()).first()
+
+    try:
+        last_test.collection_main = float(last_test.collection_main)
+        last_test.collection_bd = float(last_test.collection_bd)
+        last_test.collection_email = float(last_test.collection_email)
+    except:
+        pass
+
+    try:
+        last_test.booked_prod_main = float(last_test.booked_prod_main)
+        last_test.booked_prod_email = float(last_test.booked_prod_email)
+    except:
+        pass
+
+    try:
+        last_test.adjustments_main = float(last_test.adjustments_main)
+        last_test.adjustments_bd = float(last_test.adjustments_bd)
+        last_test.adjustments_email = float(last_test.adjustments_email)
+    except:
+        pass
+
+    try:
+        last_test.case_accpt_main = float(last_test.case_accpt_main)
+        last_test.case_accpt_bd = float(last_test.case_accpt_bd)
+        last_test.case_accpt_email = float(last_test.case_accpt_email)
+    except:
+        pass
+
+    try:
+        last_test.miss_ref_main = float(last_test.miss_ref_main)
+        last_test.miss_ref_bd = float(last_test.miss_ref_bd)
+        last_test.miss_ref_email = float(last_test.miss_ref_email)
+    except:
+        pass
+
+    try:
+        last_test.no_show_main = float(last_test.no_show_main)
+        last_test.no_show_bd = float(last_test.no_show_bd)
+        last_test.no_show_email = float(last_test.no_show_email)
+    except:
+        pass
+
+    try:
+        last_test.daily_coll_main = float(last_test.daily_coll_main)
+        last_test.daily_coll_bd = float(last_test.daily_coll_bd)
+        last_test.daily_coll_email = float(last_test.email)
+    except:
+        pass
+
+    try:
+        last_test.hyg_reapp_main = float(last_test.hyg_reapp_main)
+        last_test.hyg_reapp_bd = float(last_test.hyg_reapp_bd)
+        last_test.hyg_reapp_email = float(last_test.hyg_reapp_email)
+    except:
+        pass
+
+    try:
+        last_test.new_patient_main = float(last_test.new_patient_main)
+        last_test.new_patient_bd = float(last_test.new_patient_bd)
+        last_test.new_patient_email = float(last_test.new_patient_email)
+    except:
+        pass
+
+    try:
+        last_test.sd_treat_main = float(last_test.sd_treat_main)
+        last_test.sd_treat_bd = float(last_test.sd_treat_bd)
+        last_test.sd_treat_email = float(last_test.sd_treat_email)
+    except:
+        pass
+
+    try:
+        last_test.pt_portion_main = float(last_test.pt_portion_main)
+        last_test.pt_portion_bd = float(last_test.pt_portion_bd)
+        last_test.pt_portion_email = float(last_test.pt_portion_email)
+    except:
+        pass
+    
+    try:
+        last_test.daily_net_main = float(last_test.daily_net_main)
+        last_test.daily_net_email = float(last_test.daily_net_email)
+    except:
+        pass
+
+    try:
+        last_test.daily_gross_main = float(last_test.daily_gross_main)
+        last_test.daily_gross_email = float(last_test.daily_gross_email)
+    except:
+        pass
+
+    try:
+        last_test.sched_vs_goal_main = float(last_test.sched_vs_goal_main)
+        last_test.sched_vs_goal_email = float(last_test.sched_vs_goal_email)
+    except:
+        pass
+
+    try:
+        last_test.general_main = float(last_test.general_main)
+        last_test.general_email = float(last_test.general_email)
+    except:
+        pass
+
+    try:
+        last_test.ortho_prod_main = float(last_test.ortho_prod_main)
+        last_test.ortho_prod_email = float(last_test.ortho_prod_email)
+    except:
+        pass
+    
+    try:
+        last_test.perio_prod_main = float(last_test.perio_prod_main)
+        last_test.perio_prod_email = float(last_test.perio_prod_email)
+    except:
+        pass
+
+    try:
+        last_test.oral_surgery_main = float(last_test.oral_surgery_main)
+        last_test.oral_surgery_email = float(last_test.oral_surgery_email)
+    except:
+        pass
+
+    try:
+        last_test.num_prod_main = float(last_test.num_prod_main)
+        last_test.num_prod_email = float(last_test.num_prod_email)
+    except:
+        pass
+
+    try:
+        last_test.adp_main = float(last_test.adp_main)
+        last_test.adp_email = float(last_test.adp_email)
+    except:
+        pass
+
+    try:
+        last_test.specialty_main = float(last_test.specialty_main)
+        last_test.specialty_email = float(last_test.specialty_email)
+    except:
+        pass
+    
+    try:
+        last_test.total_pts_main = float(last_test.total_pts_main)
+        last_test.total_pts_email = float(last_test.total_pts_email)
+    except:
+        pass
+
+    try:
+        last_test.total_office_main = float(last_test.total_office_main)
+        last_test.total_office_email = float(last_test.total_office_email)
+    except:
+        pass
+
+    try:
+        last_test.appts_changed_main = float(last_test.appts_changed_main)
+        last_test.appts_changed_email = float(last_test.appts_changed_email)
+    except:
+        pass
+
+    try:
+        last_test.appts_cancel_main = float(last_test.appts_cancel_main)
+        last_test.appts_cancel_email = float(last_test.appts_cancel_email)
+    except:
+        pass
+
+    try:
+        last_test.hyg_reserve_main = float(last_test.hyg_reserve_main)
+        last_test.hyg_reserve_email = float(last_test.hyg_reserve_email)
+    except:
+        pass
+
+    try:
+        last_test.hyg_cap_main = float(last_test.hyg_cap_main)
+        last_test.hyg_cap_email = float(last_test.hyg_cap_email)
+    except:
+        pass
+
+    try:
+        last_test.react_calls_main = float(last_test.react_calls_main)
+        last_test.react_calls_email = float(last_test.react_calls_email)
+    except:
+        pass
+
+    try:
+        last_test.res_apps_main = float(last_test.res_apps_main)
+        last_test.res_apps_email = float(last_test.res_apps_email)
+    except:
+        pass
+
+    try:
+        last_test.endo_main = float(last_test.endo_main)
+        last_test.endo_email = float(last_test.endo_email)
+    except:
+        pass
+
+    try:
+        last_test.clear_aligners_main = float(last_test.clear_aligners_main)
+        last_test.clear_aligners_email = float(last_test.clear_aligners_email)
+    except:
+        pass
+
+    try:
+        last_test.guest_appt_main = float(last_test.guest_appt_main)
+        last_test.guest_appt_email = float(last_test.guest_appt_email)
+    except:
+        pass
+
+    try:
+        last_test.unsched_treat_main = float(last_test.unsched_treat_main)
+        last_test.unsched_treat_email = float(last_test.unsched_treat_email)
+    except:
+        pass
+
+    try:
+        last_test.recalls_main = float(last_test.recalls_main)
+        last_test.recalls_email = float(last_test.recalls_email)
+    except:
+        pass
+
+    return last_test
+
+def getTestCodeInfo(testcode):
+    return TestCodes.query.filter_by(test_code=testcode).first()
+
+def getGraphData(last_test):
+    bd_success = 0
+    bd_fail = 0
+    email_success = 0
+    email_fail = 0
+
+    if (last_test.collection_main == last_test.collection_bd):
+        bd_success += 1
+    else:
+        bd_fail += 1
+
+    if (last_test.adjustments_main == last_test.adjustments_bd):
+        bd_success += 1
+    else:
+        bd_fail += 1
+
+    if (last_test.case_accpt_main == last_test.case_accpt_bd):
+        bd_success += 1
+    else:
+        bd_fail += 1
+
+    if (last_test.miss_ref_main == last_test.miss_ref_bd):
+        bd_success += 1
+    else:
+        bd_fail += 1
+
+    if (last_test.no_show_main == last_test.no_show_bd):
+        bd_success += 1
+    else:
+        bd_fail += 1
+    
+    if (last_test.daily_coll_main == last_test.daily_coll_bd):
+        bd_success += 1
+    else:
+        bd_fail += 1
+
+    if (last_test.hyg_reapp_main == last_test.hyg_reapp_bd):
+        bd_success += 1
+    else:
+        bd_fail += 1
+
+    if (last_test.new_patient_main == last_test.new_patient_bd):
+        bd_success += 1
+    else:
+        bd_fail += 1
+
+    if (last_test.sd_treat_main == last_test.sd_treat_bd):
+        bd_success += 1
+    else:
+        bd_fail += 1
+
+    if (last_test.pt_portion_main == last_test.pt_portion_bd):
+        bd_success += 1
+    else:
+        bd_fail += 1    
+
+    if (last_test.collection_main == last_test.collection_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.adjustments_main == last_test.adjustments_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.case_accpt_main == last_test.case_accpt_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.miss_ref_main == last_test.miss_ref_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.no_show_main == last_test.no_show_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.daily_coll_main == last_test.daily_coll_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.hyg_reapp_main == last_test.hyg_reapp_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.new_patient_main == last_test.new_patient_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.sd_treat_main == last_test.sd_treat_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.pt_portion_main == last_test.pt_portion_email):
+        email_success += 1
+    else:
+        email_fail += 1
+    
+    if (last_test.booked_prod_main == last_test.booked_prod_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.daily_net_main == last_test.daily_net_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.daily_gross_main == last_test.daily_gross_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.sched_vs_goal_main == last_test.sched_vs_goal_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.general_main == last_test.general_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.ortho_prod_main == last_test.ortho_prod_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.perio_prod_main == last_test.perio_prod_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.oral_surgery_main == last_test.oral_surgery_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.num_prod_main == last_test.num_prod_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.adp_main == last_test.adp_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.specialty_main == last_test.specialty_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.total_pts_main == last_test.total_pts_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.total_office_main == last_test.total_office_email):
+        email_success += 1
+    else:
+        email_fail += 1
+    
+    if (last_test.appts_changed_main == last_test.appts_changed_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.appts_cancel_main == last_test.appts_cancel_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.hyg_reserve_main == last_test.hyg_reserve_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.hyg_cap_main == last_test.hyg_cap_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.react_calls_main == last_test.react_calls_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.res_apps_main == last_test.res_apps_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.endo_main == last_test.endo_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.clear_aligners_main == last_test.clear_aligners_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.guest_appt_main == last_test.guest_appt_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.unsched_treat_main == last_test.unsched_treat_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    if (last_test.recalls_main == last_test.recalls_email):
+        email_success += 1
+    else:
+        email_fail += 1
+
+    return {
+        'bd_success': bd_success,
+        'bd_fail': bd_fail,
+        'email_success': email_success,
+        'email_fail': email_fail
+    }

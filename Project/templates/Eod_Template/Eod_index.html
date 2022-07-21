@@ -9,27 +9,85 @@
 {% endblock test_button %}
 
 {% block content %}
-    
-    <!--Search Section-->
-    {% include "Eod_Template/Sections/Search_section.html" %}
 
-    <!--Info Section-->
-    {% include "Eod_Template/Sections/Info_section.html" %}
+    {% if last_test %}
+        <!--Info Section-->
+        {% include "Eod_Template/Sections/Info_section.html" %}
+        
+        <!--Search Section-->
+        {% include "Eod_Template/Sections/Search_section.html" %}
 
-    <!--Graph Section-->
-    {% include "Eod_Template/Sections/Graph_test_section.html" %}
+        <!--Graph Section-->
+        {% include "Eod_Template/Sections/Graph_test_section.html" %}
 
-    <!--Breakdown Section-->
-    {% include "Eod_Template/Sections/Breakdown_test_section.html" %}
+        <!--Breakdown Section-->
+        {% include "Eod_Template/Sections/Breakdown_test_section.html" %}
 
-    <!--Mail Section-->
-    {% include "Eod_Template/Sections/Mail_test_section.html" %}
-    
-    <!--Test Modal-->
-    {% include "Eod_Template/Modal/Eod_modal.html" %}
+        <!--Mail Section-->
+        {% include "Eod_Template/Sections/Mail_test_section.html" %}
+        
+        <!--Test Modal-->
+        {% include "Eod_Template/Modal/Eod_modal.html" %}
+    {% else %}
+        {% include "Eod_Template/Sections/No_tests.html" %}
+    {% endif %}
 
 {% endblock content %}
 
 {% block chart %}
-    <script src="{{ url_for('static', filename='charts/eod_form_chart.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='charts/eod_form_chart.js') }}"></script> -->
+    <script>
+        (function breakdown_chart(){
+            const sample = document.getElementById('breakdown_chart');
+            const myChart = new Chart(sample, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pass', 'Fail'],
+                    datasets: [{
+                        data: [{{ graph_vals['bd_success'] }}, {{ graph_vals['bd_fail'] }}],
+                        backgroundColor: [
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(246, 51, 21, 1)',
+                            
+                        ],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+
+        (function mail_chart(){
+            const sample = document.getElementById('mail_chart');
+            const myChart = new Chart(sample, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pass', 'Fail'],
+                    datasets: [{
+                        data: [{{ graph_vals['email_success'] }}, {{ graph_vals['email_fail'] }}],
+                        backgroundColor: [
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(246, 51, 21, 1)',
+                        ],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true 
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+    </script>
 {% endblock chart %}
