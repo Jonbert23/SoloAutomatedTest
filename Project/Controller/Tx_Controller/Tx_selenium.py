@@ -5,9 +5,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from flask import Blueprint, flash, render_template, url_for, request, redirect
+from ...models import TxMinerDefaultTest
 from .Tx_Default import default_test_tx
 
-def login(get_test_code, optional_test):
+def login(get_test_code, optionalTestTx):
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
@@ -22,12 +23,28 @@ def login(get_test_code, optional_test):
     loginButton = driver.find_element(By.XPATH, '/html/body/div/div/div/div/div[1]/div/form/button')
     loginButton.click()
 
+    
+
 
     test_code = get_test_code.test_code
     test_month = get_test_code.test_month
+    
+    checkIfAlreadyTestInDefaultTest = TxMinerDefaultTest.query.filter_by(test_code=test_code).first()
 
-    driver.implicitly_wait(1000000000)
-    driver.get('https://solo.next.jarvisanalytics.com/tx-miner')
-    optionalData = default_test_tx.defaultTestTx(driver, test_code, test_month)
+    # if not checkIfAlreadyTestInDefaultTest:
+    #     driver.implicitly_wait(1000000000)
+    #     driver.get('https://solo.next.jarvisanalytics.com/tx-miner')
+    #     optionalData = default_test_tx.defaultTestTx(driver, test_code, test_month)
+
+    for option in optionalTestTx:
+        # print("--- "+option+" ---")
+        if option == "Provider Filter":
+            print("Provider Filter")
+        if option == "Procedure Filter":
+            print("Procedure Filter")
+        if option == "Patient Filter":
+            print("Patient Filter")
+
+
 
     driver.quit()

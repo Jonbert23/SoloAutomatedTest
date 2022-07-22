@@ -151,5 +151,23 @@ class FiguresMatching(UserMixin, db.Model):
     mh_pts = db.Column(db.String(100), nullable=True, default='N/A')
 
 
+class TxMinerDefaultTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    month = db.Column(db.String(100))
+    mv_pending_sched = db.Column(db.String(100))
+    mv_pending_unsched = db.Column(db.String(100))
+    mv_active_production = db.Column(db.String(100))
+    breakdown_pending_sched = db.Column(db.String(100))
+    breakdown_pending_unsched = db.Column(db.String(100))
+    breakdown_active_production = db.Column(db.String(100))
+    pending_sched_status = db.Column(db.String(100))
+    pending_unsched_status = db.Column(db.String(100))
+    pending_active_production = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
+
+
 
     
