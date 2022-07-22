@@ -29,6 +29,7 @@ def testing():
     }
     data = [financial, dash, ops]
     
-    message = 'Two way to run the figures matching Test '
+    for i in range(3):
+        flash('Hello fuckers!!')
     
     return render_template("test.html", data=data, financial=financial, dash=dash, ops=ops)

@@ -7,10 +7,12 @@ from Project.Controller.Global_Controller.Range_date_picker import DateFilter
 from Project.Controller.Global_Controller.Global_xpath import DatePicker
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from Project.models import FiguresMatching
+from Project import db
 
 class Dashboard:
     
-    def main(driver, metrics, client_url, test_type, test_month, test_day): 
+    def main(driver, metrics, client_url, test_type, test_month, test_day, test_code): 
         print('Dashboard Data -------------------------------------------------------------------------')
         driver.get(client_url+'/solo/results')
         #driver.implicitly_wait(1000000)
@@ -18,12 +20,12 @@ class Dashboard:
         wait = WebDriverWait(driver, 60)
         element = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/main/div[1]/div/div/div/div[4]/button')))
         
-        net_prod = 'null'
-        gross_prod = 'null'
-        collection = 'null'
-        adj = 'null'
-        npt = 'null'
-        pts = 'null'
+        net_prod = 'N/A'
+        gross_prod = 'N/A'
+        collection = 'N/A'
+        adj = 'N/A'
+        npt = 'N/A'
+        pts = 'N/A'
         
         if test_type == 'daily':
             DateFilter.rangePicker(driver, test_day, test_day)
@@ -63,19 +65,18 @@ class Dashboard:
             if metric == "pts":
                 pts = Dashboard.pts(driver)
                 print(pts)
-        
-        data = []
-        data.append(gross_prod)
-        data.append(net_prod)
-        data.append(collection)
-        data.append(adj)
-        data.append(npt)
-        data.append(pts)
-        # print(data)
-        return data
+                
+        dashboard = FiguresMatching.query.filter_by(test_code=test_code).first()
+        dashboard.dash_netProd = net_prod
+        dashboard.dash_grossProd  = gross_prod
+        dashboard.dash_collection = collection  
+        dashboard.dash_adjusment = adj 
+        dashboard.dash_npt = npt
+        dashboard.dash_pts = pts
+        db.session.commit()
     
     def getValue(driver, metric_name):
-        value = 'null'
+        value = 'N/A'
         done = 'false'
         rows = driver.find_elements(By.XPATH, DashboardXpath.metric_counter)
         rows = len(rows)

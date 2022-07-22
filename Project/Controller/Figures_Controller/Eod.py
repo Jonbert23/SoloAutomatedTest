@@ -4,18 +4,21 @@ from selenium.webdriver.common.by import By
 from Project.Controller.Figures_Controller.Figures_xpath import EodXpath
 from Project.Controller.Global_Controller.Single_date_picker import SinglePicker
 
+from Project.models import FiguresMatching
+from Project import db
+
 class Eod:
     
-    def main(driver, metrics, client_url, test_type, test_month, test_day):
+    def main(driver, metrics, client_url, test_type, test_month, test_day, test_code):
         print('EOD Data -------------------------------------------------------------------------')
         driver.get(client_url+'/end-of-day')
         driver.implicitly_wait(1000000)
-        net_prod = 'null'
-        gross_prod = 'null'
-        collection = 'null'
-        adj = 'null'
-        npt = 'null'
-        pts = 'null'
+        net_prod = 'N/A'
+        gross_prod = 'N/A'
+        collection = 'N/A'
+        adj = 'N/A'
+        npt = 'N/A'
+        pts = 'N/A'
         
         loader = driver.find_element(By.XPATH, '/html/body/div[1]/main/div[2]/div[3]/div[1]/div/form/div/div[2]/div[2]/div[2]/input').get_attribute('value')
         
@@ -77,14 +80,15 @@ class Eod:
                     pts = Eod.pts(driver)
                     print(pts)
                 
-        data = []
-        data.append(gross_prod)
-        data.append(net_prod)
-        data.append(collection)
-        data.append(adj)
-        data.append(npt)
-        data.append(pts)
-        return data
+        eod = FiguresMatching.query.filter_by(test_code=test_code).first()
+        eod.eod_netProd = net_prod
+        eod.eod_grossProd  = gross_prod
+        eod.eod_collection = collection
+        eod.eod_adjusment = adj
+        eod.eod_npt = npt
+        eod.eod_pts = pts
+        db.session.commit()
+        
 
     def netProd(driver):
         net_prod = driver.find_element(By.XPATH, EodXpath.net_prod).get_attribute('value')
@@ -111,7 +115,7 @@ class Eod:
         return pts
     
     def getDailyValue(driver, metric_name):
-        value = 'null'
+        value = 'N/A'
         done = 'false'
         rows = driver.find_elements(By.XPATH, EodXpath.metric_counter)
         rows = len(rows)

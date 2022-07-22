@@ -28,8 +28,8 @@ class Login:
             flash(res["message"], category="error")
             driver.quit()
             return False
-
-        return driver
+        
+        return True
 
     @staticmethod
     def authenticate(driver, username_xpath, password_xpath, loginbtn_xpath, username, passwd):
@@ -48,13 +48,14 @@ class Login:
                     EC.presence_of_element_located((By.XPATH, LoginXpath.main_header))
                 )
             )
-            print("Login success")
 
             if "These credentials do not match our records" in element.text:
                 return {
                     "success": False,
                     "message": "Invalid credentials."
                 }
+
+            print("Login success")
             
         except Exception as e:
             print(e)
@@ -86,7 +87,7 @@ class Login:
             element = WebDriverWait(driver, 120).until(
                 EC.presence_of_element_located((By.XPATH, LoginXpath.logo_xpath))
             )
-            print(f"Valid URL {element}")
+            print(f"Valid URL")
         except Exception as e:
             print("Invalid Url")
             return {

@@ -6,10 +6,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from Project.Controller.Figures_Controller.Figures_xpath import MhXpath
 from Project.Controller.Global_Controller.Single_date_picker import SinglePicker
 
+from Project.models import FiguresMatching
+from Project import db
+
 
 class MorningHuddle:
     
-    def main(driver, metrics, client_url, test_day, param):
+    def main(driver, metrics, client_url, test_day, param, test_code):
         print('Morning Huddle Data -------------------------------------------------------------------------')
         driver.get(client_url+'/morning-huddle')
         driver.implicitly_wait(1000000)
@@ -26,12 +29,12 @@ class MorningHuddle:
         time.sleep(5)
         scorecard = driver.find_element(By.XPATH, MhXpath.scorecard).click()
         
-        net_prod = 'null'
-        gross_prod = 'null'
-        collection = 'null'
-        adj = 'null'
-        npt = 'null'
-        pts = 'null'
+        net_prod = 'N/A'
+        gross_prod = 'N/A'
+        collection = 'N/A'
+        adj = 'N/A'
+        npt = 'N/A'
+        pts = 'N/A'
         
         for metric in metrics:
             if metric == "net_prod":
@@ -60,18 +63,16 @@ class MorningHuddle:
                 print(npt)
                 
             if metric == "pts":
-                npt = driver.find_element(By.XPATH, MhXpath.pts).text
+                pts = driver.find_element(By.XPATH, MhXpath.pts).text
                 print(pts)
-
-        data = []
-        data.append(gross_prod)
-        data.append(net_prod)
-        data.append(collection)
-        data.append(adj)
-        data.append(npt)
-        data.append(pts)
-        return data
-                
+        
+        mh = FiguresMatching.query.filter_by(test_code=test_code).first()
+        mh.mh_netProd  = net_prod
+        mh.mh_grossProd  = gross_prod
+        mh.mh_collection = collection
+        mh.mh_npt = npt
+        mh.mh_pts = pts
+        db.session.commit()
     
     def getValue(driver, metric_name):
         value = 'null'
