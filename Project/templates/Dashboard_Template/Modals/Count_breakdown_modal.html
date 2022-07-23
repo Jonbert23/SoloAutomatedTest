@@ -20,43 +20,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Preston Nader - INV</td>
-                            <td>D8090</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr> 
-                            <td>Christian Kirlin - AS1</td>
-                            <td>D1110</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>Pass</td>
-
-                        </tr>
-                        <tr>
-                            <td>Preston Nader - INV</td>
-                            <td>D8090</td>
-                            <td>7</td>
-                            <td>5</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>Christian Kirlin - AS1</td>
-                            <td>D2393</td>
-                            <td>14</td>
-                            <td>14</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Cloyd Murray - RR</td>
-                            <td>D8090</td>
-                            <td>21</td>
-                            <td>17</td>
-                            <td>Fail</td>
-                        </tr>
-                        
+                        {% for count in count_value %}
+                            <tr>
+                                <td>{{count.provider_name}}</td>
+                                <td>{{count.proced_code}}</td>
+                                <td>{{count.count_data}}</td>
+                                <td>{{count.bd_data}}</td>
+                                <td>{{count.count_status}}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
 

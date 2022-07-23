@@ -22,7 +22,7 @@
                                                 <h5 class="font-16 one-line-text">Doctor</h5>
                                             </div>
                                             <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{ '' if not lob_result['Doctor'][0] else ('Fail' if 'Fail' in lob_result['Doctor'][0] else 'Pass') }} </span>
                                                 <span class="float-right">
                                                 <a href="#" data-toggle="modal" data-target="#lob_doctor_modal"><i class="fas fa-external-link-alt"></i></a> 
                                                 </span>
@@ -36,7 +36,7 @@
                                                 <h5 class="font-16 one-line-text">Endo</h5>
                                             </div>
                                             <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{ '' if not lob_result['Endo'][0] else ('Fail' if 'Fail' in lob_result['Endo'][0] else 'Pass') }} </span>
                                                 <span class="float-right">
                                                 <a href="#" data-toggle="modal" data-target="#lob_endo_modal"><i class="fas fa-external-link-alt"></i></a> 
                                                 </span>
@@ -49,7 +49,7 @@
                                                 <h5 class="font-16 one-line-text">Hygiene</h5>
                                             </div>
                                             <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{ '' if not lob_result['Hygiene'][0] else ('Fail' if 'Fail' in lob_result['Hygiene'][0] else 'Pass') }} </span>
                                                 <span class="float-right">
                                                 <a href="#" data-toggle="modal" data-target="#lob_hyg_modal"><i class="fas fa-external-link-alt"></i></a> 
                                                 </span>
@@ -62,7 +62,7 @@
                                                 <h5 class="font-16 one-line-text">Invisalign</h5>
                                             </div>
                                             <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{ '' if not lob_result['Invisalign'][0] else ('Fail' if 'Fail' in lob_result['Invisalign'][0] else 'Pass') }} </span>
                                                 <span class="float-right">
                                                 <a href="#" data-toggle="modal" data-target="#lob_invisalign_modal"><i class="fas fa-external-link-alt"></i></a> 
                                                 </span>
@@ -79,7 +79,7 @@
                                                 <h5 class="font-16 one-line-text">Oral Surgery</h5>
                                             </div>
                                             <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{ '' if not lob_result['Oral Surgery'][0] else ('Fail' if 'Fail' in lob_result['Oral Surgery'][0] else 'Pass') }} </span>
                                                 <span class="float-right">
                                                 <a href="#" data-toggle="modal" data-target="#lob_os_modal"><i class="fas fa-external-link-alt"></i></a> 
                                                 </span>
@@ -92,7 +92,7 @@
                                                 <h5 class="font-16 one-line-text">Ortho</h5>
                                             </div>
                                             <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{ '' if not lob_result['Ortho'][0] else ('Fail' if 'Fail' in lob_result['Ortho'][0] else 'Pass') }} </span>
                                                 <span class="float-right">
                                                 <a href="#" data-toggle="modal" data-target="#lob_ortho_modal"><i class="fas fa-external-link-alt"></i></a> 
                                                 </span>
@@ -105,7 +105,7 @@
                                                 <h5 class="font-16 one-line-text">Pedo</h5>
                                             </div>
                                             <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{ '' if not lob_result['Pedo'][0] else ('Fail' if 'Fail' in lob_result['Pedo'][0] else 'Pass') }} </span>
                                                 <span class="float-right">
                                                 <a href="#" data-toggle="modal" data-target="#lob_pedo_modal"><i class="fas fa-external-link-alt"></i></a> 
                                                 </span>
@@ -122,7 +122,7 @@
                                                 <h5 class="font-16 one-line-text">Perio</h5>
                                             </div>
                                             <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{ '' if not lob_result['Perio'][0] else ('Fail' if 'Fail' in lob_result['Perio'][0] else 'Pass') }} </span>
                                                 <span class="float-right">
                                                 <a href="#" data-toggle="modal" data-target="#lob_perio_modal"><i class="fas fa-external-link-alt"></i></a> 
                                                 </span>
@@ -135,7 +135,7 @@
                                                 <h5 class="font-16 one-line-text">Prosthe</h5>
                                             </div>
                                             <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{ '' if not lob_result['Prosthe'][0] else ('Fail' if 'Fail' in lob_result['Prosthe'][0] else 'Pass') }} </span>
                                                 <span class="float-right">
                                                 <a href="#" data-toggle="modal" data-target="#lob_prosthe_modal"><i class="fas fa-external-link-alt"></i></a> 
                                                 </span>
@@ -148,7 +148,7 @@
                                                 <h5 class="font-16 one-line-text">Others</h5>
                                             </div>
                                             <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{ '' if not lob_result['Others'][0] else ('Fail' if 'Fail' in lob_result['Others'][0] else 'Pass') }} </span>
                                                 <span class="float-right">
                                                 <a href="#" data-toggle="modal" data-target="#lob_others_modal"><i class="fas fa-external-link-alt"></i></a> 
                                                 </span>

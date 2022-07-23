@@ -16,7 +16,7 @@
                                     <h5 class="font-16 one-line-text">Net Production</h5>
                                 </div>
                                 <hr>
-                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> PASS </span> </p>
+                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{breakdown_value.status_netprod}} </span> </p>
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                                     <h5 class="font-16 one-line-text">Gross Production</h5>
                                 </div>
                                 <hr>
-                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> PASS </span> </p>
+                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{breakdown_value.status_grossprod}} </span> </p>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                                     <h5 class="font-16 one-line-text">Collection</h5>
                                 </div>
                                 <hr>
-                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> PASS </span> </p>
+                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{breakdown_value.status_coll}} </span> </p>
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                                     <h5 class="font-16 one-line-text">Adjustment </h5>
                                 </div>
                                 <hr>
-                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> PASS </span> </p>
+                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{breakdown_value.status_adjust}} </span> </p>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                                     <h5 class="font-16 one-line-text">New Patients Visits</h5>
                                 </div>
                                 <hr>
-                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> PASS </span> </p>
+                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{breakdown_value.status_npv}} </span> </p>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                                     <h5 class="font-16 one-line-text">Patients Visits</h5>
                                 </div>
                                 <hr>
-                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> PASS </span> </p>
+                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{breakdown_value.status_epv}} </span> </p>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                     <div class="col-md-8">
                         <div class="card" style="box-shadow: 1px 1px 4px #000000;">
                             <div class="p-3" style="height: 400px">
-                                    <canvas id="brk_chart"></canvas>
+                                    <canvas id="brk_chart_100"></canvas>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                     <div class="col-md-4">
                         <div class="card" style="box-shadow: 1px 1px 4px #000000;">
                             <div class="p-3"style="height: 400px">
-                                <canvas id="brk_chart2"></canvas>
+                                <canvas id="brk_chart2_100"></canvas>
                             </div>
                         </div>
                     </div>

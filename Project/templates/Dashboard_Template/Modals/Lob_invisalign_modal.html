@@ -20,10 +20,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>31,355.70</td>
-                            <td>31,355.70</td>
-                            <td>31,355.70</td>
-                            <td>Pass</td>
+                            <td>{{lob_result['Invisalign'][1][0]}}</td>
+                            <td>{{lob_result['Invisalign'][1][1]}}</td>
+                            <td>{{lob_result['Invisalign'][1][2]}}</td>
+                            <td>{{lob_result['Invisalign'][1][3]}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -38,31 +38,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Aufderhar, Lisa - 1</td>
-                            <td>Doctor</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Wunsch, Cicero - BAL</td>
-                            <td>Doctor</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Jast, Elvera - CD</td>
-                            <td>Doctor</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Pouros, Maeve - DL</td>
-                            <td>Doctor</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Konopelski, Ena - DRK</td>
-                            <td>Endo</td>
-                            <td>Fail</td>
-                        </tr>
+                       {% for data in lob_result['Invisalign'][2]%}
+                            <tr>
+                                <td>{{data[0]}}</td>
+                                <td>{{data[1]}}</td>
+                                <td>{{data[2]}}</td>
+                            </tr>
+                       {% endfor %}
                     </tbody>
                 </table>
 

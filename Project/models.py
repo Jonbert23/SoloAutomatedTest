@@ -182,6 +182,90 @@ class EodTestResults(UserMixin, db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False)
 
+class DashboardBreakdownTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    # net production
+    base_netprod = db.Column(db.String(100))
+    bd_netprod = db.Column(db.String(100))
+    status_netprod = db.Column(db.String(100))
+    # gross production
+    base_grossprod = db.Column(db.String(100))
+    bd_grossprod = db.Column(db.String(100))
+    status_grossprod = db.Column(db.String(100))
+    # collection
+    base_coll = db.Column(db.String(100))
+    bd_coll = db.Column(db.String(100))
+    status_coll = db.Column(db.String(100))
+    # adjustment
+    base_adjust = db.Column(db.String(100))
+    bd_adjust = db.Column(db.String(100))
+    status_adjust = db.Column(db.String(100))
+    # new patient exist
+    base_npv = db.Column(db.String(100))
+    bd_npv = db.Column(db.String(100))
+    status_npv = db.Column(db.String(100))
+    # Existing Patients Visits
+    base_epv = db.Column(db.String(100))
+    bd_epv = db.Column(db.String(100))
+    status_epv = db.Column(db.String(100))
+    # time
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+class DashboardProductionTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    base_netprod = db.Column(db.String(100))
+    provider_data = db.Column(db.String(100))
+    providerdata_status = db.Column(db.String(100))
+    table_total = db.Column(db.String(100))
+    tabletotal_status = db.Column(db.String(100))
+    payor_score = db.Column(db.String(100))
+    payorscore_status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+class DashboardServiceCountTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    provider_name = db.Column(db.String(100))
+    proced_code = db.Column(db.String(100))
+    count_data = db.Column(db.String(100))
+    bd_data = db.Column(db.String(100))
+    count_status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+class DashboardServiceProcedureTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    proced_code = db.Column(db.String(100))
+    provider_type = db.Column(db.String(100))
+    unsearch_result = db.Column(db.String(100))
+    proced_status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+class DashboardLOBProductionTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    line_bussiness = db.Column(db.String(100))
+    netprod_base = db.Column(db.String(100))
+    providers_data = db.Column(db.String(100))
+    table_total = db.Column(db.String(100))
+    production_status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+class DashboardLOBSpecialityTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    production_id = db.Column(db.Integer)
+    providers_name = db.Column(db.String(100))
+    providers_speciality = db.Column(db.String(100))
+    speciality_status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
 class FiguresMatching(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)

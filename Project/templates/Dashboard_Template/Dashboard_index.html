@@ -57,4 +57,231 @@
 
 {% block chart %}
     <script src="{{ url_for('static', filename='charts/dashboard_chart.js') }}"></script>
+    <script>
+        (function brk_chart_100(){
+            const ctx = document.getElementById('brk_chart_100');
+            const base_netprod = {{breakdown_value.base_netprod}};
+            const bd_netprod = {{breakdown_value.bd_netprod}};
+            const base_grossprod = {{breakdown_value.base_grossprod}};
+            const bd_grossprod = {{breakdown_value.bd_grossprod}};
+            const base_coll = {{breakdown_value.base_coll}};
+            const bd_coll = {{breakdown_value.bd_coll}};
+            const base_adjust = {{breakdown_value.base_adjust}};
+            const bd_adjust = {{breakdown_value.bd_adjust}};
+            console.log(base_netprod);
+            const brk_chart_100 = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Net Production', 'Gross Production', 'Collection', 'Adjustment'],
+                    datasets:
+                    [
+                        {
+                            label: 'Base Data',
+                            data: [base_netprod, base_grossprod, base_coll, base_adjust],
+                            backgroundColor: [
+                                'rgba(38, 144, 244, 1)',
+                                'rgba(38, 144, 244, 1)',
+                                'rgba(38, 144, 244, 1)',
+                                'rgba(38, 144, 244, 1)',
+                            ],
+                        },
+                        {
+                            label: 'Breakdown Data',
+                            data: [bd_netprod, bd_grossprod, bd_coll, bd_adjust],
+                            backgroundColor: [
+                                'rgba(222, 182, 23, 1)',
+                                'rgba(222, 182, 23, 1)',
+                                'rgba(222, 182, 23, 1)',
+                                'rgba(222, 182, 23, 1)',
+                            ],
+                        }
+                    ],
+
+                },
+                options: {
+                    scales:
+                    {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+
+        (function brk_chart2_100(){
+            const ctx = document.getElementById('brk_chart2_100');
+            const base_npv = {{breakdown_value.base_npv}};
+            const bd_npv = {{breakdown_value.bd_npv}};
+            const base_epv = {{breakdown_value.base_epv}};
+            const bd_epv = {{breakdown_value.bd_epv}};
+            const brk_chart2_100 = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['New Patients Visits', 'Existing Patients Visits'],
+                    datasets:
+                    [
+                        {
+                            label: 'Base Data',
+                            data: [base_npv, base_epv],
+                            backgroundColor: [
+                                'rgba(38, 144, 244, 1)',
+                                'rgba(38, 144, 244, 1)',
+                            ],
+                        },
+                        {
+                            label: 'Breakdown Data',
+                            data: [bd_npv, bd_epv],
+                            backgroundColor: [
+                                'rgba(222, 182, 23, 1)',
+                                'rgba(222, 182, 23, 1)',
+                            ],
+                        }
+                    ],
+
+                },
+                options: {
+                    scales:
+                    {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+
+        (function production_figures_test(){
+            const ctx = document.getElementById('production_figures_test');
+            const base_netprod = {{production_value.base_netprod}};
+            const provider_data = {{production_value.provider_data}};
+            const table_total = {{production_value.table_total}};
+            const payor_score = {{production_value.payor_score}};
+            const metric_chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Production Data'],
+                    datasets:
+                    [
+                        {
+                            label: "Financial Data",
+                            backgroundColor: "rgba(38, 144, 244, 1)",
+                            data: [base_netprod],
+                         },{
+                            label: "Provider Data",
+                            backgroundColor: "rgba(222, 182, 23, 1)",
+                            data: [provider_data],
+                         },{
+                            label: "Table Total",
+                            backgroundColor: " rgba(246, 51, 21, 1)",
+                            data: [table_total],
+                         },{
+                            label: "Payor Score",
+                            backgroundColor: "rgba(164, 20, 195, 1)",
+                            data: [payor_score],
+                         }
+
+                    ],
+
+                },
+                options: {
+                    scales:
+                    {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+
+        (function services_test(){
+            const ctx = document.getElementById('services_test');
+            const count_status_pass = {{count_status_pass}};
+            const count_status_fail = {{count_status_fail}};
+            const proced_status_pass = {{proced_status_pass}};
+            const proced_status_fail = {{proced_status_fail}};
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Search Procedure', 'Count Breakdown'],
+                    datasets:
+                    [
+                        {
+                            label: 'Pass',
+                            data: [proced_status_pass, count_status_pass],
+                            backgroundColor: [
+                                'rgba(38, 144, 244, 1)',
+                                'rgba(38, 144, 244, 1)',
+                            ],
+                        },
+                        {
+                            label: 'Fail',
+                            data: [proced_status_fail, count_status_fail],
+                            backgroundColor: [
+                                'rgba(246, 51, 21, 1)',
+                                'rgba(246, 51, 21, 1)',
+                            ],
+                        }
+                    ],
+
+                },
+                options: {
+                    scales:
+                    {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+
+        (function lob_filter_test()
+        {
+            const lob = document.getElementById('lob_filter');
+            const lobs_status_pass = {{lobs_status_pass}};
+            const lobs_status_fail = {{lobs_status_fail}};
+            const myChart = new Chart(lob, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pass', 'Fail'],
+                    datasets: [{
+                        data: [lobs_status_pass, lobs_status_fail],
+                        backgroundColor: [
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(246, 51, 21, 1)',
+
+                        ],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+    </script>
 {% endblock chart %}
+

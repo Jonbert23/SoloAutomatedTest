@@ -126,28 +126,24 @@ def calendarDateRange(driver, date_from, date_to):
         month.click()
 
         # Input Year
-        clear_year = WebDriverWait(driver, 120).until(
+        date_year = WebDriverWait(driver, 120).until(
             EC.visibility_of_element_located((By.XPATH, f"{CalendarDateRangeXpath.curr_yearfrom}"))
         )
-        clear_year.send_keys(Keys.CONTROL + "a")
-
-        clear_year = WebDriverWait(driver, 120).until(
-            EC.visibility_of_element_located((By.XPATH, f"{CalendarDateRangeXpath.curr_yearfrom}"))
-        )
-        clear_year.send_keys(Keys.DELETE)
-
-        year = WebDriverWait(driver, 120).until(
-            EC.visibility_of_element_located((By.XPATH, f"{CalendarDateRangeXpath.curr_yearfrom}"))
-        )
-        year.send_keys(yf)
-
+        # Select all Input
+        date_year.send_keys(Keys.CONTROL + "a")
+        # Clear Input
+        date_year.send_keys(Keys.DELETE)
+        # Input Year
+        date_year.send_keys(yf)
+        print(dt)
+        print(df)
         # Date clicked
         fromDate = driver.find_element(by=By.XPATH,
-                                       value=f'//html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/tbody/tr/td[ text() = {df} and (@class="" or @class="weekend" or @class="in-range"  or @class="today active in-range end-date" or @class="weekend in-range" or @class="active in-range start-date" or @class="weekend today active in-range end-date" or @class="active in-range end-date" or @class="weekend today in-range" or @class="weekend today")]')
+                                       value=f'//html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/tbody/tr/td[ text() = {df} and (@class="weekend active in-range start-date" or @class="today" or @class="active in-range start-date end-date" or @class="" or @class="weekend" or @class="in-range"  or @class="today active in-range end-date" or @class="weekend in-range" or @class="active in-range start-date" or @class="weekend today active in-range end-date" or @class="active in-range end-date" or @class="weekend today in-range" or @class="weekend today" or @class="today in-range")]')
         fromDate.click()
 
         toDate = driver.find_element(by=By.XPATH,
-                                     value=f'//html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/tbody/tr/td[ text() = {dt} and (@class="" or @class="weekend" or @class="in-range"  or @class="today active in-range end-date" or @class="weekend in-range" or @class="active in-range start-date" or @class="weekend today active in-range end-date" or @class="active in-range end-date" or @class="weekend today in-range" or @class="weekend today")]')
+                                     value=f'//html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/tbody/tr/td[ text() = {dt} and (@class="weekend active in-range start-date" or @class="today" or @class="active in-range start-date end-date" or @class="" or @class="weekend" or @class="in-range"  or @class="today active in-range end-date" or @class="weekend in-range" or @class="active in-range start-date" or @class="weekend today active in-range end-date" or @class="active in-range end-date" or @class="weekend today in-range" or @class="weekend today" or @class="today in-range")]')
         toDate.click()
 
     else:
@@ -168,24 +164,19 @@ def dateFrom(driver, yf, mf, df):
     month.click()
 
     # Input Year
-    clear_year = WebDriverWait(driver, 120).until(
+    date_year = WebDriverWait(driver, 120).until(
         EC.visibility_of_element_located((By.XPATH, f"{CalendarDateRangeXpath.curr_yearfrom}"))
     )
-    clear_year.send_keys(Keys.CONTROL + "a")
-
-    clear_year = WebDriverWait(driver, 120).until(
-        EC.visibility_of_element_located((By.XPATH, f"{CalendarDateRangeXpath.curr_yearfrom}"))
-    )
-    clear_year.send_keys(Keys.DELETE)
-
-    year = WebDriverWait(driver, 120).until(
-        EC.visibility_of_element_located((By.XPATH, f"{CalendarDateRangeXpath.curr_yearfrom}"))
-    )
-    year.send_keys(yf)
+    # Select All Input
+    date_year.send_keys(Keys.CONTROL + "a")
+    # Clear Input
+    date_year.send_keys(Keys.DELETE)
+    # Input Year
+    date_year.send_keys(yf)
 
     # Date clicked
     fromDate = driver.find_element(by=By.XPATH,
-                                   value=f'//html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/tbody/tr/td[ text() = {df} and (@class="" or @class="weekend" or @class="in-range"  or @class="today active in-range end-date" or @class="weekend in-range" or @class="active in-range start-date" or @class="weekend today active in-range end-date" or @class="active in-range end-date" or @class="weekend today in-range" or @class="weekend today")]')
+                                   value=f'//html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/tbody/tr/td[ text() = {df} and (@class="weekend active in-range start-date" or @class="today" or @class="today in-range" or @class="" or @class="weekend" or @class="in-range"  or @class="today active in-range end-date" or @class="weekend in-range" or @class="active in-range start-date" or @class="weekend today active in-range end-date" or @class="active in-range end-date" or @class="weekend today in-range" or @class="weekend today")]')
     fromDate.click()
 
 def dateTo(driver, yt, mt, dt):
@@ -202,22 +193,17 @@ def dateTo(driver, yt, mt, dt):
     month.click()
 
     # Input Year
-    clear_year = WebDriverWait(driver, 120).until(
+    date_year = WebDriverWait(driver, 120).until(
         EC.visibility_of_element_located((By.XPATH, f"{CalendarDateRangeXpath.curr_yearto}"))
     )
-    clear_year.send_keys(Keys.CONTROL + "a")
-
-    clear_year = WebDriverWait(driver, 120).until(
-        EC.visibility_of_element_located((By.XPATH, f"{CalendarDateRangeXpath.curr_yearto}"))
-    )
-    clear_year.send_keys(Keys.DELETE)
-
-    year = WebDriverWait(driver, 120).until(
-        EC.visibility_of_element_located((By.XPATH, f"{CalendarDateRangeXpath.curr_yearto}"))
-    )
-    year.send_keys(yt)
+    # Select All Input
+    date_year.send_keys(Keys.CONTROL + "a")
+    # Clear Input
+    date_year.send_keys(Keys.DELETE)
+    # Input Year
+    date_year.send_keys(yt)
 
     # Date clicked
     toDate = driver.find_element(by=By.XPATH,
-                                   value=f'//html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr/td[ text() = {dt} and (@class="" or @class="weekend" or @class="in-range"  or @class="today active in-range end-date" or @class="weekend in-range" or @class="active in-range start-date" or @class="weekend today active in-range end-date" or @class="active in-range end-date" or @class="weekend today in-range" or @class="weekend today")]')
+                                   value=f'//html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr/td[ text() = {dt} and (@class="weekend active in-range start-date" or @class="today" or @class="today in-range" or @class="" or @class="weekend" or @class="in-range"  or @class="today active in-range end-date" or @class="weekend in-range" or @class="active in-range start-date" or @class="weekend today active in-range end-date" or @class="active in-range end-date" or @class="weekend today in-range" or @class="weekend today")]')
     toDate.click()

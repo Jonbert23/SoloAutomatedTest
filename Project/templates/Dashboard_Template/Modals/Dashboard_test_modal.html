@@ -8,11 +8,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                 <form action="/figures-matching" method="POST">
+                 <form action="/dashboard" method="POST">
                     <div class="form-group">
                         <label>Test Code</label>
                         <div class="pb-3">
-                            <input type="text" class="form-control" required name="client_url" placeholder="Enter The Test Code"/>
+                            <input type="text" class="form-control" required name="testcode" placeholder="Enter The Test Code"/>
                         </div>
 
                         <label>Default Test</label>
@@ -35,14 +35,13 @@
                         <label>Optional Test</label>
                         <div>
                             <div class="form-check">
-                                <input class="form-check-input checkbox-lg" type="checkbox" name="Optional[]" value="lob"/>
-                                <label class="form-check-label">Line Of Business Test</label>
-                            </div>
-                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="Optional" value="procedure_test"/>
                                 <label class="form-check-label">Services Test: Procedure Test</label>
                             </div>
-                            
+                            <div class="form-check">
+                                <input class="form-check-input checkbox-lg" type="checkbox" name="Optional" value="lob"/>
+                                <label class="form-check-label">Line Of Business Test</label>
+                            </div>
                         </div>
                     </div>
 
@@ -51,7 +50,7 @@
                             <button type="button" class="btn btn-secondary waves-effect m-l-5" data-dismiss="modal">
                                 Cancel
                             </button>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light"">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">
                                 Proceed
                             </button>
                         </div>

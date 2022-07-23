@@ -19,43 +19,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>D8090</td>
-                            <td>Orthodontics</td>
-                            <td>None</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>D2740</td>
-                            <td>Crowns</td>
-                            <td>None</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>D3330</td>
-                            <td>Endodontics</td>
-                            <td>D2740</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>D0274</td>
-                            <td>Diagnostic</td>
-                            <td>None</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>D2392</td>
-                            <td>Restorative</td>
-                            <td>None</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>D4341</td>
-                            <td>Periodontics</td>
-                            <td>D4342</td>
-                            <td>Fail</td>
-                        </tr>
-                        
+                        {% for proced in proced_value %}
+                            <tr>
+                                <td>{{proced.proced_code}}</td>
+                                <td>{{proced.provider_type}}</td>
+                                <td>{{proced.unsearch_result}}</td>
+                                <td>{{proced.proced_status}}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
 
