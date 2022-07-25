@@ -26,11 +26,12 @@
         <!--Mail Section-->
         {% include "Eod_Template/Sections/Mail_test_section.html" %}
         
-        <!--Test Modal-->
-        {% include "Eod_Template/Modal/Eod_modal.html" %}
     {% else %}
         {% include "Eod_Template/Sections/No_tests.html" %}
     {% endif %}
+
+    <!--Test Modal-->
+    {% include "Eod_Template/Modal/Eod_modal.html" %}
 
 {% endblock content %}
 

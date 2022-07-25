@@ -20,6 +20,7 @@ from datetime import datetime
 eod = Blueprint('eod', __name__)
 
 @eod.route("/eod-form", methods=["POST", "GET"])
+@login_required
 def eodForm():
     testcode = None
     testcode_info = None
