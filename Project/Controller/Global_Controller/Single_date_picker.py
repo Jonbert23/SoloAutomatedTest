@@ -10,9 +10,12 @@ class SinglePicker:
     
     def MH_DatePicker(driver, date):
         date = datetime.datetime.strptime(date,'%Y-%m-%d')
+        driver.implicitly_wait(1000000)
         wait = WebDriverWait(driver, 60)
-        element = wait.until(EC.element_to_be_clickable((By.XPATH, SinglePickerXpath.mh_loader)))
+        element = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/main/div[1]/div/div/div/div[4]/button')))
         time.sleep(3)
+        
+        stoper = value = driver.find_element(By.XPATH, '/html/body/div[1]/main/div[2]/div[1]/div[1]/div/div/div[1]/input').get_attribute('value')
         
         driver.find_element(By.XPATH, SinglePickerXpath.picker).click()
         SinglePicker.MH_monthYearPicker(driver, date.month, date.year)

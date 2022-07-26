@@ -8,38 +8,29 @@
                 </button>
             </div>
             <div class="modal-body">
-                 <form action="#">
                     
-                    <div class="form-group">
-                        <label>Test Code</label>
-                        <div>
-                            <input type="text" class="form-control" required placeholder="Enter The Test Code"/>
-                        </div>
+                <form action="{{ url_for('mh.morning_huddle') }}" method="POST">
+                    <label>Test Code</label>
+                    <div>
+                        <input type="text" placeholder="Enter Client Username" name="test_code" class="form-control" required />
                     </div>
-
+                    <br>
                     <div class="form-group">
                         <label>Default Test</label>
-                        <div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck1" data-parsley-multiple="groups"
-                                        data-parsley-mincheck="2">
-                                <label class="custom-control-label" for="customCheck1">Breakdown Test</label>
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck2" data-parsley-multiple="groups"
-                                        data-parsley-mincheck="2">
-                                <label class="custom-control-label" for="customCheck2">Scorecard Test</label>
-                            </div>
-                            
+                        <div class="form-check" id="calendar">
+                            <input class="form-check-input" type="checkbox" checked disabled name="Test[]" value="breakdown"/>
+                            <label class="form-check-label">Breakdown Test</label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked disabled name="Test[]" value="scorecard"/>
+                            <label class="form-check-label">Scorecard Test</label>
+                        </div>
+                        
                         <hr>
                         <label>Optional Test</label>
-                        <div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck4" data-parsley-multiple="groups"
-                                        data-parsley-mincheck="2">
-                                <label class="custom-control-label" for="customCheck4">Mail Test</label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="Test[]" value="mail"/>
+                            <label class="form-check-label">Mail Test</label>
                         </div>
                     </div>
 
