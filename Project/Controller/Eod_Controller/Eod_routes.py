@@ -36,7 +36,7 @@ def eodForm():
         d = DesiredCapabilities.CHROME
         d['loggingPrefs'] = {'browser': 'ERROR'}
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), desired_capabilities=d)
-        login = Login.login(driver, f"{testcode_info.client_link}end-of-day", testcode_info.client_username, testcode_info.client_password)
+        login = Login.login(driver, test_url, testcode_info.client_username, testcode_info.client_password)
         
         if login and driver:
 
