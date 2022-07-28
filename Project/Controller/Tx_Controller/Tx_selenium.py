@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from flask import Blueprint, flash, render_template, url_for, request, redirect
 from ...models import TxMinerDefaultTest
 from .Tx_Default import default_test_tx
+from .Tx_Optional import providers_test
 
 def login(get_test_code, optionalTestTx):
     options = webdriver.ChromeOptions()
@@ -23,9 +24,6 @@ def login(get_test_code, optionalTestTx):
     loginButton = driver.find_element(By.XPATH, '/html/body/div/div/div/div/div[1]/div/form/button')
     loginButton.click()
 
-    
-
-
     test_code = get_test_code.test_code
     test_month = get_test_code.test_month
     
@@ -39,6 +37,10 @@ def login(get_test_code, optionalTestTx):
     for option in optionalTestTx:
         # print("--- "+option+" ---")
         if option == "Provider Filter":
+            driver.implicitly_wait(1000000000)
+            driver.get(get_test_code.client_link+'/tx-miner')
+
+            optionalData = providers_test.providerTestTx(driver, test_code)
             print("Provider Filter")
         if option == "Procedure Filter":
             print("Procedure Filter")
