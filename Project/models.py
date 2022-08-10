@@ -323,6 +323,7 @@ class MhMain(UserMixin, db.Model):
     ytr_goal = db.Column(db.String(100), nullable=True, default='N/A')
     ytr_net_prod = db.Column(db.String(100), nullable=True, default='N/A')
     ytr_collection = db.Column(db.String(100), nullable=True, default='N/A')
+    ytr_collection_percent = db.Column(db.String(100), nullable=True, default='N/A')
     ytr_prod_per_patient = db.Column(db.String(100), nullable=True, default='N/A')
     ytr_npt = db.Column(db.String(100), nullable=True, default='N/A')
     ytr_care_progress = db.Column(db.String(100), nullable=True, default='N/A')
@@ -360,6 +361,7 @@ class MhMain(UserMixin, db.Model):
     tmw_unsched_tx = db.Column(db.String(100), nullable=True, default='N/A')
     tmw_unsched_family_members = db.Column(db.String(100), nullable=True, default='N/A')
     tmw_unsched_hyg = db.Column(db.String(100), nullable=True, default='N/A')
+    tmw_past_due_ar = db.Column(db.String(100), nullable=True, default='N/A')
     tmw_due_bwx = db.Column(db.String(100), nullable=True, default='N/A')
     twm_due_fmx = db.Column(db.String(100), nullable=True, default='N/A')
     
@@ -371,6 +373,7 @@ class MhBreakdown(UserMixin, db.Model):
     ytr_gross_prod = db.Column(db.String(100), nullable=True, default='N/A')
     ytr_net_prod = db.Column(db.String(100), nullable=True, default='N/A')
     ytr_collection = db.Column(db.String(100), nullable=True, default='N/A')
+    ytr_collection_percent = db.Column(db.String(100), nullable=True, default='N/A')
     ytr_prod_per_patient = db.Column(db.String(100), nullable=True, default='N/A')
     ytr_npt = db.Column(db.String(100), nullable=True, default='N/A')
     ytr_care_progress = db.Column(db.String(100), nullable=True, default='N/A')
@@ -404,6 +407,7 @@ class MhBreakdown(UserMixin, db.Model):
     tmw_unsched_tx = db.Column(db.String(100), nullable=True, default='N/A')
     tmw_unsched_family_members = db.Column(db.String(100), nullable=True, default='N/A')
     tmw_unsched_hyg = db.Column(db.String(100), nullable=True, default='N/A')
+    tmw_past_due_ar = db.Column(db.String(100), nullable=True, default='N/A')
     tmw_due_bwx = db.Column(db.String(100), nullable=True, default='N/A')
     twm_due_fmx = db.Column(db.String(100), nullable=True, default='N/A')
 

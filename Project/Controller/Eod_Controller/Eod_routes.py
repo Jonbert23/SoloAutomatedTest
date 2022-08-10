@@ -500,7 +500,7 @@ def emailTest(driver):
 
         send_eod["recipients"].findElement(driver)
         send_eod["sndeod_email"].findElement(driver)
-        send_eod["sndeod_email"].element.send_keys("eod.test.jap@gmail.com\n")
+        send_eod["sndeod_email"].element.send_keys("jonbert.dummy@gmail.com\n")
 
         send_eod["send_summary"].findElement(driver)
         send_eod["send_summary"].click(driver)
@@ -511,10 +511,10 @@ def emailTest(driver):
         gmail_elements = getGmailXpath()
 
         gmail_elements['email'].findElement(driver)
-        gmail_elements['email'].element.send_keys('eod.test.jap@gmail.com\n')
+        gmail_elements['email'].element.send_keys('jonbert.dummy@gmail.com\n')
 
         gmail_elements['password'].findElement(driver)
-        gmail_elements['password'].element.send_keys('ZsRL3Yk3crboXq\n')
+        gmail_elements['password'].element.send_keys('oct.23,1997\n')
 
         # OPEN FIRST EMAIL RECEIVED.
         gmail_elements['first_email'].findElement(driver)

@@ -50,8 +50,185 @@
 {% endblock content %}
 
 {% block chart %}
-    <script src="{{ url_for('static', filename='charts/mh_brk_chart.js') }}"></script>
     <script src="{{ url_for('static', filename='charts/mh_display.js') }}"></script>
     <script src="{{ url_for('static', filename='charts/mh_mail_chart.js') }}"></script>
-    <script src="{{ url_for('static', filename='charts/mh_scorecard_chart.js') }}"></script>
+
+    <script>
+        (function ytd_breakdown_chart()
+        {
+            const sample = document.getElementById('ytd_breakdown_chart');
+            const myChart = new Chart(sample, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pass', 'Fail'],
+                    datasets: [{
+                        data: [{{ brk_ytr_chart.pass }}, {{ brk_ytr_chart.fail }}],
+                        backgroundColor: [
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(246, 51, 21, 1)',
+                            
+                        ],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+
+        (function tdy_breakdown_chart()
+        {
+            const sample = document.getElementById('tdy_breakdown_chart');
+            const myChart = new Chart(sample, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pass', 'Fail'],
+                    datasets: [{
+                        data: [{{ brk_tdy_chart.pass }}, {{ brk_tdy_chart.fail }} ],
+                        backgroundColor: [
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(246, 51, 21, 1)',
+                        ],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true 
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+
+        (function trw_breakdown_chart()
+        {
+            const sample = document.getElementById('trw_breakdown_chart');
+            const myChart = new Chart(sample, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pass', 'Fail'],
+                    datasets: [{
+                        data: [{{ brk_tmw_chart.pass }}, {{ brk_tmw_chart.fail }}],
+                        backgroundColor: [
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(246, 51, 21, 1)',
+                        ],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true 
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+
+        (function trw_breakdown_chart()
+        {
+            const sample = document.getElementById('sc_result_chart');
+            const myChart = new Chart(sample, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pass', 'Fail'],
+                    datasets: [{
+                        data: [{{ sc_chart.pass }}, {{ sc_chart.fail }}],
+                        backgroundColor: [
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(246, 51, 21, 1)',
+                        ],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true 
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+
+        (function brk_chart(){
+            const ctx = document.getElementById('scorecard_chart');
+            const metric_chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Yesterday', 'Today', 'Tomorrow'],
+                    datasets: 
+                    [
+                        {
+                            label: 'Mainview Production',
+                            data: [{{ sc_goal_prod_graph.mh_ytr_prod }}, {{ sc_goal_prod_graph.mh_tdy_prod }}, {{ sc_goal_prod_graph.mh_tmw_prod }}],
+                            backgroundColor: [
+                                'rgb(153, 107, 229)',
+                                'rgb(153, 107, 229)',
+                                'rgb(153, 107, 229)',
+                                'rgb(153, 107, 229)',
+                            ],
+                        },
+                        {
+                            label: 'Scorecard Production',
+                            data: [{{ sc_goal_prod_graph.sc_ytr_prod }}, {{ sc_goal_prod_graph.sc_tdy_prod }}, {{ sc_goal_prod_graph.sc_tmw_prod }}],
+                            backgroundColor: [
+                                'rgb(97, 67, 156)',
+                                'rgb(97, 67, 156)',
+                                'rgb(97, 67, 156)',
+                                'rgb(97, 67, 156)',
+                            ],
+                        },
+                        {
+                            label: 'Mainview Goal',
+                            data: [{{ sc_goal_prod_graph.mh_ytr_goal }}, {{ sc_goal_prod_graph.mh_tdy_goal }}, {{ sc_goal_prod_graph.mh_tmw_goal }}],
+                            backgroundColor: [
+                                'rgb(109, 229, 193)',
+                                'rgb(109, 229, 193)',
+                                'rgb(109, 229, 193)',
+                                'rgb(109, 229, 193)',
+                            ],
+                        },
+                        {
+                            label: 'Scorecard Goal',
+                            data: [{{ sc_goal_prod_graph.sc_ytr_sc }}, {{ sc_goal_prod_graph.sc_tdy_goal }}, {{ sc_goal_prod_graph.sc_tmw_goal }}],
+                            backgroundColor: [
+                                'rgb(74, 192, 156)',
+                                'rgb(74, 192, 156)',
+                                'rgb(74, 192, 156)',
+                                'rgb(74, 192, 156)',
+                            ],
+                        }
+                    ],
+                    
+                },
+                options: {
+                    scales: 
+                    {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        })();
+        
+    </script>
+
 {% endblock chart %}

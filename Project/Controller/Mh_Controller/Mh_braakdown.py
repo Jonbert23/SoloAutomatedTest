@@ -68,7 +68,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_gross_prod = value
-                mh_brk.ytr_gross_prod = value
+                mh_brk.ytr_gross_prod = brk
                 db.session.commit()
                 
                 print('--------------------------------------------------------------------')
@@ -93,7 +93,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_net_prod = value
-                mh_brk.ytr_net_prod = value
+                mh_brk.ytr_net_prod = brk
                 db.session.commit()
                 
                 print('--------------------------------------------------------------------')
@@ -108,7 +108,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_collection = value
-                mh_brk.ytr_collection = value
+                mh_brk.ytr_collection = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -122,8 +122,8 @@ class MornigHuddleBreakdown:
                 
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
-                mh_main.ytr_collection = value
-                mh_brk.ytr_collection = value
+                mh_main.ytr_collection_percent = value
+                mh_brk.ytr_collection_percent = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -138,7 +138,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_copay = value
-                mh_brk.ytr_copay = value
+                mh_brk.ytr_copay = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -153,7 +153,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_prod_per_patient = value
-                mh_brk.ytr_prod_per_patient = value
+                mh_brk.ytr_prod_per_patient = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -167,7 +167,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_npt = value
-                mh_brk.ytr_npt = value
+                mh_brk.ytr_npt = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -181,7 +181,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_care_progress = value
-                mh_brk.ytr_care_progress = value
+                mh_brk.ytr_care_progress = brk
                 db.session.commit()
                 
                 print('Breakdown: ')
@@ -194,7 +194,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_tx_acceptance = value
-                mh_brk.ytr_tx_acceptance = value
+                mh_brk.ytr_tx_acceptance = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -208,7 +208,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_tx_presented = value
-                mh_brk.ytr_tx_presented = value
+                mh_brk.ytr_tx_presented = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -222,7 +222,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_tx_completed = value
-                mh_brk.ytr_tx_completed = value
+                mh_brk.ytr_tx_completed = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -236,7 +236,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_tx_sched = value
-                mh_brk.ytr_tx_sched = value
+                mh_brk.ytr_tx_sched = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -250,7 +250,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_tx_unsched = value
-                mh_brk.ytr_tx_unsched = value
+                mh_brk.ytr_tx_unsched = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -264,7 +264,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_hyg_prod = value
-                mh_brk.ytr_hyg_prod = value
+                mh_brk.ytr_hyg_prod = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -278,7 +278,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_hyg_reappt = value
-                mh_brk.ytr_hyg_reappt = value
+                mh_brk.ytr_hyg_reappt = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -292,7 +292,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_hyg_sched = value
-                mh_brk.ytr_hyg_sched = value
+                mh_brk.ytr_hyg_sched = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -306,7 +306,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_not_sched = value
-                mh_brk.ytr_not_sched = value
+                mh_brk.ytr_not_sched = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -320,7 +320,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_broken_appt = value
-                mh_brk.ytr_broken_appt = value
+                mh_brk.ytr_broken_appt = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -334,7 +334,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_unshed_broken_appt = value
-                mh_brk.ytr_unshed_broken_appt = value
+                mh_brk.ytr_unshed_broken_appt = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -348,7 +348,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_npt_not_resched = value
-                mh_brk.ytr_npt_not_resched = value
+                mh_brk.ytr_npt_not_resched = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -362,7 +362,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.ytr_pts_not_resched = value
-                mh_brk.ytr_pts_not_resched = value
+                mh_brk.ytr_pts_not_resched = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -402,7 +402,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_npt_actual = value
-                mh_brk.tdy_npt_actual = value
+                mh_brk.tdy_npt_actual = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -417,7 +417,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_npt_sched = value
-                mh_brk.tdy_npt_sched = value
+                mh_brk.tdy_npt_sched = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -432,7 +432,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_hyg_prod_sched = value
-                mh_brk.tdy_hyg_prod_sched = value
+                mh_brk.tdy_hyg_prod_sched = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -447,7 +447,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_hyg_prod_actual = value
-                mh_brk.tdy_hyg_prod_actual = value
+                mh_brk.tdy_hyg_prod_actual = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -462,7 +462,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_unsched_tx = value
-                mh_brk.tdy_unsched_tx = value
+                mh_brk.tdy_unsched_tx = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -477,7 +477,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_unsched_family_members = value
-                mh_brk.tdy_unsched_family_members = value
+                mh_brk.tdy_unsched_family_members = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -492,7 +492,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_unsched_hyg = value
-                mh_brk.tdy_unsched_hyg = value
+                mh_brk.tdy_unsched_hyg = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -507,7 +507,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_patient_bday = value
-                mh_brk.tdy_patient_bday = value
+                mh_brk.tdy_patient_bday = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -522,7 +522,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_past_due_ar = value
-                mh_brk.tdy_past_due_ar = value
+                mh_brk.tdy_past_due_ar = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -536,7 +536,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_due_bwx = value
-                mh_brk.tdy_due_bwx = value
+                mh_brk.tdy_due_bwx = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -550,7 +550,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tdy_due_fmx = value
-                mh_brk.tdy_due_fmx = value
+                mh_brk.tdy_due_fmx = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -590,7 +590,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tmw_npt_sched = value
-                mh_brk.tmw_npt_sched = value
+                mh_brk.tmw_npt_sched = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -604,7 +604,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tmw_hyg_prod_sched = value
-                mh_brk.tmw_hyg_prod_sched = value
+                mh_brk.tmw_hyg_prod_sched = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -618,7 +618,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tmw_unsched_tx = value
-                mh_brk.tmw_unsched_tx = value
+                mh_brk.tmw_unsched_tx = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -632,7 +632,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tmw_unsched_family_members = value
-                mh_brk.tmw_unsched_family_members = value
+                mh_brk.tmw_unsched_family_members = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -646,7 +646,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tmw_unsched_hyg = value
-                mh_brk.tmw_unsched_hyg = value
+                mh_brk.tmw_unsched_hyg = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -660,7 +660,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.tmw_due_bwx = value
-                mh_brk.tmw_due_bwx = value
+                mh_brk.tmw_due_bwx = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)
@@ -674,7 +674,7 @@ class MornigHuddleBreakdown:
                 mh_main = MhMain.query.filter_by(test_code=test_code).first()
                 mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
                 mh_main.twm_due_fmx = value
-                mh_brk.twm_due_fmx = value
+                mh_brk.twm_due_fmx = brk
                 db.session.commit()
                 
                 print(metric_name+': '+value)

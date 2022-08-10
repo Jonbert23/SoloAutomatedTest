@@ -8,18 +8,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Scheduled Production<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Scheduled Production<span class="float-right">{{ sc_result.tdy_sched_prod }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.tdy_sched_prod }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Scorecard</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_sc.tdy_sched_prod }}</h3>
                     </div>
                 </div>
             </div>
@@ -30,18 +30,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Daily Goal<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Daily Goal<span class="float-right">{{ sc_result.tdy_goal }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.tdy_goal }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Scorecard</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_sc.tdy_goal }}</h3>
                     </div>
                 </div>
             </div>
@@ -52,18 +52,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">New Patients (Actual)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">New Patients (Actual)<span class="float-right">{{ sc_result.tdy_npt_actual }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.tdy_npt_actual }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Scorecard</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_sc.tdy_npt_actual }}</h3>
                     </div>
                 </div>
             </div>
@@ -74,18 +74,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">New Patients (Scheduled)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">New Patients (Scheduled)<span class="float-right">{{ sc_result.tdy_npt_sched }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.tdy_npt_sched }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Scorecard</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_sc.tdy_npt_sched }}</h3>
                     </div>
                 </div>
             </div>

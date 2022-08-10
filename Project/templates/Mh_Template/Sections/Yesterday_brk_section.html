@@ -8,18 +8,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Yesterday's Production (gross)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Yesterday's Production (gross)<span class="float-right">{{ brk_ytr_result.ytr_gross_prod }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_gross_prod }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_gross_prod }}</h3>
                     </div>
                 </div>
             </div>
@@ -30,18 +30,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Yesterday's Production (net)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Yesterday's Production (net)<span class="float-right">{{  brk_ytr_result.ytr_net_prod  }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_net_prod }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_net_prod }}</h3>
                     </div>
                 </div>
             </div>
@@ -52,18 +52,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Yesterday's Collection<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Yesterday's Collection<span class="float-right">{{  brk_ytr_result.ytr_collection  }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_collection }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_collection }}</h3>
                     </div>
                 </div>
             </div>
@@ -74,18 +74,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Collection (%)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Collection (%)<span class="float-right">{{  brk_ytr_result.ytr_collection_percent  }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_collection_percent }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_collection_percent }}</h3>
                     </div>
                 </div>
             </div>
@@ -96,18 +96,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Patient Co-pay Collection (%)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Patient Co-pay Collection (%)<span class="float-right">{{  brk_ytr_result.ytr_copay  }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_copay }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_copay }}</h3>
                     </div>
                 </div>
             </div>
@@ -118,18 +118,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Production Per Patient<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Production Per Patient<span class="float-right">{{  brk_ytr_result.ytr_prod_per_patient  }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_prod_per_patient }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_prod_per_patient }}</h3>
                     </div>
                 </div>
             </div>
@@ -140,18 +140,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">New Patients (Actual)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">New Patients (Actual)<span class="float-right">{{  brk_ytr_result.ytr_npt }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_npt }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_npt }}</h3>
                     </div>
                 </div>
             </div>
@@ -162,18 +162,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Care Progress Rate (%)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Care Progress Rate (%)<span class="float-right">{{  brk_ytr_result.ytr_care_progress }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_care_progress }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_care_progress }}</h3>
                     </div>
                 </div>
             </div>
@@ -184,18 +184,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Treatment acceptance (%)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Treatment acceptance (%)<span class="float-right">{{ brk_ytr_result.ytr_tx_acceptance }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_tx_acceptance }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_tx_acceptance }}</h3>
                     </div>
                 </div>
             </div>
@@ -206,18 +206,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Presented<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Presented<span class="float-right">{{ brk_ytr_result.ytr_tx_presented }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_tx_presented }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_tx_presented }}</h3>
                     </div>
                 </div>
             </div>
@@ -228,18 +228,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Completed<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Completed<span class="float-right">{{ brk_ytr_result.ytr_tx_completed }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_tx_completed }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_tx_completed }}</h3>
                     </div>
                 </div>
             </div>
@@ -250,18 +250,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Scheduled<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Scheduled<span class="float-right">{{ brk_ytr_result.ytr_tx_sched }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_tx_sched }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_tx_sched }}</h3>
                     </div>
                 </div>
             </div>
@@ -272,18 +272,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Unscheduled<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Unscheduled<span class="float-right">{{ brk_ytr_result.ytr_tx_unsched }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_tx_unsched }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_tx_unsched }}</h3>
                     </div>
                 </div>
             </div>
@@ -294,18 +294,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Hygiene Production<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Hygiene Production<span class="float-right">{{ brk_ytr_result.ytr_hyg_prod }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_hyg_prod }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_hyg_prod }}</h3>
                     </div>
                 </div>
             </div>
@@ -316,18 +316,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Hygiene Reappoint (%)<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Hygiene Reappoint (%)<span class="float-right">{{ brk_ytr_result.ytr_hyg_reappt }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_hyg_reappt }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_hyg_reappt }}</h3>
                     </div>
                 </div>
             </div>
@@ -338,18 +338,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Scheduled<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Scheduled<span class="float-right">{{ brk_ytr_result.ytr_hyg_sched }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_hyg_sched }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_hyg_sched }}</h3>
                     </div>
                 </div>
             </div>
@@ -360,18 +360,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Not Scheduled<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Not Scheduled<span class="float-right">{{ brk_ytr_result.ytr_not_sched }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_not_sched }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_not_sched }}</h3>
                     </div>
                 </div>
             </div>
@@ -382,18 +382,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Broken appointments<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Broken appointments<span class="float-right">{{ brk_ytr_result.ytr_broken_appt }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_broken_appt }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_broken_appt }}</h3>
                     </div>
                 </div>
             </div>
@@ -404,18 +404,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Unscheduled Broken Appointments<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Unscheduled Broken Appointments<span class="float-right">{{ brk_ytr_result.ytr_unshed_broken_appt }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_unshed_broken_appt }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_unshed_broken_appt }}</h3>
                     </div>
                 </div>
             </div>
@@ -426,18 +426,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">New Pts not rescheduled<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">New Pts not rescheduled<span class="float-right">{{ brk_ytr_result.ytr_npt_not_resched }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_npt_not_resched }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_npt_not_resched }}</h3>
                     </div>
                 </div>
             </div>
@@ -448,18 +448,18 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Existing Pts not rescheduled<span class="float-right">PASS</span></h5>
+                    <h5 class="font-12 one-line-text">Existing Pts not rescheduled<span class="float-right">{{ brk_ytr_result.ytr_pts_not_resched }}</span></h5>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 border-right">
                         <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_main.ytr_pts_not_resched }}</h3>
                     </div>
                     
                     <div class="col-md-6">
                         <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12,234</h3>
+                        <h3 class="text-center font-20">{{ mh_brk.ytr_pts_not_resched }}</h3>
                     </div>
                 </div>
             </div>
