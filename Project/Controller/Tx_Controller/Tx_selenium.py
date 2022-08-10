@@ -40,7 +40,7 @@ def login(get_test_code, optionalTestTx):
             driver.implicitly_wait(1000000000)
             driver.get(get_test_code.client_link+'/tx-miner')
 
-            optionalData = providers_test.providerTestTx(driver, test_code)
+            optionalData = providers_test.providerTestTx(driver, test_code, test_month)
             print("Provider Filter")
         if option == "Procedure Filter":
             print("Procedure Filter")
