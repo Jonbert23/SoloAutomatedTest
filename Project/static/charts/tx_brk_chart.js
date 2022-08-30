@@ -118,6 +118,7 @@
             
         },
         options: {
+            indexAxis: 'x',
             scales: 
             {
                 yAxes: [{

@@ -1,0 +1,29 @@
+{% extends "Layout_template.html" %}
+
+{% block header %}  Patient Portal {% endblock header%}
+
+{% block test_button %} 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Pp_modal">
+        Run Test
+    </button>
+{% endblock test_button %}
+
+{% block content %}
+    <!--Search Section-->
+    {% include "PP_Template/Sections/Search_section.html" %}
+    <!--Info Section-->
+    {% include "PP_Template/Sections/Info_section.html" %}
+    
+    {% include "PP_Template/Filters/Age.html" %}
+
+    {% include "PP_Template/Modals/Pp_modal.html" %}
+
+{% endblock content %}
+
+
+{% block datatable %}
+    <script>
+        $(document).ready(function () {
+            $('#filter').DataTable();
+        });</script>
+{% endblock datatable %}

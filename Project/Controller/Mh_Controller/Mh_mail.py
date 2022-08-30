@@ -14,6 +14,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+from Project.models import MhMail
 
 from Project.Controller.Mh_Controller.Mh_xpath import MailTestXpath
 
@@ -70,15 +71,196 @@ class MornigHuddleMail:
         
         time.sleep(5)
         
+        mh_main = MhMail(
+            user_id = current_user.id,
+            test_code = test_code,
+        )
+        db.session.add(mh_main)
+        db.session.commit()
+        
         ytr_mail_counter = driver.find_elements(By.XPATH, MailTestXpath.ytr_mail_counter)
         ytr_mail_counter = len(ytr_mail_counter)
-        print(ytr_mail_counter)
         
         print('Yesterday Mail----------------------------------------------------------------------------------------------------------------')
         for row in range(ytr_mail_counter):
             metric_name = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_name(row+1)).text
-            metric_value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
-            print(metric_name+': '+metric_value)
+            
+            if metric_name == "Yesterday's Production (gross)":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                print(metric_name+": "+value)
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_gross_prod = value
+                db.session.commit()
+                print(metric_name+": "+value)
+            
+            if metric_name == "Goal":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_goal = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Yesterday's Production (net)":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_net_prod = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Yesterday's Collection":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_collection = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Collection (%)":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_collection_percent = value
+                db.session.commit()
+                print(metric_name+": "+value)
+            
+            if metric_name == "Patient Co-pay Collection (%)":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_copay = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Production Per Patient":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_prod_per_patient = value
+                db.session.commit()
+                print(metric_name+": "+value)
+            
+            if metric_name == "New Patients (Actual)":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_npt = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Care Progress Rate (%)":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_care_progress = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Treatment acceptance (%)":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_tx_acceptance = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Presented":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_tx_presented = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Completed":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_tx_completed = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Scheduled":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_tx_sched = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Unscheduled":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_tx_unsched = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Hygiene Production":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_hyg_prod = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Hygiene Reappoint (%)":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_hyg_reappt = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Scheduled":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_hyg_sched = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Not Scheduled":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_not_sched = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Broken appointments":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_broken_appt = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Unscheduled Broken Appointments":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_unshed_broken_appt = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "New Pts not rescheduled":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_npt_not_resched = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Existing Pts not rescheduled":
+                value = driver.find_element(By.XPATH, MailTestXpath.ytr_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.ytr_pts_not_resched = value
+                db.session.commit()
+                print(metric_name+": "+value)
             
         tdy_mail_counter = driver.find_elements(By.XPATH, MailTestXpath.tdy_mail_counter)
         tdy_mail_counter = len(tdy_mail_counter)
@@ -87,17 +269,201 @@ class MornigHuddleMail:
         print('Today Mail--------------------------------------------------------------------------------------------------------------------')
         for row in range(tdy_mail_counter):
             metric_name = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_name(row+1)).text
-            metric_value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
-            print(metric_name+': '+metric_value)
+            
+            if metric_name == "Today's Scheduled Production":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_sched_prod = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Goal":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_goal = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "New Patients (Actual)":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_npt_actual = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "New Patients (Scheduled)":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_npt_sched = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Hygiene Production (Scheduled)":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_hyg_prod_sched = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Hygiene Production (Actual)":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_hyg_prod_actual = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Unscheduled Treatment":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_unsched_tx = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Unscheduled Family Members":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_unsched_family_members = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Unscheduled Hygiene":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_unsched_hyg = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Patient Birthdays":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_patient_bday = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Past Due AR":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_past_due_ar = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Due for BWX":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_due_bwx = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Due for FMX":
+                value = driver.find_element(By.XPATH, MailTestXpath.tdy_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tdy_due_fmx = value
+                db.session.commit()
+                print(metric_name+": "+value)
+            
             
         tmw_mail_counter = driver.find_elements(By.XPATH, MailTestXpath.tmw_mail_counter)
         tmw_mail_counter = len(tmw_mail_counter)
+        print(tmw_mail_counter)
         
         print('Tomorrow Mail-----------------------------------------------------------------------------------------------------------------')
         for row in range(tmw_mail_counter):
             metric_name = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_name(row+1)).text
-            metric_value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
-            print(metric_name+': '+metric_value)
+            
+            if metric_name == "Tomorrow's Scheduled Production":
+                value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tmw_sched_prod = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Goal":
+                value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tmw_goal = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "New Patients (Scheduled)":
+                value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tmw_npt_sched = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Hygiene Production (Scheduled)":
+                value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tmw_hyg_prod_sched = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Unscheduled Treatment":
+                value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tmw_unsched_tx = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Unscheduled Family Members":
+                value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tmw_unsched_family_members = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Unscheduled Hygiene":
+                value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tmw_unsched_hyg = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Past Due AR":
+                value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tmw_past_due_ar = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Due for BWX":
+                value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.tmw_due_bwx = value
+                db.session.commit()
+                print(metric_name+": "+value)
+                
+            if metric_name == "Due for FMX":
+                value = driver.find_element(By.XPATH, MailTestXpath.tmw_mail_metric_value(row+1)).text
+                
+                mh_mail = MhMail.query.filter_by(test_code=test_code).first()
+                mh_mail.twm_due_fmx = value
+                db.session.commit()
+                print(metric_name+": "+value)
+            
+            
         
         
         

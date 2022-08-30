@@ -19,12 +19,14 @@ from Project.Controller.Mh_Controller.Mh_scorecard import MornigHuddleScorecard
 from Project.Controller.Mh_Controller.Mh_result import MhResult
 from Project.Controller.Mh_Controller.Mh_mail import MornigHuddleMail
 from Project.Controller.Global_Controller.Single_date_picker import SinglePicker
+from Project.Controller.Global_Controller.Login import GlobalLogin
 
 from Project.models import TestCodes
 from Project import db
 from Project.models import MhBreakdown
 from Project.models import MhMain
 from Project.models import MhScorecard
+from Project.models import MhMail
 
 mh = Blueprint('mh', __name__)
 
@@ -57,26 +59,28 @@ def morning_huddle():
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
         
-        Login.login(driver, test.client_link, test.client_username, test.client_password)
+        GlobalLogin.Login(driver, test.client_link, test.client_username, test.client_password)
         
         driver.get(test.client_link+'/morning-huddle')
         
         SinglePicker.MH_DatePicker(driver, test.test_date)
         update = driver.find_element(By.XPATH, MHXpath.update_btn).click()
         
-        #MornigHuddleBreakdown.Main_test(driver, test.test_date, test_code) 
-        #MornigHuddleScorecard.Main_test(driver, test_code) 
+        MornigHuddleBreakdown.Main_test(driver, test.test_date, test_code) 
+        MornigHuddleScorecard.Main_test(driver, test_code) 
         
-        for test in tests:
-            if test == 'mail':
-                MornigHuddleMail.main_test(driver, email_username, mail_password, test_code)
+        # for test in tests:
+        #     if test == 'mail':
+        #         MornigHuddleMail.main_test(driver, email_username, mail_password, test_code)
                 
         
     #Test Queries   
     mh_main = MhMain.query.order_by(MhMain.id.desc()).first()
     mh_brk = MhBreakdown.query.order_by(MhBreakdown.id.desc()).first()
     mh_sc = MhScorecard.query.order_by(MhScorecard.id.desc()).first()
+    mh_mail = MhMail.query.order_by(MhMail.id.desc()).first()
     mh_main_len = MhMain.query.order_by(MhMain.id.desc()).count()
+
     
     #Test Results
     if mh_main_len != 0:
@@ -84,11 +88,18 @@ def morning_huddle():
         brk_tdy_result = MhResult.brk_tdy_result(mh_main, mh_brk)
         brk_tmw_result = MhResult.brk_tmw_result(mh_main, mh_brk)
         sc_result = MhResult.sc_result(mh_main, mh_sc)
+        mail_ytr_result = MhResult.mail_ytr_result(mh_mail, mh_brk)
+        mail_tdy_result = MhResult.mail_tdy_result(mh_mail, mh_brk)
+        mail_tmw_result = MhResult.mail_tmw_result(mh_mail, mh_brk)
+        
     else:
         brk_ytr_result = 0
         brk_tdy_result = 0
         brk_tmw_result = 0
         sc_result = 0
+        mail_ytr_result = 0
+        mail_tdy_result = 0
+        mail_tmw_result = 0
     
     #Graph Data
     if mh_main_len != 0:
@@ -118,16 +129,19 @@ def morning_huddle():
                            mh_main = mh_main,
                            mh_brk = mh_brk,
                            mh_sc = mh_sc,
+                           mh_mail = mh_mail,
                            brk_ytr_result = brk_ytr_result,
                            brk_tdy_result = brk_tdy_result,
                            brk_tmw_result = brk_tmw_result,
                            sc_result = sc_result,
+                           mail_ytr_result = mail_ytr_result,
+                           mail_tdy_result = mail_tdy_result,
+                           mail_tmw_result = mail_tmw_result,
                            brk_ytr_chart = brk_ytr_chart,
                            brk_tdy_chart = brk_tdy_chart,
                            brk_tmw_chart = brk_tmw_chart,
                            sc_chart = sc_chart,
                            sc_goal_prod_graph = sc_goal_prod_graph)
-    
     
 class Graph:
 
