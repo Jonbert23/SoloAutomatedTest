@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, request, redirect,flash
+from flask import Blueprint, render_template, url_for, request, redirect, flash
 from flask_login import login_required, current_user
 import time
 import datetime
@@ -35,10 +35,12 @@ class GlobalLogin:
             if welcome == 1 or module_title == 1:
                 print('Successfully Login')
             else:
+                driver.quit()
                 flash('Incorrect Login credentials', 'error')
                 return redirect('/')
             
         else:
+            driver.quit()
             flash('Url does not exist in Jarvis. Kindly check your internet connection or VPN', 'error')
             return redirect('/')
         

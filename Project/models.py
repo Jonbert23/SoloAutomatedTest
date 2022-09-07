@@ -481,8 +481,78 @@ class MhScorecard(UserMixin, db.Model):
     tmw_sched_prod = db.Column(db.String(100), nullable=True, default='N/A')
     tmw_goal = db.Column(db.String(100), nullable=True, default='N/A')
     tmw_npt = db.Column(db.String(100), nullable=True, default='N/A')
+    
+class PpTestcodeLogs(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    
+class PpAgeFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    patient_age = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
 
+class PpPIRFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    rem_insurance = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
+    
+class PpBalanceFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    balance = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
+    
+class PpSIRFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    rem_insurance = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
+    
 
+class PpRemainingBenefits(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    rem_insurance = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
 
 
     

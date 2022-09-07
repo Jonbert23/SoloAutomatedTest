@@ -14,7 +14,25 @@
     <!--Info Section-->
     {% include "PP_Template/Sections/Info_section.html" %}
     
-    {% include "PP_Template/Filters/Age.html" %}
+    {% if age_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/Age.html" %}
+    {% endif %}
+
+    {% if pir_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/PrimariInsuranceRemaining.html" %}
+    {% endif %}
+
+    {% if balance_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/Balance.html" %}
+    {% endif %}
+    
+    {% if sir_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/SecondaryInsuranceRemaining.html" %}
+    {% endif %}
+
+    {% if rb_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/RemainingBenefits.html" %}
+    {% endif %}
 
     {% include "PP_Template/Modals/Pp_modal.html" %}
 
@@ -24,6 +42,35 @@
 {% block datatable %}
     <script>
         $(document).ready(function () {
-            $('#filter').DataTable();
-        });</script>
+            $('#Agefilter').DataTable();
+            $('#PIRfilter').DataTable();
+            $('#Balancefilter').DataTable();
+            $('#SIRfilter').DataTable();
+            
+        });
+        
+    </script>
 {% endblock datatable %}
+
+{% block chart %}
+    {% if age_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Age_filter_chart.html" %}    
+    {% endif %}
+
+    {% if pir_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/PrimariInsuranceRemaining_filter_chart.html" %}
+    {% endif %}
+
+    {% if balance_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Balance_filter_chart.html" %}
+    {% endif %}
+
+    {% if sir_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Secondary_insurance_rem_chart.html" %}
+    {% endif %}
+
+    {% if rb_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/RemainingBenefits_filter_chart.html" %}
+    {% endif %}
+    
+{% endblock chart %}

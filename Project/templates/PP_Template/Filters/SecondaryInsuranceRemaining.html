@@ -11,7 +11,7 @@
                 <h4 class="mt-0 header-title font-16">Age Filter Test Result</h4>
                 <hr>
                 <div style="height: 590px">
-                    <canvas id="age_filter"></canvas>
+                    <canvas id="sir_filter"></canvas>
                 </div>
             </div>
         </div>
@@ -20,11 +20,11 @@
     <div class="col-8">
         <div class="card m-b-30">
             <div class="card-body">
-                <table id="Agefilter" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <table id="SIRfilter" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
                             <th>Patient Name - ID</th>
-                            <th>Age</th>
+                            <th>Remaining Insurance</th>
                             <th>Gender</th>
                             <th>Email</th>
                             <th>Condition</th>
@@ -32,11 +32,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for test in age_filter %}
+                        {% for test in sir_filter %}
                             {% if test.test_code == latest_test.test_code %}
                                 <tr>
                                     <td>{{test.patient_name}} - {{test.patient_id}}</td>
-                                    <td>{{test['patient_age']}}</td>
+                                    <td>{{test['rem_insurance']}}</td>
                                     <td>{{test['patient_gender']}}</td>
                                     <td>{{test['patient_email']}}</td>
                                     <td>{{test['Condition']}}</td>
