@@ -135,6 +135,113 @@ class MhResult:
         
         return result
     
+    
+    def mail_ytr_result(mh_main, mh_mail):
+        ytr_gross_prod = MhResult.result(mh_main.ytr_gross_prod, mh_mail.ytr_gross_prod)
+        ytr_net_prod = MhResult.result(mh_main.ytr_net_prod, mh_mail.ytr_net_prod)
+        ytr_collection  = MhResult.result(mh_main.ytr_collection, mh_mail.ytr_collection)
+        ytr_collection_percent = MhResult.result(mh_main.ytr_collection_percent, mh_mail.ytr_collection_percent)
+        ytr_prod_per_patient  = MhResult.result(mh_main.ytr_prod_per_patient , mh_mail.ytr_prod_per_patient )
+        ytr_npt = MhResult.result(mh_main.ytr_npt, mh_mail.ytr_npt)
+        ytr_care_progress = MhResult.result(mh_main.ytr_care_progress, mh_mail.ytr_care_progress)
+        ytr_copay = MhResult.result(mh_main.ytr_copay , mh_mail.ytr_copay)
+        ytr_tx_acceptance = MhResult.result(mh_main.ytr_tx_acceptance, mh_mail.ytr_tx_acceptance)
+        ytr_tx_presented = MhResult.result(mh_main.ytr_tx_presented, mh_mail.ytr_tx_presented)
+        ytr_tx_completed = MhResult.result(mh_main.ytr_tx_completed, mh_mail.ytr_tx_completed)
+        ytr_tx_sched = MhResult.result(mh_main.ytr_tx_sched , mh_mail.ytr_tx_sched )
+        ytr_tx_unsched = MhResult.result(mh_main.ytr_tx_unsched , mh_mail.ytr_tx_unsched )
+        ytr_hyg_prod = MhResult.result(mh_main.ytr_hyg_prod , mh_mail.ytr_hyg_prod )
+        ytr_hyg_reappt = MhResult.result(mh_main.ytr_hyg_reappt , mh_mail.ytr_hyg_reappt )
+        ytr_hyg_sched = MhResult.result(mh_main.ytr_hyg_sched , mh_mail.ytr_hyg_sched )
+        ytr_not_sched = MhResult.result(mh_main.ytr_not_sched , mh_mail.ytr_not_sched )
+        ytr_broken_appt = MhResult.result(mh_main.ytr_broken_appt, mh_mail.ytr_broken_appt)
+        ytr_unshed_broken_appt = MhResult.result(mh_main.ytr_unshed_broken_appt  , mh_mail.ytr_unshed_broken_appt  )
+        ytr_npt_not_resched = MhResult.result(mh_main.ytr_npt_not_resched, mh_mail.ytr_npt_not_resched  )
+        ytr_pts_not_resched = MhResult.result(mh_main.ytr_pts_not_resched , mh_mail.ytr_pts_not_resched )
+        
+        result = {
+           'ytr_gross_prod' : ytr_gross_prod,
+           'ytr_net_prod': ytr_net_prod,
+           'ytr_collection': ytr_collection,
+           'ytr_collection_percent': ytr_collection_percent,
+           'ytr_prod_per_patient': ytr_prod_per_patient,
+           'ytr_npt': ytr_npt,
+           'ytr_care_progress': ytr_care_progress,
+           'ytr_copay': ytr_copay,
+           'ytr_tx_acceptance': ytr_tx_acceptance,
+           'ytr_tx_presented': ytr_tx_presented,
+           'ytr_tx_completed': ytr_tx_completed,
+           'ytr_tx_sched': ytr_tx_sched,
+           'ytr_tx_unsched': ytr_tx_unsched,
+           'ytr_hyg_prod': ytr_hyg_prod,
+           'ytr_hyg_reappt': ytr_hyg_reappt,
+           'ytr_hyg_sched': ytr_hyg_sched,
+           'ytr_not_sched': ytr_not_sched,  
+           'ytr_broken_appt': ytr_broken_appt,
+           'ytr_unshed_broken_appt': ytr_unshed_broken_appt ,
+           'ytr_npt_not_resched': ytr_npt_not_resched,
+           'ytr_pts_not_resched': ytr_pts_not_resched,
+            
+        }
+        
+        return result 
+    
+    
+    def mail_tdy_result(mh_main, mh_mail):
+        tdy_npt_actual = MhResult.result(mh_mail.tdy_npt_actual, mh_mail.tdy_npt_actual)
+        tdy_npt_sched = MhResult.result(mh_mail.tdy_npt_sched , mh_mail.tdy_npt_sched)
+        tdy_hyg_prod_sched = MhResult.result(mh_mail.tdy_hyg_prod_sched , mh_mail.tdy_hyg_prod_sched )
+        tdy_hyg_prod_actual = MhResult.result(mh_mail.tdy_hyg_prod_actual, mh_mail.tdy_hyg_prod_actual)
+        tdy_unsched_tx = MhResult.result(mh_mail.tdy_unsched_tx , mh_mail.tdy_unsched_tx )
+        tdy_unsched_family_members = MhResult.result(mh_mail.tdy_unsched_family_members, mh_mail.tdy_unsched_family_members)
+        tdy_unsched_hyg = MhResult.result(mh_mail.tdy_unsched_hyg, mh_mail.tdy_unsched_hyg)
+        tdy_patient_bday = MhResult.result(mh_mail.tdy_patient_bday , mh_mail.tdy_patient_bday )
+        tdy_past_due_ar = MhResult.result(mh_mail.tdy_past_due_ar, mh_mail.tdy_past_due_ar)
+        tdy_due_bwx = MhResult.result(mh_mail.tdy_due_bwx, mh_mail.tdy_due_bwx)
+        tdy_due_fmx = MhResult.result(mh_mail.tdy_due_fmx, mh_mail.tdy_due_fmx)
+        
+        result = {
+            'tdy_npt_actual': tdy_npt_actual,
+            'tdy_npt_sched': tdy_npt_sched,
+            'tdy_hyg_prod_sched': tdy_hyg_prod_sched,
+            'tdy_hyg_prod_actual': tdy_hyg_prod_actual,
+            'tdy_unsched_tx': tdy_unsched_tx,
+            'tdy_unsched_family_members':tdy_unsched_family_members,
+            'tdy_unsched_hyg': tdy_unsched_hyg,
+            'tdy_patient_bday': tdy_patient_bday,
+            'tdy_past_due_ar': tdy_past_due_ar,
+            'tdy_due_bwx': tdy_due_bwx,
+            'tdy_due_fmx': tdy_due_fmx,
+        }
+        
+        return result
+    
+    
+    def mail_tmw_result(mh_main, mh_mail):
+        tmw_npt_sched = MhResult.result(mh_main.tmw_npt_sched, mh_mail.tmw_npt_sched)
+        tmw_hyg_prod_sched = MhResult.result(mh_main.tmw_hyg_prod_sched, mh_mail.tmw_hyg_prod_sched)
+        tmw_unsched_tx = MhResult.result(mh_main.tmw_unsched_tx, mh_mail.tmw_unsched_tx)
+        tmw_unsched_family_members = MhResult.result(mh_main.tmw_unsched_family_members, mh_mail.tmw_unsched_family_members)
+        tmw_unsched_hyg = MhResult.result(mh_main.tmw_unsched_hyg, mh_mail.tmw_unsched_hyg)
+        tmw_past_due_ar = MhResult.result(mh_main.tmw_past_due_ar, mh_mail.tmw_past_due_ar)
+        tmw_due_bwx = MhResult.result(mh_main.tmw_due_bwx, mh_mail.tmw_due_bwx)
+        twm_due_fmx = MhResult.result(mh_main.twm_due_fmx, mh_mail.twm_due_fmx)
+        
+        result = {
+            'tmw_npt_sched': tmw_npt_sched,
+            'tmw_hyg_prod_sched': tmw_hyg_prod_sched,
+            'tmw_unsched_tx': tmw_unsched_tx,
+            'tmw_unsched_family_members': tmw_unsched_family_members,
+            'tmw_unsched_hyg': tmw_unsched_hyg,
+            'tmw_past_due_ar': tmw_past_due_ar,
+            'tmw_due_bwx': tmw_due_bwx,
+            'twm_due_fmx': twm_due_fmx,
+        }
+        
+        return result
+    
+    
+    
     def result(main, brk):
         main = main.replace("$","").replace(",","").replace(" ","").replace("%","").replace("N/A","0").replace("(","-").replace(")","")
         brk = brk.replace("$","").replace(",","").replace(" ","").replace("%","").replace("N/A","0").replace("(","-").replace(")","")

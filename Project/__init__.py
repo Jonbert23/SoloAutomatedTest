@@ -60,5 +60,8 @@ def create_app():
     
     from .Controller.Figures_Controller.Figures_routes import fm as main_blueprint
     app.register_blueprint(main_blueprint)
+    
+    from .Controller.PP_Controller.Pp_routes import pp as main_blueprint
+    app.register_blueprint(main_blueprint)
 
     return app

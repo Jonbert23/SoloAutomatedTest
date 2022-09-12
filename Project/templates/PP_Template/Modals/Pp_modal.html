@@ -1,0 +1,204 @@
+<div id="Pp_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Run Test Modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                 <form action="patient-portal" method="POST">
+                    <div class="form-group">
+                        <label>Client Link</label>
+                        <div class="pb-3">
+                            <input type="text" class="form-control" required name="client_url" placeholder="https://sample.stage.jarvisanalytics.com"/>
+                        </div>
+
+                        <fieldset class="border p-2 pb-2">
+                            <legend  class="w-auto" style="font-size:13px; font-weight:bold">Client Login Credentials</legend>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Client Username</label>
+                                        <div class="pb-3">
+                                            <input type="text" placeholder="Enter Client Username" name="client_username" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Client Password</label>
+                                        <div class="pb-3">
+                                            <input type="text" placeholder="Enter Client Password" name="client_password"  class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                        </fieldset>
+                        <br>
+                        
+                        <hr>
+                        <label>Patient Portal Filters</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div>
+                                    <div class="form-check">
+                                        <input class="form-check-input checkbox-lg" type="radio" name="Filter[]" value="age"/>
+                                        <label class="form-check-label">Age</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="balance"/>
+                                        <label class="form-check-label">Balance</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="broken_visit"/>
+                                        <label class="form-check-label">Broken Visits</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="firts_seen"/>
+                                        <label class="form-check-label">First Seen</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="future_hyg_visit"/>
+                                        <label class="form-check-label">Future Hyg Visit</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="future_visit"/>
+                                        <label class="form-check-label">Future Visit</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="gender"/>
+                                        <label class="form-check-label">Gender</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="has_unsched_fam_members"/>
+                                        <label class="form-check-label">Has Unscheduled Family Members</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="hyg_due"/>
+                                        <label class="form-check-label">Hygiene Due</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="last_hyg_visit"/>
+                                        <label class="form-check-label">Last Hygiene Visit</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="last_seen"/>
+                                        <label class="form-check-label">Last Seen</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="primary_insurance"/>
+                                        <label class="form-check-label">Primary Insurance</label>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="primary_insurance_remaining"/>
+                                        <label class="form-check-label">Primary Insurance Remaining</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input checkbox-lg" type="radio" name="Filter[]" value="primary_provider"/>
+                                        <label class="form-check-label">Primary Provider</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input checkbox-lg" type="radio" name="Filter[]" value="referral_source"/>
+                                        <label class="form-check-label">Referral Source</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input checkbox-lg" type="radio" name="Filter[]" value="remaining_benefits"/>
+                                        <label class="form-check-label">Remaining Benefits</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="scheduled"/>
+                                        <label class="form-check-label">Scheduled</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="secondary_insurance"/>
+                                        <label class="form-check-label">Secondary Insurance</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="secondary_insurance_remaining"/>
+                                        <label class="form-check-label">Secondary Insurance Remaining</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="secondary_provider"/>
+                                        <label class="form-check-label">Secondary Provider</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="status"/>
+                                        <label class="form-check-label">Status</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="uninsured"/>
+                                        <label class="form-check-label">Uninsured</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Filter[]" value="visits"/>
+                                        <label class="form-check-label">Visits</label>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <fieldset class="border p-2 pb-2">
+                            <legend  class="w-auto" style="font-size:13px; font-weight:bold">Filter Conditions</legend>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Condition: Greater</label>
+                                        <div class="pb-1">
+                                            <input type="number" name="greater" class="form-control" required />
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-12">
+                                        <label>Condition: Between</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="pb-1">
+                                                    <input type="number" name="between_first"  class="form-control" required />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="pb-1">
+                                                    <input type="number"  name="between_second"  class="form-control" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <label>Condition: Less</label>
+                                        <div class="pb-1">
+                                            <input type="number" class="form-control" name="less" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label>Condition: Equal</label>
+                                        <div class="pb-1">
+                                            <input type="number"  class="form-control" name="equal" required />
+                                        </div>
+                                    </div>
+                                </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="form-group m-b-0 float-right">
+                        <div>
+                            <button type="button" class="btn btn-secondary waves-effect m-l-5" data-dismiss="modal">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light"">
+                                Proceed
+                            </button>
+                        </div>
+                    </div>
+                </form> 
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>

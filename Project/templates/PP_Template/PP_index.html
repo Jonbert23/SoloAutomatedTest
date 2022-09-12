@@ -1,0 +1,76 @@
+{% extends "Layout_template.html" %}
+
+{% block header %}  Patient Portal {% endblock header%}
+
+{% block test_button %} 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Pp_modal">
+        Run Test
+    </button>
+{% endblock test_button %}
+
+{% block content %}
+    <!--Search Section-->
+    {% include "PP_Template/Sections/Search_section.html" %}
+    <!--Info Section-->
+    {% include "PP_Template/Sections/Info_section.html" %}
+    
+    {% if age_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/Age.html" %}
+    {% endif %}
+
+    {% if pir_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/PrimariInsuranceRemaining.html" %}
+    {% endif %}
+
+    {% if balance_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/Balance.html" %}
+    {% endif %}
+    
+    {% if sir_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/SecondaryInsuranceRemaining.html" %}
+    {% endif %}
+
+    {% if rb_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/RemainingBenefits.html" %}
+    {% endif %}
+
+    {% include "PP_Template/Modals/Pp_modal.html" %}
+
+{% endblock content %}
+
+
+{% block datatable %}
+    <script>
+        $(document).ready(function () {
+            $('#Agefilter').DataTable();
+            $('#PIRfilter').DataTable();
+            $('#Balancefilter').DataTable();
+            $('#SIRfilter').DataTable();
+            
+        });
+        
+    </script>
+{% endblock datatable %}
+
+{% block chart %}
+    {% if age_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Age_filter_chart.html" %}    
+    {% endif %}
+
+    {% if pir_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/PrimariInsuranceRemaining_filter_chart.html" %}
+    {% endif %}
+
+    {% if balance_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Balance_filter_chart.html" %}
+    {% endif %}
+
+    {% if sir_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Secondary_insurance_rem_chart.html" %}
+    {% endif %}
+
+    {% if rb_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/RemainingBenefits_filter_chart.html" %}
+    {% endif %}
+    
+{% endblock chart %}

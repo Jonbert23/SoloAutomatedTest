@@ -8,7 +8,11 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Yesterday's Production (gross)<span class="float-right">{{ brk_ytr_result.ytr_gross_prod }}</span></h5>
+                    {% if brk_ytr_result.ytr_gross_prod == 'Pass' %}
+                        <h5 class="font-12 one-line-text">Yesterday's Production (gross)<span class="float-right">{{ brk_ytr_result.ytr_gross_prod }}</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">Yesterday's Production (gross)<span class="float-right">{{ brk_ytr_result.ytr_gross_prod }}</span></h5>
+                    {% endif %}
                 </div>
                 <hr>
                 <div class="row">
@@ -30,7 +34,11 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Yesterday's Production (net)<span class="float-right">{{  brk_ytr_result.ytr_net_prod  }}</span></h5>
+                    {% if brk_ytr_result.ytr_net_prod == 'Pass' %}
+                        <h5 class="font-12 one-line-text">Yesterday's Production (gross)<span class="float-right">{{ brk_ytr_result.ytr_net_prod }}</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">Yesterday's Production (gross)<span class="float-right">{{ brk_ytr_result.ytr_net_prod }}</span></h5>
+                    {% endif %}
                 </div>
                 <hr>
                 <div class="row">
@@ -96,7 +104,11 @@
         <div class="card">
             <div class="card-heading p-1 pl-4 pr-3">
                 <div>
-                    <h5 class="font-12 one-line-text">Patient Co-pay Collection (%)<span class="float-right">{{  brk_ytr_result.ytr_copay  }}</span></h5>
+                    {% if brk_ytr_result.ytr_copay == 'Pass' %}
+                        <h5 class="font-12 one-line-text">Yesterday's Production (gross)<span class="float-right">{{ brk_ytr_result.ytr_copay }}</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">Yesterday's Production (gross)<span class="float-right">{{ brk_ytr_result.ytr_copay }}</span></h5>
+                    {% endif %}
                 </div>
                 <hr>
                 <div class="row">
