@@ -9,6 +9,7 @@ from selenium.common.exceptions import NoSuchElementException
 import time 
 from datetime import datetime
 from ....models import TxMinerDefaultTest
+from ....models import TxMinerProviderTest
 from .... import db
 import sqlite3
 import re
@@ -76,8 +77,10 @@ def providerTestTx(driver, test_code, test_month):
             clickProviderFilters = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[1]/div/button")
             clickProviderFilters.click()
 
-            getProviderTextInProviderFilter = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[1]/div/div/div[2]/ul/li["+str(i+1)+"]/span/span[1]").text
-            print(getProviderTextInProviderFilter)
+            getProviderTextInProviderFilter = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[1]/div/div/div[2]/ul/li["+str(i+1)+"]/span/span[2]").text
+            splitGetProviderTextInProviderFilter = getProviderTextInProviderFilter.split(" - ")
+            providerInFilter = splitGetProviderTextInProviderFilter[0]
+            # print(splitGetProviderTextInProviderFilter[0])
             clickSelectedProvider = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[1]/div/div/div[2]/ul/li["+str(i+1)+"]/span/span[1]")
             clickSelectedProvider.click()
 
@@ -86,7 +89,7 @@ def providerTestTx(driver, test_code, test_month):
 
             checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
             stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
-
+            time.sleep(3)
             checkIfDataExistInTables = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[2]/div/div/table/tbody").text
             countCheckedData = len(checkIfDataExistInTables)
 
@@ -144,33 +147,206 @@ def providerTestTx(driver, test_code, test_month):
                             clickPatientBreakdown.click()
                             checkIfPatientInfoAlreadyLoad = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/h5").text
                             checkIfOverviewAlreadyLoad = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div[2]/div[1]/div[1]/div/div[2]/h5[1]").text 
-                            clickARSummary = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[1]/ul/li[6]/a")
-                            clickARSummary.click()
+                            clickLedger = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[1]/ul/li[4]/a")
+                            clickLedger.click()
                             
-                            checkIfTotalAlreadyLoaded = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div[1]/div/div[1]/div/div/div[1]/h5").text 
-                            # checkIfTableAlreadyLoaded = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div[2]/div/div/table/tbody/tr[1]/td[1]").text 
+                            # checkIfTotalAlreadyLoaded = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div[1]/div/div[1]/div/div/div[1]/h5").text 
                             time.sleep(3)
+                            checkIfTableAlreadyLoaded = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr[1]/td[1]").text 
                             
-                            countDataInTableARSummary = driver.find_elements(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div[2]/div/div/table/tbody/tr/td[1]")
-                            countARSummaryData = len(countDataInTableARSummary)
                             
-                            # print(countARSummaryData)
-                            status = ""
-                            for w in range(countARSummaryData):
-                                getArSummaryDate = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div[2]/div/div/table/tbody/tr["+str(w+1)+"]/td[5]").text
-                                month_ar_summary = datetime.strptime(getArSummaryDate, '%b %d, %Y')
-                                month_ar_summary = month_ar_summary.strftime("%Y-%m")
-                                
-                                if month_ar_summary == test_month:
-                                    getProviderNameArSummary = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div[2]/div/div/table/tbody/tr["+str(w+1)+"]/td[4]").text
-                                    print(getProviderNameArSummary);
-                                    print("-----------------------------------")
+                            # countDataInTableTXPlans = driver.find_elements(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[1]")
+                            # countTXPlanData = len(countDataInTableTXPlans)
 
+                            checkIfItsNoData = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr/td").text
+                            # print(checkIfItsNoData)
+                            statusBreaker = 0; 
+
+                            if checkIfItsNoData == "No Data":
+                                clickTxPlans = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[1]/ul/li[5]/a")
+                                clickTxPlans.click()
+                                time.sleep(3)
+
+                                checkIfItsNoDataTXplan = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr/td").text
+                                # print(checkIfItsNoData)
+                                statusBreaker = 0; 
+
+                                if checkIfItsNoDataTXplan == "No Data":
+                                    print("FAILLLLLLLLLLLL")
+                                    new_txminer_provider = TxMinerProviderTest(user_id = current_user.id,
+                                        test_code = test_code,
+                                        month_breakdown = getMonth,
+                                        pt_name = "No Data",
+                                        provider_filtered = providerInFilter,
+                                        provider_pt_table = "No Data",
+                                        status = "Fail",
+                                        created_at = datetime.now(),
+                                        updated_at = datetime.now())
                                     
-                            # print("Month Breakdown: "+getMonth)
-                            # print("Month Filtered: "+month_test)
-                            # print("Patient Name: "+getPatientName)   
-                            # print("Status: "+ status)
+                                    db.session.add(new_txminer_provider)
+                                    db.session.commit()
+                                else:
+                                    countTXPlanData = driver.find_elements(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[1]")
+                                    lengthOfCountTXPlanData = len(countTXPlanData)
+                                    txPlanProvider = "NONEEE"
+                                    for b in range(lengthOfCountTXPlanData):
+                                        getTXPlanDate = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr["+str(b+1)+"]/td[8]").text
+                                        month_txplan = datetime.strptime(getTXPlanDate, '%b %d, %Y')
+                                        month_txplan = month_txplan.strftime("%Y-%m")
+
+                                        table_month = datetime.strptime(getMonth, '%B %Y')
+                                        table_month = table_month.strftime("%Y-%m")
+                                        if month_txplan == table_month:
+                                            getProviderTXPlan = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr["+str(b+1)+"]/td[6]").text
+                                            if providerInFilter == getProviderTXPlan:
+                                                txPlanProvider = getProviderTXPlan
+                                                statusBreaker = 1
+                                                break
+                                    if statusBreaker == 1: 
+                                        print("Month Breakdown: "+getMonth)
+                                        print("Patient Name: "+getPatientName)   
+                                        print("Provider Name Filtered: "+providerInFilter)
+                                        print("Provider Name Ledger: "+txPlanProvider)
+                                        print("Status: "+ str(statusBreaker))
+                                        new_txminer_provider = TxMinerProviderTest(user_id = current_user.id,
+                                            test_code = test_code,
+                                            month_breakdown = getMonth,
+                                            pt_name = getPatientName,
+                                            provider_filtered = providerInFilter,
+                                            provider_pt_table = txPlanProvider,
+                                            status = "Pass",
+                                            created_at = datetime.now(),
+                                            updated_at = datetime.now())
+                                        
+                                        db.session.add(new_txminer_provider)
+                                        db.session.commit()
+                                    else: 
+                                        print("FAIIIIIIIIIIIIIIIIIIIIIIIL")
+                                        new_txminer_provider = TxMinerProviderTest(user_id = current_user.id,
+                                            test_code = test_code,
+                                            month_breakdown = getMonth,
+                                            pt_name = "No Data",
+                                            provider_filtered = providerInFilter,
+                                            provider_pt_table = "No Data",
+                                            status = "Fail",
+                                            created_at = datetime.now(),
+                                            updated_at = datetime.now())
+                                        
+                                        db.session.add(new_txminer_provider)
+                                        db.session.commit()
+                            else:
+                                countLedgerData = driver.find_elements(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[1]")
+                                lengthOfCountLedgerData = len(countLedgerData)
+                                ledgerProvider = "NONEEE"
+                                for w in range(lengthOfCountLedgerData):
+                                    getLedgerDate = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr["+str(w+1)+"]/td[7]").text
+                                    month_ledger = datetime.strptime(getLedgerDate, '%b %d, %Y')
+                                    month_ledger = month_ledger.strftime("%Y-%m")
+
+                                    table_month = datetime.strptime(getMonth, '%B %Y')
+                                    table_month = table_month.strftime("%Y-%m")
+
+                                    if table_month == month_ledger:
+                                        getLedgerProviderName = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr["+str(w+1)+"]/td[6]").text
+                                        # print(table_month + ' CONDTION ' + providerInFilter)
+                                        # print(month_ledger + ' and ' + getLedgerProviderName)
+                                        if providerInFilter == getLedgerProviderName:
+                                            ledgerProvider = getLedgerProviderName
+                                            statusBreaker = 1
+                                            break
+
+                                if statusBreaker != 1: 
+                                    print("------------ Checking in TX Plan ------------")
+                                    clickTxPlans = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[1]/ul/li[5]/a")
+                                    clickTxPlans.click()
+                                    time.sleep(3)
+
+                                    checkIfItsNoData = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr/td").text
+                                    # print(checkIfItsNoData)
+                                    # statusBreaker = 0; 
+
+                                    if checkIfItsNoData == "No Data":
+                                        print("FAILLLLLLLLLLLL")
+                                        new_txminer_provider = TxMinerProviderTest(user_id = current_user.id,
+                                            test_code = test_code,
+                                            month_breakdown = getMonth,
+                                            pt_name = "No Data",
+                                            provider_filtered = providerInFilter,
+                                            provider_pt_table = "No Data",
+                                            status = "Fail",
+                                            created_at = datetime.now(),
+                                            updated_at = datetime.now())
+                                        
+                                        db.session.add(new_txminer_provider)
+                                        db.session.commit()
+                                    else:
+                                        countTXPlanData = driver.find_elements(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[1]")
+                                        lengthOfCountTXPlanData = len(countTXPlanData)
+                                        txPlanProvider = "NONEEE"
+                                        for b in range(lengthOfCountTXPlanData):
+                                            getTXPlanDate = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr["+str(b+1)+"]/td[8]").text
+                                            month_txplan = datetime.strptime(getTXPlanDate, '%b %d, %Y')
+                                            month_txplan = month_txplan.strftime("%Y-%m")
+
+                                            table_month = datetime.strptime(getMonth, '%B %Y')
+                                            table_month = table_month.strftime("%Y-%m")
+                                            if month_txplan == table_month:
+                                                getProviderTXPlan = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr["+str(b+1)+"]/td[6]").text
+                                                if providerInFilter == getProviderTXPlan:
+                                                    txPlanProvider = getProviderTXPlan
+                                                    statusBreaker = 1
+                                                    break
+                                        if statusBreaker == 1: 
+                                            print("Month Breakdown: "+getMonth)
+                                            print("Patient Name: "+getPatientName)   
+                                            print("Provider Name Filtered: "+providerInFilter)
+                                            print("Provider Name Ledger: "+txPlanProvider)
+                                            print("Status: "+ str(statusBreaker))
+                                            new_txminer_provider = TxMinerProviderTest(user_id = current_user.id,
+                                                test_code = test_code,
+                                                month_breakdown = getMonth,
+                                                pt_name = getPatientName,
+                                                provider_filtered = providerInFilter,
+                                                provider_pt_table = txPlanProvider,
+                                                status = "Pass",
+                                                created_at = datetime.now(),
+                                                updated_at = datetime.now())
+                                            
+                                            db.session.add(new_txminer_provider)
+                                            db.session.commit()
+                                        else: 
+                                            print("FAILLLLLLLLLLLL")
+                                            new_txminer_provider = TxMinerProviderTest(user_id = current_user.id,
+                                                test_code = test_code,
+                                                month_breakdown = getMonth,
+                                                pt_name = "No Data",
+                                                provider_filtered = providerInFilter,
+                                                provider_pt_table = "No Data",
+                                                status = "Fail",
+                                                created_at = datetime.now(),
+                                                updated_at = datetime.now())
+                                            
+                                            db.session.add(new_txminer_provider)
+                                            db.session.commit()
+                                else:
+                                    print("Month Breakdown: "+getMonth)
+                                    print("Patient Name: "+getPatientName)   
+                                    print("Provider Name Filtered: "+providerInFilter)
+                                    print("Provider Name Ledger: "+ledgerProvider)
+                                    print("Status: "+ str(statusBreaker))
+                                    new_txminer_provider = TxMinerProviderTest(user_id = current_user.id,
+                                        test_code = test_code,
+                                        month_breakdown = getMonth,
+                                        pt_name = getPatientName,
+                                        provider_filtered = providerInFilter,
+                                        provider_pt_table = ledgerProvider,
+                                        status = "Pass",
+                                        created_at = datetime.now(),
+                                        updated_at = datetime.now())
+                                    
+                                    db.session.add(new_txminer_provider)
+                                    db.session.commit()
+                            
                             
                             clickClosePatientInfoButton = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[1]/div[1]/button")
                             clickClosePatientInfoButton.click()
@@ -216,8 +392,9 @@ def providerTestTx(driver, test_code, test_month):
                 stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
         else:
             break
-        
-    return driver
+
+    driver.quit()
+    # return driver
 
     # print(numberOfProviderItHasData)
     # print(providerArray)
