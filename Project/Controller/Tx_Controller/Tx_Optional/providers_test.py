@@ -123,7 +123,7 @@ def providerTestTx(driver, test_code, test_month):
                     clickMonthBreakdown = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[2]/div/div/table/tbody/tr["+str(j+1)+"]/td[1]/span/span[2]/a")
                     clickMonthBreakdown.click()
                     
-                    wait = WebDriverWait(driver, 100000)
+                    wait = WebDriverWait(driver, 100000000)
                     element = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/main/div[5]/div/div/div/div[2]/div/div/div/div[1]/div/button[2]')))
                     
                     checkIfAlreadyLoad = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div/div/div/div[2]/div/div/div/div[2]/div[1]/table/tbody").text

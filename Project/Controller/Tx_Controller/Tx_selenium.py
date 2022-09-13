@@ -8,6 +8,7 @@ from flask import Blueprint, flash, render_template, url_for, request, redirect
 from ...models import TxMinerDefaultTest
 from .Tx_Default import default_test_tx
 from .Tx_Optional import providers_test
+from .Tx_Optional import procedures_test
 
 def login(get_test_code, optionalTestTx):
     options = webdriver.ChromeOptions()
@@ -39,10 +40,13 @@ def login(get_test_code, optionalTestTx):
         if option == "Provider Filter":
             driver.implicitly_wait(1000000000)
             driver.get(get_test_code.client_link+'/tx-miner')
-
-            optionalData = providers_test.providerTestTx(driver, test_code, test_month)
+            # This is DONE!!
+            # optionalData = providers_test.providerTestTx(driver, test_code, test_month)
             print("Provider Filter")
         if option == "Procedure Filter":
+            driver.implicitly_wait(1000000000)
+            driver.get(get_test_code.client_link+'/tx-miner')
+            procedureFilter = procedures_test.procedureTestTx(driver, test_code, test_month)
             print("Procedure Filter")
         if option == "Patient Filter":
             print("Patient Filter")
