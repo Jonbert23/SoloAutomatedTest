@@ -313,6 +313,18 @@ class TxMinerDefaultTest(UserMixin, db.Model):
     pending_active_production = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False)
+
+class TxMinerProviderTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    month_breakdown = db.Column(db.String(100))
+    pt_name = db.Column(db.String(100))
+    provider_filtered = db.Column(db.String(100))
+    provider_pt_table = db.Column(db.String(100))
+    status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
     
 class MhMain(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -606,6 +618,8 @@ class PpUninsuredFilter(UserMixin, db.Model):
     patient_email = db.Column(db.String(100), nullable=True)
     Condition = db.Column(db.String(100), nullable=True)
     status = db.Column(db.String(100), nullable=True)
+
+
 
     
     
