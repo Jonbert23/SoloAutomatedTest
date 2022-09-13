@@ -33,7 +33,7 @@
                     </thead>
                     <tbody>
                         {% for test in age_filter %}
-                            {% if test.test_code == latest_test.test_code %}
+                            {% if test.test_code == latest_test %}
                                 <tr>
                                     <td>{{test.patient_name}} - {{test.patient_id}}</td>
                                     <td>{{test['patient_age']}}</td>

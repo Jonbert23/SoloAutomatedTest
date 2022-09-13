@@ -34,6 +34,18 @@
         {% include "PP_Template/Filters/RemainingBenefits.html" %}
     {% endif %}
 
+    {% if gender_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/Gender.html" %}
+    {% endif %}
+
+    {% if status_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/Status.html" %}
+    {% endif %}
+
+    {% if sched_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/Schedule.html" %}
+    {% endif %}
+
     {% include "PP_Template/Modals/Pp_modal.html" %}
 
 {% endblock content %}
@@ -46,7 +58,8 @@
             $('#PIRfilter').DataTable();
             $('#Balancefilter').DataTable();
             $('#SIRfilter').DataTable();
-            
+            $('#Genderfilter').DataTable(); 
+            $('#Schedfilter').DataTable();
         });
         
     </script>
@@ -71,6 +84,18 @@
 
     {% if rb_filter_exist == 'Yes' %}
         {% include "PP_Template/Charts/RemainingBenefits_filter_chart.html" %}
+    {% endif %}
+
+    {% if gender_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Gender_filter_chart.html" %}
+    {% endif %}
+
+    {% if status_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Status_filter_chart.html" %}
+    {% endif %}
+
+    {% if sched_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Sched_filter.html" %}
     {% endif %}
     
 {% endblock chart %}

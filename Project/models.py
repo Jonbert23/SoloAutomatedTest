@@ -553,7 +553,59 @@ class PpRemainingBenefits(UserMixin, db.Model):
     patient_email = db.Column(db.String(100), nullable=True)
     Condition = db.Column(db.String(100), nullable=True)
     status = db.Column(db.String(100), nullable=True)
+    
+class PpGenderFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    patient_age = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
 
+class PpStatusFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    patient_status = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
+    
+class PpScheduleFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    next_visit = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
+
+
+class PpUninsuredFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)    
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    insurance = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
 
     
     
