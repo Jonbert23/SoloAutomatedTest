@@ -618,8 +618,59 @@ class PpUninsuredFilter(UserMixin, db.Model):
     patient_email = db.Column(db.String(100), nullable=True)
     Condition = db.Column(db.String(100), nullable=True)
     status = db.Column(db.String(100), nullable=True)
-
-
-
     
+class PpFirstseenFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)    
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    first_seen = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
+    
+    
+class PpLastSeenFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)    
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    last_seen = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
+
+
+class PpFutureVisitFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)    
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    future_visit = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
+
+
+class PpFutureHygVisitFilter(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)    
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    future_hyg_visit = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
     
