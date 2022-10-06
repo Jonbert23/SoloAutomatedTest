@@ -325,6 +325,19 @@ class TxMinerProviderTest(UserMixin, db.Model):
     status = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False)
+
+class TxMinerProcedureTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    month_breakdown = db.Column(db.String(100))
+    procedure_code_filtered = db.Column(db.String(100))
+    procedure_desc_filtered = db.Column(db.String(100))
+    procedure_code_table = db.Column(db.String(100))
+    procedure_desc_table = db.Column(db.String(100))
+    status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
     
 class MhMain(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
