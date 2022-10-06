@@ -46,6 +46,14 @@
         {% include "PP_Template/Filters/Schedule.html" %}
     {% endif %}
 
+    {% if uninsured_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/Uninsured.html" %}
+    {% endif %} 
+
+    {% if firstseen_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/FirstSeen.html" %}
+    {% endif %} 
+
     {% include "PP_Template/Modals/Pp_modal.html" %}
 
 {% endblock content %}
@@ -97,5 +105,13 @@
     {% if sched_filter_exist == 'Yes' %}
         {% include "PP_Template/Charts/Sched_filter.html" %}
     {% endif %}
+
+    {% if uninsured_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/uninsured_filter_chart.html" %}
+    {% endif %} 
+
+    {% if firstseen_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Firstseen_filter_chart.html" %}
+    {% endif %} 
     
 {% endblock chart %}

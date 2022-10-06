@@ -22,6 +22,12 @@ from Project.Controller.PP_Controller.Filters.RemainingBenefits import Remaining
 from Project.Controller.PP_Controller.Filters.Gender import GenderFilter
 from Project.Controller.PP_Controller.Filters.Status import StatusFilter
 from Project.Controller.PP_Controller.Filters.Schedule import ScheduleFilter
+from Project.Controller.PP_Controller.Filters.Uninsured import UninsuredFilter
+from Project.Controller.PP_Controller.Filters.SingleDatePicker import SinglePicker
+from Project.Controller.PP_Controller.Filters.FirstSeen import FirstSeenFilter
+from Project.Controller.PP_Controller.Filters.LastSeen import LastSeenFilter
+from Project.Controller.PP_Controller.Filters.FutureVisit import FutureVisitFilter
+from Project.Controller.PP_Controller.Filters.FutureHygVisit import FutureHygVisitFilter
 
 from Project.models import PpTestcodeLogs
 from Project.models import PpAgeFilter
@@ -32,6 +38,8 @@ from Project.models import PpRemainingBenefits
 from Project.models import PpGenderFilter
 from Project.models import PpStatusFilter
 from Project.models import PpScheduleFilter
+from Project.models import PpUninsuredFilter
+from Project.models import PpFirstseenFilter
 from Project import db
 
 
@@ -120,6 +128,45 @@ def patient_portal():
                 
             if pp_filter == 'scheduled':
                 ScheduleFilter.Schedule_filter(driver, test_code)
+                
+            if pp_filter == 'uninsured':
+                UninsuredFilter.Uninsured_filter(driver, test_code)
+                
+            if pp_filter == 'firts_seen':
+                after = request.form['after']
+                before = request.form['before']
+                on = request.form['on']
+                between_first = request.form['between_first']
+                between_second = request.form['between_second']
+               
+                FirstSeenFilter.FirstSeen_filter(driver, test_code, after, before, on, between_first, between_second)
+                
+            if pp_filter == 'last_seen':
+                after = request.form['after']
+                before = request.form['before']
+                on = request.form['on']
+                between_first = request.form['between_first']
+                between_second = request.form['between_second']
+               
+                LastSeenFilter.LastSeen_filter(driver, test_code, after, before, on, between_first, between_second)
+                
+            if pp_filter == 'future_visit':
+                after = request.form['after']
+                before = request.form['before']
+                on = request.form['on']
+                between_first = request.form['between_first']
+                between_second = request.form['between_second']
+               
+                FutureVisitFilter.FutureVisit_filter(driver, test_code, after, before, on, between_first, between_second)
+                
+            if pp_filter == 'future_hyg_visit':
+                after = request.form['after']
+                before = request.form['before']
+                on = request.form['on']
+                between_first = request.form['between_first']
+                between_second = request.form['between_second']
+               
+                FutureHygVisitFilter.FutureHygVisit_filter(driver, test_code, after, before, on, between_first, between_second)
             
         driver.quit()
         
@@ -157,6 +204,12 @@ def patient_portal():
     sched_filter_exist = 'No'
     sched_filter = PpScheduleFilter.query.filter_by(test_code=latest_test).first()
     
+    uninsured_filter_exist = 'No'
+    uninsured_filter = PpUninsuredFilter.query.filter_by(test_code=latest_test).first()
+    
+    firstseen_filter_exist = 'No'
+    firstseen_filter = PpFirstseenFilter.query.filter_by(test_code=latest_test).first()
+    
     if age_filter:
         age_filter_exist = 'Yes'
         age_filter = PpAgeFilter.query.all()
@@ -189,6 +242,13 @@ def patient_portal():
         sched_filter_exist = 'Yes'
         sched_filter = PpScheduleFilter.query.all()
         
+    if uninsured_filter:
+        uninsured_filter_exist = 'Yes'
+        uninsured_filter = PpUninsuredFilter.query.all()
+   
+    if firstseen_filter:
+        firstseen_filter_exist = 'Yes'   
+        firstseen_filter = PpFirstseenFilter.query.all()
         
         
         
@@ -202,4 +262,6 @@ def patient_portal():
         gender_filter_exist = gender_filter_exist, gender_filter = gender_filter,
         status_filter_exist = status_filter_exist, status_filter = status_filter,
         sched_filter_exist = sched_filter_exist, sched_filter = sched_filter,
+        uninsured_filter_exist = uninsured_filter_exist, uninsured_filter = uninsured_filter,
+        firstseen_filter_exist = firstseen_filter_exist, firstseen_filter = firstseen_filter,
     )
