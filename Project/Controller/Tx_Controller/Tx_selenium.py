@@ -14,8 +14,11 @@ from .Tx_Optional import patient_test
 def login(get_test_code, optionalTestTx):
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    options.add_argument('--start-maximized')
 
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome('/usr/local/bin/chromedriver', options=options)
+    driver.execute_script("document.body.style.zoom='zoom 50%'")
     driver.implicitly_wait(1000000000) 
     driver.get(get_test_code.client_link)
 
