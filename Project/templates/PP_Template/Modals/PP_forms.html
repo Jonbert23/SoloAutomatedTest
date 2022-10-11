@@ -1,0 +1,424 @@
+<hr style="opacity:0" >
+<fieldset class="border p-2 pb-2" id="age_conditions">
+    <legend  class="w-auto" style="font-size:13px; font-weight:bold">Age Filter Conditions</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Condition: Greate</label>
+                <div class="pb-1">
+                    <input type="number" class="form-control" name="age_greater" id="age_after"/>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label>Condition: Less</label>
+                <div class="pb-1">
+                    <input type="number" class="form-control" name="age_less" id="age_before"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Equal</label>
+                <div class="pb-1">
+                    <input type="number"  class="form-control" name="age_equal" id="age_on"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Between</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="number" name="age_between_first" id="age_between_first" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="number"  name="age_between_second"  id="age_between_second" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>
+
+
+<fieldset class="border p-2 pb-2" id="balance_conditions">
+    <legend  class="w-auto" style="font-size:13px; font-weight:bold">Balance Filter Conditions</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Condition: Greate</label>
+                <div class="pb-1">
+                    <input type="number" class="form-control" name="balance_greater" id="balance_greater"/>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label>Condition: Less</label>
+                <div class="pb-1">
+                    <input type="number" class="form-control" name="balance_less" id="balance_less"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Equal</label>
+                <div class="pb-1">
+                    <input type="number"  class="form-control" name="balance_equal" id="balance_equal"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Between</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="number" name="balance_between_first" id="balance_between_first" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="number"  name="balance_between_second"  id="balance_between_second" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>
+
+<fieldset class="border p-2 pb-2" id="firtseen_conditions">
+    <legend  class="w-auto" style="font-size:13px; font-weight:bold">First Seen Filter Conditions</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Condition: After</label>
+                <div class="pb-1">
+                    <input type="date" class="form-control" name="fs_after" id="fs_after"/>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label>Condition: Before</label>
+                <div class="pb-1">
+                    <input type="date" class="form-control" name="fs_before" id="fs_before"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: On</label>
+                <div class="pb-1">
+                    <input type="date"  class="form-control" name="fs_on" id="fs_on"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Between</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="date" name="fs_between_first" id="fs_between_first" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="date"  name="fs_between_second"  id="fs_between_second" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>
+
+
+<fieldset class="border p-2 pb-2" id="fhv_conditions">
+    <legend  class="w-auto" style="font-size:13px; font-weight:bold">Future Hyg Visit Filter Conditions</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Condition: After</label>
+                <div class="pb-1">
+                    <input type="date" class="form-control" name="fhv_after" id="fhv_after"/>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label>Condition: Before</label>
+                <div class="pb-1">
+                    <input type="date" class="form-control" name="fhv_before" id="fhv_before"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: On</label>
+                <div class="pb-1">
+                    <input type="date"  class="form-control" name="fhv_on" id="fhv_on"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Between</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="date" name="fhv_between_first" id="fhv_between_first" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="date"  name="fhv_between_second"  id="fhv_between_second" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>
+
+
+<fieldset class="border p-2 pb-2" id="fv_conditions">
+    <legend  class="w-auto" style="font-size:13px; font-weight:bold">Future Visit Filter Conditions</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Condition: After</label>
+                <div class="pb-1">
+                    <input type="date" class="form-control" name="fv_after" id="fv_after"/>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label>Condition: Before</label>
+                <div class="pb-1">
+                    <input type="date" class="form-control" name="fv_before" id="fv_before"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: On</label>
+                <div class="pb-1">
+                    <input type="date"  class="form-control" name="fv_on" id="fv_on"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Between</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="date" name="fv_between_first" id="fv_between_first" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="date"  name="fv_between_second"  id="fv_between_second" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>
+
+<fieldset class="border p-2 pb-2" id="lhv_conditions">
+    <legend  class="w-auto" style="font-size:13px; font-weight:bold">Last Hyg Visit Filter Conditions</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Condition: After</label>
+                <div class="pb-1">
+                    <input type="date" class="form-control" name="lhv_after" id="lhv_after"/>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label>Condition: Before</label>
+                <div class="pb-1">
+                    <input type="date" class="form-control" name="lhv_before" id="lhv_before"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: On</label>
+                <div class="pb-1">
+                    <input type="date"  class="form-control" name="lhv_on" id="lhv_on"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Between</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="date" name="lhv_between_first" id="lhv_between_first" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="date"  name="lhv_between_second"  id="lhv_between_second" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>
+
+<fieldset class="border p-2 pb-2" id="ls_conditions">
+    <legend  class="w-auto" style="font-size:13px; font-weight:bold">Last Seen Filter Conditions</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Condition: After</label>
+                <div class="pb-1">
+                    <input type="date" class="form-control" name="ls_after" id="ls_after"/>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label>Condition: Before</label>
+                <div class="pb-1">
+                    <input type="date" class="form-control" name="ls_before" id="ls_before"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: On</label>
+                <div class="pb-1">
+                    <input type="date"  class="form-control" name="ls_on" id="ls_on"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Between</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="date" name="ls_between_first" id="ls_between_first" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="date"  name="ls_between_second"  id="ls_between_second" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>
+
+<fieldset class="border p-2 pb-2" id="pir_conditions">
+    <legend  class="w-auto" style="font-size:13px; font-weight:bold">Primary Insurance Remaining Filter Conditions</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Condition: Greate</label>
+                <div class="pb-1">
+                    <input type="number" class="form-control" name="pir_greater" id="pir_greater"/>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label>Condition: Less</label>
+                <div class="pb-1">
+                    <input type="number" class="form-control" name="pir_less" id="pir_less"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Equal</label>
+                <div class="pb-1">
+                    <input type="number"  class="form-control" name="pir_equal" id="pir_equal"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Between</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="number" name="pir_between_first" id="pir_between_first" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="number"  name="pir_between_second"  id="pir_between_second" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>
+
+<fieldset class="border p-2 pb-2" id="rb_conditions">
+    <legend  class="w-auto" style="font-size:13px; font-weight:bold">Remaining Benefits Filter Conditions</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Condition: Greate</label>
+                <div class="pb-1">
+                    <input type="number" class="form-control" name="rb_greater" id="rb_greater"/>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label>Condition: Less</label>
+                <div class="pb-1">
+                    <input type="number" class="form-control" name="rb_less" id="rb_less"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Equal</label>
+                <div class="pb-1">
+                    <input type="number"  class="form-control" name="rb_equal" id="rb_equal"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Between</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="number" name="rb_between_first" id="rb_between_first" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="number"  name="rb_between_second"  id="rb_between_second" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>
+
+
+<fieldset class="border p-2 pb-2" id="sir_conditions">
+    <legend  class="w-auto" style="font-size:13px; font-weight:bold">Secondary Insurance Remaining Filter Conditions</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Condition: Greate</label>
+                <div class="pb-1">
+                    <input type="number" class="form-control" name="sir_greater" id="sir_greater"/>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label>Condition: Less</label>
+                <div class="pb-1">
+                    <input type="number" class="form-control" name="sir_less" id="sir_less"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Equal</label>
+                <div class="pb-1">
+                    <input type="number"  class="form-control" name="sir_equal" id="sir_equal"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label>Condition: Between</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="number" name="sir_between_first" id="sir_between_first" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pb-1">
+                            <input type="number"  name="sir_between_second"  id="sir_between_second" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</fieldset>

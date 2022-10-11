@@ -21,7 +21,7 @@ from Project import db
 class ScheduleFilter:
     
     def Schedule_filter(driver, test_code):
-        driver.implicitly_wait(90)
+        driver.implicitly_wait(5)
         
         wait = WebDriverWait(driver, 60)
         element = wait.until(EC.element_to_be_clickable((By.XPATH, Xpath.loader)))

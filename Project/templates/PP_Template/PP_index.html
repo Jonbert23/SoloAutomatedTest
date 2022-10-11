@@ -54,6 +54,22 @@
         {% include "PP_Template/Filters/FirstSeen.html" %}
     {% endif %} 
 
+    {% if lastseen_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/Lastseen.html" %}
+    {% endif %} 
+
+    {% if fhv_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/FutureHygVisit.html" %}
+    {% endif %} 
+
+    {% if fv_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/FutureVisit.html" %}
+    {% endif %} 
+
+    {% if lhv_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/LastHygVisit.html" %}
+    {% endif %}
+
     {% include "PP_Template/Modals/Pp_modal.html" %}
 
 {% endblock content %}
@@ -113,5 +129,22 @@
     {% if firstseen_filter_exist == 'Yes' %}
         {% include "PP_Template/Charts/Firstseen_filter_chart.html" %}
     {% endif %} 
-    
+
+    {% if lastseen_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Lastseen_filter_chart.html" %}
+    {% endif %} 
+
+    {% if fhv_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/FutureHyfVisit_filter_chart.html" %}
+    {% endif %} 
+
+    {% if fv_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/FutureVisit_filter_chart.html" %}
+    {% endif %} 
+
+    {% if lhv_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/LastHygVisit_filter_chart.html" %}
+    {% endif %} 
+
+    {% include "PP_Template/Charts/PP_modal_script.html" %}
 {% endblock chart %}

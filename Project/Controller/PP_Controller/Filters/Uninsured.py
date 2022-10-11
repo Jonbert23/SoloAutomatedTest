@@ -59,13 +59,12 @@ class UninsuredFilter:
             
         
     def collect_data(driver, test_code, selected_condition):
-        for row in range(100):
+        for row in range(10):
             xpath_exist = driver.find_elements(By.XPATH, Xpath.patient_name(row+1))
             xpath_exist = len(xpath_exist)
             #print('Xpath Exist: '+str(xpath_exist))
         
             if xpath_exist != 0:
-                loop_counter = loop_counter + 1
                 patient_name = driver.find_element(By.XPATH, Xpath.patient_name(row+1)).text
                 patient_id = driver.find_element(By.XPATH, Xpath.patient_id(row+1)).text
                 patient_gender = driver.find_element(By.XPATH, Xpath.patient_gender(row+1)).text

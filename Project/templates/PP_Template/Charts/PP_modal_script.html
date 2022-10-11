@@ -1,0 +1,199 @@
+<script>
+    document.getElementById("age_conditions").hidden = true;
+    document.getElementById("balance_conditions").hidden = true;
+    document.getElementById("firtseen_conditions").hidden = true;
+    document.getElementById("fhv_conditions").hidden = true;
+    document.getElementById("fv_conditions").hidden = true;
+    document.getElementById("lhv_conditions").hidden = true;
+    document.getElementById("ls_conditions").hidden = true;
+    document.getElementById("pir_conditions").hidden = true;
+    document.getElementById("rb_conditions").hidden = true;
+    document.getElementById("sir_conditions").hidden = true;
+    
+    function modal_script() {
+        var age = document.getElementById("age_cb");
+        var balance = document.getElementById("balance_cb");
+        var fs =  document.getElementById("firtseen_cb");
+        var fhv =  document.getElementById("fvh_cb");
+        var fv =  document.getElementById("fv_cb");
+        var lhv =  document.getElementById("lhv_cb");
+        var ls = document.getElementById("ls_cb");
+        var pir = document.getElementById("pir_cb");
+        var rb =  document.getElementById("rb_cb");
+        var sir =  document.getElementById("sir_cb");
+
+        if (age.checked == true)
+        {
+            document.getElementById('age_conditions').hidden = false;
+            document.getElementById('age_after').required = true;
+            document.getElementById('age_before').required = true;
+            document.getElementById('age_on').required = true;
+            document.getElementById('age_between_first').required = true;
+            document.getElementById('age_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById('age_conditions').hidden = true;
+            document.getElementById('age_after').required = false;
+            document.getElementById('age_before').required = false;
+            document.getElementById('age_on').required = false;
+            document.getElementById('age_between_first').required = false;
+            document.getElementById('age_between_second').required = false;
+        }
+
+        if (balance.checked == true)
+        {
+            document.getElementById("balance_conditions").hidden = false;
+            document.getElementById('balance_greater').required = true;
+            document.getElementById('balance_less').required = true;
+            document.getElementById('balance_equal').required = true;
+            document.getElementById('balance_between_first').required = true;
+            document.getElementById('balance_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById("balance_conditions").hidden = true;
+            document.getElementById('balance_greater').required = false;
+            document.getElementById('balance_less').required = false;
+            document.getElementById('balance_equal').required = false;
+            document.getElementById('balance_between_first').required = false;
+            document.getElementById('balance_between_second').required = false;
+        }
+
+        if(fs.checked == true)
+        {
+            document.getElementById("firtseen_conditions").hidden = false;
+            document.getElementById('fs_after').required = true;
+            document.getElementById('fs_before').required = true;
+            document.getElementById('fs_on').required = true;
+            document.getElementById('fs_between_first').required = true;
+            document.getElementById('fs_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById("firtseen_conditions").hidden = true;
+            document.getElementById('fs_after').required = false;
+            document.getElementById('fs_before').required = false;
+            document.getElementById('fs_on').required = false;
+            document.getElementById('fs_between_first').required = false;
+            document.getElementById('fs_between_second').required = false;
+        }
+
+        if(fhv.checked == true)
+        {
+            document.getElementById("fhv_conditions").hidden = false;
+            document.getElementById('fhv_after').required = true;
+            document.getElementById('fhv_before').required = true;
+            document.getElementById('fhv_on').required = true;
+            document.getElementById('fhv_between_first').required = true;
+            document.getElementById('fhv_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById("fhv_conditions").hidden = true;
+            document.getElementById('fhv_after').required = false;
+            document.getElementById('fhv_before').required = false;
+            document.getElementById('fhv_on').required = false;
+            document.getElementById('fhv_between_first').required = false;
+            document.getElementById('fhv_between_second').required = false;
+        }
+
+        if(lhv.checked == true)
+        {
+            document.getElementById("lhv_conditions").hidden = false;
+            document.getElementById('lhv_after').required = true;
+            document.getElementById('lhv_before').required = true;
+            document.getElementById('lhv_on').required = true;
+            document.getElementById('lhv_between_first').required = true;
+            document.getElementById('lhv_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById("lhv_conditions").hidden = true;
+            document.getElementById('lhv_after').required = false;
+            document.getElementById('lhv_before').required = false;
+            document.getElementById('lhv_on').required = false;
+            document.getElementById('lhv_between_first').required = false;
+            document.getElementById('lhv_between_second').required = false;
+        }
+
+        if(ls.checked == true)
+        {
+            document.getElementById("ls_conditions").hidden = false;
+            document.getElementById('ls_after').required = true;
+            document.getElementById('ls_before').required = true;
+            document.getElementById('ls_on').required = true;
+            document.getElementById('ls_between_first').required = true;
+            document.getElementById('ls_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById("ls_conditions").hidden = true;
+            document.getElementById('ls_after').required = false;
+            document.getElementById('ls_before').required = false;
+            document.getElementById('ls_on').required = false;
+            document.getElementById('ls_between_first').required = false;
+            document.getElementById('ls_between_second').required = false;
+        }
+
+        if(pir.checked == true)
+        {
+            document.getElementById("pir_conditions").hidden = false;
+            document.getElementById('pir_greater').required = true;
+            document.getElementById('pir_less').required = true;
+            document.getElementById('pir_equal').required = true;
+            document.getElementById('pir_between_first').required = true;
+            document.getElementById('pir_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById("pir_conditions").hidden = true;
+            document.getElementById('pir_greater').required = false;
+            document.getElementById('pir_less').required = false;
+            document.getElementById('pir_equal').required = false;
+            document.getElementById('pir_between_first').required = false;
+            document.getElementById('pir_between_second').required = false;
+        }
+
+        if(rb.checked == true)
+        {
+            document.getElementById("rb_conditions").hidden = false;
+            document.getElementById('rb_greater').required = true;
+            document.getElementById('rb_less').required = true;
+            document.getElementById('rb_equal').required = true;
+            document.getElementById('rb_between_first').required = true;
+            document.getElementById('rb_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById("rb_conditions").hidden = true;
+            document.getElementById('rb_greater').required = false;
+            document.getElementById('rb_less').required = false;
+            document.getElementById('rb_equal').required = false;
+            document.getElementById('rb_between_first').required = false;
+            document.getElementById('rb_between_second').required = false;
+        }
+
+        if(sir.checked == true)
+        {
+            document.getElementById("sir_conditions").hidden = false;
+            document.getElementById('sir_greater').required = true;
+            document.getElementById('sir_less').required = true;
+            document.getElementById('sir_equal').required = true;
+            document.getElementById('sir_between_first').required = true;
+            document.getElementById('sir_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById("sir_conditions").hidden = true;
+            document.getElementById('sir_greater').required = false;
+            document.getElementById('sir_less').required = false;
+            document.getElementById('sir_equal').required = false;
+            document.getElementById('sir_between_first').required = false;
+            document.getElementById('sir_between_second').required = false;
+        }
+
+
+        
+    }
+</script>

@@ -28,6 +28,7 @@ from Project.Controller.PP_Controller.Filters.FirstSeen import FirstSeenFilter
 from Project.Controller.PP_Controller.Filters.LastSeen import LastSeenFilter
 from Project.Controller.PP_Controller.Filters.FutureVisit import FutureVisitFilter
 from Project.Controller.PP_Controller.Filters.FutureHygVisit import FutureHygVisitFilter
+from Project.Controller.PP_Controller.Filters.LastHygVisit import LastHygVisitFilter
 
 from Project.models import PpTestcodeLogs
 from Project.models import PpAgeFilter
@@ -39,7 +40,12 @@ from Project.models import PpGenderFilter
 from Project.models import PpStatusFilter
 from Project.models import PpScheduleFilter
 from Project.models import PpUninsuredFilter
-from Project.models import PpFirstseenFilter
+from Project.models import PpFirstseenFilter 
+from Project.models import PpLastSeenFilter
+from Project.models import PpFutureHygVisitFilter
+from Project.models import PpFutureVisitFilter
+from Project.models import PpLastHygVisitFilter
+
 from Project import db
 
 
@@ -76,47 +82,47 @@ def patient_portal():
         
         for pp_filter in filters:
             if pp_filter == 'age':
-                greater = request.form['greater']
-                less = request.form['less']
-                equal = request.form['equal']
-                between_first = request.form['between_first']
-                between_second = request.form['between_second']
+                greater = request.form['age_greater']
+                less = request.form['age_less']
+                equal = request.form['age_equal']
+                between_first = request.form['age_between_first']
+                between_second = request.form['age_between_second']
 
                 AgeFilter.Age_filter(driver, greater, less, equal, between_first, between_second, test_code)
                 
             if pp_filter == 'balance':
-                greater = request.form['greater']
-                less = request.form['less']
-                equal = request.form['equal']
-                between_first = request.form['between_first']
-                between_second = request.form['between_second']
+                greater = request.form['balance_greater']
+                less = request.form['balance_less']
+                equal = request.form['balance_equal']
+                between_first = request.form['balance_between_first']
+                between_second = request.form['balance_between_second']
 
                 BalanceFilter.Balance_filter(driver, greater, less, equal, between_first, between_second, test_code)
                 
             if pp_filter == 'primary_insurance_remaining':
-                greater = request.form['greater']
-                less = request.form['less']
-                equal = request.form['equal']
-                between_first = request.form['between_first']
-                between_second = request.form['between_second']
+                greater = request.form['pir_greater']
+                less = request.form['pir_less']
+                equal = request.form['pir_equal']
+                between_first = request.form['pir_between_first']
+                between_second = request.form['pir_between_second']
 
                 PIRFilter.PIR_filter(driver, greater, less, equal, between_first, between_second, test_code)
                 
             if pp_filter == 'secondary_insurance_remaining':
-                greater = request.form['greater']
-                less = request.form['less']
-                equal = request.form['equal']
-                between_first = request.form['between_first']
-                between_second = request.form['between_second']
+                greater = request.form['sir_greater']
+                less = request.form['sir_less']
+                equal = request.form['sir_equal']
+                between_first = request.form['sir_between_first']
+                between_second = request.form['sir_between_second']
 
                 SIRFilter.SIR_filter(driver, greater, less, equal, between_first, between_second, test_code)
                 
             if pp_filter == 'remaining_benefits':
-                greater = request.form['greater']
-                less = request.form['less']
-                equal = request.form['equal']
-                between_first = request.form['between_first']
-                between_second = request.form['between_second']
+                greater = request.form['rb_greater']
+                less = request.form['rb_less']
+                equal = request.form['rb_equal']
+                between_first = request.form['rb_between_first']
+                between_second = request.form['rb_between_second']
 
                 RemainingBenefitsFilter.RB_filter(driver, greater, less, equal, between_first, between_second, test_code)
 
@@ -133,40 +139,50 @@ def patient_portal():
                 UninsuredFilter.Uninsured_filter(driver, test_code)
                 
             if pp_filter == 'firts_seen':
-                after = request.form['after']
-                before = request.form['before']
-                on = request.form['on']
-                between_first = request.form['between_first']
-                between_second = request.form['between_second']
+                after = request.form['fs_after']
+                before = request.form['fs_before']
+                on = request.form['fs_on']
+                between_first = request.form['fs_between_first']
+                between_second = request.form['fs_between_second']
                
                 FirstSeenFilter.FirstSeen_filter(driver, test_code, after, before, on, between_first, between_second)
                 
             if pp_filter == 'last_seen':
-                after = request.form['after']
-                before = request.form['before']
-                on = request.form['on']
-                between_first = request.form['between_first']
-                between_second = request.form['between_second']
+                after = request.form['ls_after']
+                before = request.form['ls_before']
+                on = request.form['ls_on']
+                between_first = request.form['ls_between_first']
+                between_second = request.form['ls_between_second']
                
                 LastSeenFilter.LastSeen_filter(driver, test_code, after, before, on, between_first, between_second)
                 
             if pp_filter == 'future_visit':
-                after = request.form['after']
-                before = request.form['before']
-                on = request.form['on']
-                between_first = request.form['between_first']
-                between_second = request.form['between_second']
+                after = request.form['fv_after']
+                before = request.form['fv_before']
+                on = request.form['fv_on']
+                between_first = request.form['fv_between_first']
+                between_second = request.form['fv_between_second']
                
                 FutureVisitFilter.FutureVisit_filter(driver, test_code, after, before, on, between_first, between_second)
                 
             if pp_filter == 'future_hyg_visit':
-                after = request.form['after']
-                before = request.form['before']
-                on = request.form['on']
-                between_first = request.form['between_first']
-                between_second = request.form['between_second']
+                after = request.form['fhv_after']
+                before = request.form['fhv_before']
+                on = request.form['fhv_on']
+                between_first = request.form['fhv_between_first']
+                between_second = request.form['fhv_between_second']
                
                 FutureHygVisitFilter.FutureHygVisit_filter(driver, test_code, after, before, on, between_first, between_second)
+            
+            if pp_filter == 'last_hyg_visit':
+                after = request.form['lhv_after']
+                before = request.form['lhv_before']
+                on = request.form['lhv_on']
+                between_first = request.form['lhv_between_first']
+                between_second = request.form['lhv_between_second']
+                
+                LastHygVisitFilter.LastHygVisit_filter(driver, test_code, after, before, on, between_first, between_second)
+            
             
         driver.quit()
         
@@ -210,6 +226,18 @@ def patient_portal():
     firstseen_filter_exist = 'No'
     firstseen_filter = PpFirstseenFilter.query.filter_by(test_code=latest_test).first()
     
+    lastseen_filter_exist = 'No'
+    lastseen_filter = PpLastSeenFilter.query.filter_by(test_code=latest_test).first()
+    
+    fhv_filter_exist = 'No'
+    fhv_filter = PpFutureHygVisitFilter.query.filter_by(test_code=latest_test).first();
+    
+    fv_filter_exist = 'No'
+    fv_filter = PpFutureVisitFilter.query.filter_by(test_code=latest_test).first();
+    
+    lhv_filter_exist = 'No'
+    lhv_filter = PpLastHygVisitFilter.query.filter_by(test_code=latest_test).first();
+    
     if age_filter:
         age_filter_exist = 'Yes'
         age_filter = PpAgeFilter.query.all()
@@ -250,6 +278,21 @@ def patient_portal():
         firstseen_filter_exist = 'Yes'   
         firstseen_filter = PpFirstseenFilter.query.all()
         
+    if lastseen_filter:
+        lastseen_filter_exist = 'Yes'
+        lastseen_filter =  PpLastSeenFilter.query.all()
+        
+    if fhv_filter:
+        fhv_filter_exist = 'Yes'
+        fhv_filter = PpFutureHygVisitFilter.query.all()
+        
+    if fv_filter:
+        fv_filter_exist = 'Yes'
+        fv_filter = PpFutureVisitFilter.query.all()
+        
+    if lhv_filter:
+        lhv_filter_exist = 'Yes'
+        lhv_filter = PpLastHygVisitFilter.query.all()
         
         
     return render_template('PP_Template/PP_index.html', 
@@ -264,4 +307,8 @@ def patient_portal():
         sched_filter_exist = sched_filter_exist, sched_filter = sched_filter,
         uninsured_filter_exist = uninsured_filter_exist, uninsured_filter = uninsured_filter,
         firstseen_filter_exist = firstseen_filter_exist, firstseen_filter = firstseen_filter,
+        lastseen_filter_exist = lastseen_filter_exist, lastseen_filter = lastseen_filter, 
+        fhv_filter_exist = fhv_filter_exist, fhv_filter = fhv_filter,
+        fv_filter_exist = fv_filter_exist, fv_filter = fv_filter,
+        lhv_filter_exist = lhv_filter_exist, lhv_filter = lhv_filter,
     )
