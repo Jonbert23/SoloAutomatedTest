@@ -18,78 +18,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Jan 2021</td>
-                            <td>$45,204.39</td>
-                            <td>$45,204.39</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Feb 2021</td>
-                            <td>$57,000.00</td>
-                            <td>$57,000.00</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Mar 2021</td>
-                            <td>64,000.83</td>
-                            <td>64,000.83</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Apr 2021</td>
-                            <td>-10,581.66</td>
-                            <td>-10,000.00</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>May 2021</td>
-                            <td>$45,204.39</td>
-                            <td>$45,204.39</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Jun 2021</td>
-                            <td>203</td>
-                            <td>200</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>Jul 2021</td>
-                            <td>64,000.83</td>
-                            <td>64,000.83</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Aug 2021</td>
-                            <td>203</td>
-                            <td>200</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>Sept 2021</td>
-                            <td>64,000.83</td>
-                            <td>64,000.83</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Oct 2021</td>
-                            <td>$45,204.39</td>
-                            <td>$45,204.39</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Nov 2021</td>
-                            <td>203</td>
-                            <td>200</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>Dec 2021</td>
-                            <td>$45,204.39</td>
-                            <td>$45,204.39</td>
-                            <td>Pass</td>
-                        </tr>
+                        {% if fetchTxMinerPendingSched is defined %}
+                            {% for fetchTxMinerPendingSched in fetchTxMinerPendingSched %}
+                            <tr>
+                                <td>{{fetchTxMinerPendingSched['month']}}</td>
+                                <td>{{fetchTxMinerPendingSched['mv_pending_sched']}}</td>
+                                <td>{{fetchTxMinerPendingSched['breakdown_pending_sched']}}</td>
+                                <td>{{fetchTxMinerPendingSched['pending_sched_status']}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
 

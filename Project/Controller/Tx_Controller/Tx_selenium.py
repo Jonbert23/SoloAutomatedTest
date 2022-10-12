@@ -6,6 +6,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from flask import Blueprint, flash, render_template, url_for, request, redirect
 from ...models import TxMinerDefaultTest
+from ...models import TxMinerProviderTest
+from ...models import TxMinerProcedureTest
+from ...models import TxMinerPatientTest
 from .Tx_Default import default_test_tx
 from .Tx_Optional import providers_test
 from .Tx_Optional import procedures_test
@@ -15,10 +18,11 @@ def login(get_test_code, optionalTestTx):
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     options.add_argument('--start-maximized')
+    options.add_argument('--disable-blink-features=AutomationControlled')
+     
 
     # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     driver = webdriver.Chrome('/usr/local/bin/chromedriver', options=options)
-    driver.execute_script("document.body.style.zoom='zoom 50%'")
     driver.implicitly_wait(1000000000) 
     driver.get(get_test_code.client_link)
 
@@ -34,10 +38,10 @@ def login(get_test_code, optionalTestTx):
     
     checkIfAlreadyTestInDefaultTest = TxMinerDefaultTest.query.filter_by(test_code=test_code).first()
 
-    # if not checkIfAlreadyTestInDefaultTest:
-    #     driver.implicitly_wait(1000000000)
-    #     driver.get('https://solo.next.jarvisanalytics.com/tx-miner')
-    #     optionalData = default_test_tx.defaultTestTx(driver, test_code, test_month)
+    if not checkIfAlreadyTestInDefaultTest:
+        driver.implicitly_wait(1000000000)
+        driver.get(get_test_code.client_link+'/tx-miner')
+        optionalData = default_test_tx.defaultTestTx(driver, test_code, test_month)
 
     for option in optionalTestTx:
         # print("--- "+option+" ---")
@@ -45,19 +49,40 @@ def login(get_test_code, optionalTestTx):
             driver.implicitly_wait(1000000000)
             driver.get(get_test_code.client_link+'/tx-miner')
             # This is DONE!!
-            # optionalData = providers_test.providerTestTx(driver, test_code, test_month)
-            print("Provider Filter")
+
+            getProvider = TxMinerProviderTest.query.filter_by(test_code=test_code).order_by(TxMinerProviderTest.id.desc()).first()
+            if getProvider:
+                driver.quit()
+                return "fail"
+            if not getProvider:
+                optionalData = providers_test.providerTestTx(driver, test_code, test_month)
+            # print("Provider Filter")
+            print(getProvider)
         if option == "Procedure Filter":
             driver.implicitly_wait(1000000000)
             driver.get(get_test_code.client_link+'/tx-miner')
             # This is DONE!!
-            # procedureFilter = procedures_test.procedureTestTx(driver, test_code, test_month)
-            print("Procedure Filter")
+            
+            getProcedure = TxMinerProcedureTest.query.filter_by(test_code=test_code).order_by(TxMinerProcedureTest.id.desc()).first()
+            if getProcedure:
+                driver.quit()
+                return "fail"
+            if not getProcedure:
+                procedureFilter = procedures_test.procedureTestTx(driver, test_code, test_month)
+            # print("Procedure Filter")
+            print(getProcedure)
         if option == "Patient Filter":
             driver.implicitly_wait(1000000000)
             driver.get(get_test_code.client_link+'/tx-miner')
-            patientFilter = patient_test.patientTestTx(driver, test_code, test_month)
-            print("Patient Filter")
+
+            getPatient = TxMinerPatientTest.query.filter_by(test_code=test_code).order_by(TxMinerPatientTest.id.desc()).first()
+            if getPatient:
+                driver.quit()
+                return "fail"
+            if not getPatient:
+                patientFilter = patient_test.patientTestTx(driver, test_code, test_month)
+            # print("Patient Filter")
+            print(getPatient)
 
 
 

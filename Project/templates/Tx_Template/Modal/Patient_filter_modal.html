@@ -11,49 +11,23 @@
                  <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
-                            <th>Search Patient</th>
-                            <th>Patient Exist?</th>
-                            <th>Unsearch Patient</th>
+                            <th>Month Breakdown</th>
+                            <th>Patient Filtered</th>
+                            <th>Patient Breakdown</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Abshire, Ambrose </td>
-                            <td>Yes</td>
-                            <td>None</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Aufderhar, Lisa</td>
-                            <td>No</td>
-                            <td>None</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>Cassin, Monserrat </td>
-                            <td>Yes</td>
-                            <td>None</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Deckow, Noe</td>
-                            <td>Yes</td>
-                            <td>Auer, Christopher</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>Effertz, Judson</td>
-                            <td>Yes</td>
-                            <td>None</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Aufderhar, Lisa</td>
-                            <td>No</td>
-                            <td>Cassin, Monserrat</td>
-                            <td>Fail</td>
-                        </tr>
+                        {% if fetchTxMinerPatientFilter is defined %}
+                            {% for fetchTxMinerPatientFilter in fetchTxMinerPatientFilter %}
+                            <tr>
+                                <td>{{fetchTxMinerPatientFilter['month_breakdown']}}</td>
+                                <td>{{fetchTxMinerPatientFilter['patient_name_filtered']}}</td>
+                                <td>{{fetchTxMinerPatientFilter['patient_name_breakdown']}}</td>
+                                <td>{{fetchTxMinerPatientFilter['status']}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
 
