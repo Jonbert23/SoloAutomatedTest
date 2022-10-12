@@ -29,6 +29,7 @@ from Project.Controller.PP_Controller.Filters.LastSeen import LastSeenFilter
 from Project.Controller.PP_Controller.Filters.FutureVisit import FutureVisitFilter
 from Project.Controller.PP_Controller.Filters.FutureHygVisit import FutureHygVisitFilter
 from Project.Controller.PP_Controller.Filters.LastHygVisit import LastHygVisitFilter
+from Project.Controller.PP_Controller.Filters.PerioCareFilter import PerioCareFilter
 
 from Project.models import PpTestcodeLogs
 from Project.models import PpAgeFilter
@@ -63,6 +64,7 @@ def patient_portal():
         test_code = uuid.uuid4().hex
     
         #Declaring Selenium driver--------------------------------------------------------------------
+        
         options = Options()
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
@@ -183,6 +185,8 @@ def patient_portal():
                 
                 LastHygVisitFilter.LastHygVisit_filter(driver, test_code, after, before, on, between_first, between_second)
             
+            if pp_filter == 'perio_care':
+                PerioCareFilter.PerioCare_filter(driver, test_code)
             
         driver.quit()
         
@@ -293,8 +297,7 @@ def patient_portal():
     if lhv_filter:
         lhv_filter_exist = 'Yes'
         lhv_filter = PpLastHygVisitFilter.query.all()
-        
-        
+         
     return render_template('PP_Template/PP_index.html', 
         latest_test = latest_test,
         age_filter_exist = age_filter_exist, age_filter = age_filter, 

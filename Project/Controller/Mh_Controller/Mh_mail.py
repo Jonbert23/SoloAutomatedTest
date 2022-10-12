@@ -14,7 +14,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
-from Project.models import MhMail
+# from Project.models import MhMail
 
 from Project.Controller.Mh_Controller.Mh_xpath import MailTestXpath
 

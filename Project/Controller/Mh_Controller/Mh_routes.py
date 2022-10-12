@@ -26,7 +26,7 @@ from Project import db
 from Project.models import MhBreakdown
 from Project.models import MhMain
 from Project.models import MhScorecard
-from Project.models import MhMail
+# from Project.models import MhMail
 
 mh = Blueprint('mh', __name__)
 
@@ -39,8 +39,8 @@ def morning_huddle():
     if request.method == 'POST':
         test_code = request.form['test_code']
         tests = request.form.getlist('Test[]')   
-        email_username = request.form['email_username']
-        mail_password = request.form['mail_password']
+        # email_username = request.form['email_username']
+        # mail_password = request.form['mail_password']
         
         check_testcode_in_mh_main = MhMain.query.filter_by(test_code=test_code).first()
         check_testcode_exist = TestCodes.query.filter_by(test_code=test_code).first()
@@ -78,7 +78,7 @@ def morning_huddle():
     mh_main = MhMain.query.order_by(MhMain.id.desc()).first()
     mh_brk = MhBreakdown.query.order_by(MhBreakdown.id.desc()).first()
     mh_sc = MhScorecard.query.order_by(MhScorecard.id.desc()).first()
-    mh_mail = MhMail.query.order_by(MhMail.id.desc()).first()
+    # mh_mail = MhMail.query.order_by(MhMail.id.desc()).first()
     mh_main_len = MhMain.query.order_by(MhMain.id.desc()).count()
 
     
@@ -88,18 +88,18 @@ def morning_huddle():
         brk_tdy_result = MhResult.brk_tdy_result(mh_main, mh_brk)
         brk_tmw_result = MhResult.brk_tmw_result(mh_main, mh_brk)
         sc_result = MhResult.sc_result(mh_main, mh_sc)
-        mail_ytr_result = MhResult.mail_ytr_result(mh_mail, mh_brk)
-        mail_tdy_result = MhResult.mail_tdy_result(mh_mail, mh_brk)
-        mail_tmw_result = MhResult.mail_tmw_result(mh_mail, mh_brk)
+        # mail_ytr_result = MhResult.mail_ytr_result(mh_mail, mh_brk)
+        # mail_tdy_result = MhResult.mail_tdy_result(mh_mail, mh_brk)
+        # mail_tmw_result = MhResult.mail_tmw_result(mh_mail, mh_brk)
         
     else:
         brk_ytr_result = 0
         brk_tdy_result = 0
         brk_tmw_result = 0
         sc_result = 0
-        mail_ytr_result = 0
-        mail_tdy_result = 0
-        mail_tmw_result = 0
+        # mail_ytr_result = 0
+        # mail_tdy_result = 0
+        # mail_tmw_result = 0
     
     #Graph Data
     if mh_main_len != 0:
@@ -129,14 +129,10 @@ def morning_huddle():
                            mh_main = mh_main,
                            mh_brk = mh_brk,
                            mh_sc = mh_sc,
-                           mh_mail = mh_mail,
                            brk_ytr_result = brk_ytr_result,
                            brk_tdy_result = brk_tdy_result,
                            brk_tmw_result = brk_tmw_result,
                            sc_result = sc_result,
-                           mail_ytr_result = mail_ytr_result,
-                           mail_tdy_result = mail_tdy_result,
-                           mail_tmw_result = mail_tmw_result,
                            brk_ytr_chart = brk_ytr_chart,
                            brk_tdy_chart = brk_tdy_chart,
                            brk_tmw_chart = brk_tmw_chart,

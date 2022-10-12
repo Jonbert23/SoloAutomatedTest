@@ -24,16 +24,11 @@
         <!--Yesterday breakdown Section-->
         {% include "Mh_Template/Sections/Tomorrow_brk_section.html" %}
     </div>
+
     <div id="mail">
-        <!--Mail Graph Section-->
-        {% include "Mh_Template/Sections/Mail_graph-section.html" %}
-        <!--Today Mail Section-->
-        {% include "Mh_Template/Sections/Yesterday_mail_section.html" %}
-        <!--Yesterday Mail Section-->
-        {% include "Mh_Template/Sections/Today_mail_section.html" %}
-        <!--Yesterday Mail Section-->
-        {% include "Mh_Template/Sections/Tomorrow_mail_section.html" %}
+       
     </div>
+    
     <div id="scorecard">
         <!--Scorecard Graph Section-->
         {% include "Mh_Template/Sections/Scorecard_graph_section.html" %}
@@ -51,7 +46,6 @@
 
 {% block chart %}
     <script src="{{ url_for('static', filename='charts/mh_display.js') }}"></script>
-    <script src="{{ url_for('static', filename='charts/mh_mail_chart.js') }}"></script>
 
     <script>
         (function ytd_breakdown_chart()

@@ -12,7 +12,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 #Importing  File Classes 
-from Project.Controller.Global_Controller.Global_test import Login
+from Project.Controller.Global_Controller.Login import GlobalLogin
 from Project.Controller.Figures_Controller.Dashboard import Dashboard
 from Project.Controller.Figures_Controller.Eod import Eod
 from Project.Controller.Figures_Controller.Calendar import Calendar
@@ -64,8 +64,7 @@ def figuresMatching():
         driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
         
         #Calling Login Global Test -----------------------------------------------------------------
-        Login.login(driver, client_url, client_username, client_password)
-        
+        GlobalLogin.Login(driver, client_url, client_username, client_password)
         
         for module in modules:
             if module == "eod":
