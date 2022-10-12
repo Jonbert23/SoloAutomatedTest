@@ -53,6 +53,8 @@ def providerTestTx(driver, test_code, test_month):
     clickProviderFilter = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[1]/div/button")
     clickProviderFilter.click()
 
+
+
     getAllProviderInProviderFilter = driver.find_elements(By.XPATH, '/html/body/div[1]/main/div[2]/div[1]/div/div/div[2]/ul/li')
     countAllProvider = len(getAllProviderInProviderFilter)
 
@@ -64,7 +66,7 @@ def providerTestTx(driver, test_code, test_month):
     numberOfProviderItHasData = 0
     providerArray = []
 
-    checkIfTheresDataInTables = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+    checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
 
     stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
 
@@ -72,7 +74,7 @@ def providerTestTx(driver, test_code, test_month):
 
     for i in range(countAllProvider):
         if numberOfProviderItHasData < 3:
-            checkIfTheresDataInTables = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+            checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
             stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
             clickProviderFilters = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[1]/div/button")
             clickProviderFilters.click()
@@ -87,7 +89,7 @@ def providerTestTx(driver, test_code, test_month):
             clickApplyButton = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[1]/div/div/div[3]/button[2]")
             clickApplyButton.click()
 
-            checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+            checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
             stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
             time.sleep(3)
             checkIfDataExistInTables = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[2]/div/div/table/tbody").text
@@ -189,6 +191,7 @@ def providerTestTx(driver, test_code, test_month):
                                     countTXPlanData = driver.find_elements(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[1]")
                                     lengthOfCountTXPlanData = len(countTXPlanData)
                                     txPlanProvider = "NONEEE"
+                                    time.sleep(2)
                                     for b in range(lengthOfCountTXPlanData):
                                         getTXPlanDate = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr["+str(b+1)+"]/td[8]").text
                                         month_txplan = datetime.strptime(getTXPlanDate, '%b %d, %Y')
@@ -283,6 +286,7 @@ def providerTestTx(driver, test_code, test_month):
                                         countTXPlanData = driver.find_elements(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[1]")
                                         lengthOfCountTXPlanData = len(countTXPlanData)
                                         txPlanProvider = "NONEEE"
+                                        time.sleep(2)
                                         for b in range(lengthOfCountTXPlanData):
                                             getTXPlanDate = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div[2]/div/div/div[2]/div[2]/div/div/div/div/table/tbody/tr["+str(b+1)+"]/td[8]").text
                                             month_txplan = datetime.strptime(getTXPlanDate, '%b %d, %Y')
@@ -362,7 +366,7 @@ def providerTestTx(driver, test_code, test_month):
                     
                     
 
-                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
                 
                 clickPrvdrFilter = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[1]/div/button")
                 clickPrvdrFilter.click()
@@ -373,10 +377,10 @@ def providerTestTx(driver, test_code, test_month):
                 clickApplyButtons = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[1]/div/div/div[3]/button[2]")
                 clickApplyButtons.click()
 
-                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
                 stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
             if countAllDataInTable == 0:
-                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
                 
                 clickPrvdrFilter = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[1]/div/button")
                 clickPrvdrFilter.click()
@@ -388,13 +392,13 @@ def providerTestTx(driver, test_code, test_month):
                 clickApplyButtons.click()
 
 
-                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
                 stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
         else:
             break
 
-    driver.quit()
-    # return driver
+    # driver.quit()
+    return driver
 
     # print(numberOfProviderItHasData)
     # print(providerArray)

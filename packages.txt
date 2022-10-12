@@ -3,3 +3,4 @@ flask_login
 selenium 
 webdriver_manager 
 flask_sqlalchemy
+numpy

@@ -63,13 +63,13 @@ def procedureTestTx(driver, test_code, test_month):
     numberOfProcedureItHasData = 0
     procedureArray = []
 
-    checkIfTheresDataInTables = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+    checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
 
     stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
 
     for i in range(countAllProcedure):
         if numberOfProcedureItHasData < 3:
-            checkIfTheresDataInTables = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+            checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
             stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
             clickProcedureFilters = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[2]/div/button")
             clickProcedureFilters.click()
@@ -85,7 +85,7 @@ def procedureTestTx(driver, test_code, test_month):
             clickApplyButton.click()
 
 
-            checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+            checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
             stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
             time.sleep(3)
             checkIfDataExistInTables = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[2]/div/div/table/tbody").text
@@ -350,7 +350,7 @@ def procedureTestTx(driver, test_code, test_month):
                         clickCloseBreakdownButton = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[5]/div/div/div/div[1]/button")
                         clickCloseBreakdownButton.click()   
 
-                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
                     
                 clickProceduresFilters = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[2]/div/button")
                 clickProceduresFilters.click()
@@ -361,12 +361,12 @@ def procedureTestTx(driver, test_code, test_month):
                 clickApplyButtons = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[2]/div/div/div[3]/button[2]")
                 clickApplyButtons.click()
 
-                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
                 stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
 
 
             if countAllDataInTable == 0:
-                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
                     
                 clickProceduresFilters = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[2]/div/button")
                 clickProceduresFilters.click()
@@ -377,8 +377,8 @@ def procedureTestTx(driver, test_code, test_month):
                 clickApplyButtons = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[2]/div/div/div[3]/button[2]")
                 clickApplyButtons.click()
 
-                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/ul")
+                checkIfTheresDataInTable = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[3]/div/div/div/div[1]/div[1]/div/ul")
                 stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[1]/div/div/div/div[3]/button[contains(text(), 'Refresh')]")
         else:
             break
-    driver.quit()
+    return driver

@@ -3,11 +3,12 @@
         <div class="card m-b-30">
             <div class="card-body">
                 <h4 class="mt-0 header-title font-16">Breakdown Test Result</h4>
+                <!-- <h5>{{ months }}</h5> -->
                 <div class="row">
 
                     <div class="col-md-9">
                         <div style="height: 400px">
-                            <canvas id="brk_chart"></canvas>
+                            <canvas id="tx_default_test_chart"></canvas>
                         </div>
                     </div>
 
@@ -19,9 +20,9 @@
                                         <h5 class="font-16 one-line-text">Pending Scheduled</h5>
                                     </div>
                                     <hr>
-                                    <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                    <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{pendingSchedStatus}} </span> 
                                         <span class="float-right">
-                                        <a href="#" data-toggle="modal" data-target="#Pending_sched_modal"><i class="fas fa-external-link-alt"></i></a> 
+                                        <a href="#" class="txFilterSched" data-url="{{ url_for('tx.showTxPendingSchedModal', useTestCode=useTestCode) }}"><i class="fas fa-external-link-alt"></i></a> 
                                         </span>
                                     </p>
                                 </div>
@@ -35,9 +36,9 @@
                                         <h5 class="font-16 one-line-text">Pending Unscheduled</h5>
                                     </div>
                                     <hr>
-                                    <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                    <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{pendingUnschedStatus}} </span> 
                                         <span class="float-right">
-                                        <a href="#" data-toggle="modal" data-target="#Pending_unsched_modal"><i class="fas fa-external-link-alt"></i></a> 
+                                        <a href="#" class="txFilterUnsched" data-url="{{ url_for('tx.showTxPendingUnschedModal', useTestCode=useTestCode) }}"><i class="fas fa-external-link-alt"></i></a> 
                                         </span>
                                     </p>
                                 </div>
@@ -50,9 +51,9 @@
                                         <h5 class="font-16 one-line-text">Active Production</h5>
                                     </div>
                                     <hr>
-                                    <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
+                                    <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{activeProductionStatus}} </span> 
                                         <span class="float-right">
-                                        <a href="#" data-toggle="modal" data-target="#active_production_modal"><i class="fas fa-external-link-alt"></i></a> 
+                                        <a href="#" class="activeProduction" data-url="{{ url_for('tx.showTxActiveProductionModal', useTestCode=useTestCode) }}"><i class="fas fa-external-link-alt"></i></a> 
                                         </span>
                                     </p>
                                 </div>
@@ -67,3 +68,215 @@
         </div>
     </div> <!-- end col -->
 </div> <!-- end row -->
+
+<div class="append-tx-sched-filter"></div>
+<div class="append-tx-unsched-filter"></div>
+<div class="append-tx-active-production"></div>
+
+<!-- jQuery  -->
+    
+{% block chart %}
+<script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/unmin.js') }}"></script> 
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/metismenu.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slimscroll.js') }}"></script>
+<script src="{{ url_for('static', filename='js/waves.min.js') }}"></script>
+<script type="text/javascript">
+    $(".txFilterSched").click(function(){
+        var div = $('.append-tx-sched-filter');
+        div.empty();
+        var url = $(this).data('url');
+        console.log(url)
+        $.ajax({
+            url: url,
+            success:function(data){
+                // console.log(data);
+                div.append(data);
+                $('#Pending_sched_modal').modal('show');
+            }
+        });
+    });
+
+    $(".txFilterUnsched").click(function(){
+        var div = $('.append-tx-unsched-filter');
+        div.empty();
+        var url = $(this).data('url');
+        console.log(url)
+        $.ajax({
+            url: url,
+            success:function(data){
+                // console.log(data);
+                div.append(data);
+                $('#Pending_unsched_modal').modal('show');
+            }
+        });
+    });
+
+    $(".activeProduction").click(function(){
+        var div = $('.append-tx-active-production');
+        div.empty();
+        var url = $(this).data('url');
+        console.log(url)
+        $.ajax({
+            url: url,
+            success:function(data){
+                // console.log(data);
+                div.append(data);
+                $('#active_production_modal').modal('show');
+            }
+        });
+    });
+
+    
+
+    
+
+    
+    (function tx_default_test_chart(){
+        const ctx = document.getElementById('tx_default_test_chart');
+        const listOfMonths = {{months | tojson }};
+        const listOfMvPendingSched = {{ mvPendingSched | tojson }};
+        const listOfBrPendingSched = {{ brPendingSched | tojson }};
+        const listOfMvPendingUnSched = {{ mvPendingUnSched | tojson }};
+        const listOfBrPendingUnSched = {{ brPendingUnSched | tojson }};
+        const listOfMvActiveProduction = {{ mvActiveProduction | tojson }};
+        const listOfBrActiveProduction = {{ brActiveProduction | tojson }};
+        
+        const metric_chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: listOfMonths,
+                datasets: 
+                [
+                    {
+                        label: 'Main:Pending Sched',
+                        data: listOfMvPendingSched,
+                        backgroundColor: [
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                            'rgb(153, 107, 229)',
+                        ],
+                    },
+                    {
+                        label: 'Brk:Pending Sched',
+                        data: listOfBrPendingSched,
+                        backgroundColor: [
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                            'rgb(97, 67, 156)',
+                        ],
+                    },
+                    {
+                        label: 'Main:Pending Unsched ',
+                        data: listOfMvPendingUnSched,
+                        backgroundColor: [
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                            'rgb(109, 229, 193)',
+                        ],
+                    },
+                    {
+                        label: 'Brk:Pending Unsched ',
+                        data: listOfBrPendingUnSched,
+                        backgroundColor: [
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                            'rgb(74, 192, 156)',
+                        ],
+                    },
+                    {
+                        label: 'Main:Active Production',
+                        data: listOfMvActiveProduction,
+                        backgroundColor: [
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                            'rgb(0, 194, 255)',
+                        ],
+                    },
+                    {
+                        label: 'Brk:Active Production',
+                        data: listOfBrActiveProduction,
+                        backgroundColor: [
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                            'rgb(0, 102, 255)',
+                        ],
+                    }
+                ],
+                
+            },
+            options: {
+                indexAxis: 'x',
+                scales: 
+                {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    })();
+
+    
+
+</script>
+{% endblock chart %}

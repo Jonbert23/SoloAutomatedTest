@@ -2,13 +2,13 @@
     <div class="col-md-4">
         <div class="card m-b-30">
             <div class="card-body">
-                <h4 class="mt-0 header-title font-16">Provider Filter Test</h4>
+                <h4 class="mt-0 header-title font-16">Provider Filter Test </h4>
                 <div class="float-right header-title" style="margin-top: -20px">
-                    <a href="#" data-toggle="modal" data-target="#provider_filter_modal"><i class="fas fa-external-link-alt"></i></a>
+                    <a href="#" class="txProviderFilter" data-url="{{ url_for('tx.showTxProviderFilterModal', useTestCode=useTestCode) }}"><i class="fas fa-external-link-alt"></i></a>
                 </div>
                 <hr>
                 <div style="height: 350px">
-                    <canvas id="tx_provider_filter_chart"></canvas>
+                    <canvas id="tx_providers_filters_charts"></canvas>
                 </div>
                 
             </div>
@@ -20,11 +20,11 @@
             <div class="card-body">
                 <h4 class="mt-0 header-title">Procedure Filter Test</h4>
                 <div class="float-right header-title" style="margin-top: -20px">
-                    <a href="#" data-toggle="modal" data-target="#procedure_filter_modal"><i class="fas fa-external-link-alt"></i></a>
+                    <a href="#" class="txProcedureFilter" data-url="{{ url_for('tx.showTxProcedureFilterModal', useTestCode=useTestCode) }}"><i class="fas fa-external-link-alt"></i></a>
                 </div>
                 <hr>
                 <div style="height: 350px">
-                    <canvas id="tx_procedure_filter_chart"></canvas>
+                    <canvas id="tx_procedures_filters_charts"></canvas>
                 </div>
                 
             </div>
@@ -36,14 +36,164 @@
             <div class="card-body">
                 <h4 class="mt-0 header-title">Patient Filter Test</h4>
                 <div class="float-right header-title" style="margin-top: -20px">
-                    <a href="#" data-toggle="modal" data-target="#patient_filter_modal"><i class="fas fa-external-link-alt"></i></a>
+                    <a href="#" class="txPatientFilter" data-url="{{ url_for('tx.showTxPatientFilterModal', useTestCode=useTestCode) }}"><i class="fas fa-external-link-alt"></i></a>
                 </div>
                 <hr>
                 <div style="height: 350px">
-                    <canvas id="tx_patient_filter_chart"></canvas>
+                    <canvas id="tx_patients_filters_charts"></canvas>
                 </div>
                 
             </div>
         </div>
     </div> <!-- end col -->
 </div> <!-- end row -->
+
+<div class="append-tx-provider-filter"></div>
+<div class="append-tx-procedure-filter"></div>
+<div class="append-tx-patient-filter"></div>
+
+{% block chart %}
+<script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/unmin.js') }}"></script> 
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/metismenu.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slimscroll.js') }}"></script>
+<script src="{{ url_for('static', filename='js/waves.min.js') }}"></script>
+<script type="text/javascript">
+
+    $(".txProviderFilter").click(function(){
+        var div = $('.append-tx-provider-filter');
+        div.empty();
+        var url = $(this).data('url');
+        console.log(url)
+        $.ajax({
+            url: url,
+            success:function(data){
+                // console.log(data);
+                div.append(data);
+                $('#provider_filter_modal').modal('show');
+            }
+        });
+    });
+
+    $(".txProcedureFilter").click(function(){
+        var div = $('.append-tx-procedure-filter');
+        div.empty();
+        var url = $(this).data('url');
+        console.log(url)
+        $.ajax({
+            url: url,
+            success:function(data){
+                // console.log(data);
+                div.append(data);
+                $('#procedure_filter_modal').modal('show');
+            }
+        });
+    });
+
+    $(".txPatientFilter").click(function(){
+        var div = $('.append-tx-patient-filter');
+        div.empty();
+        var url = $(this).data('url');
+        console.log(url)
+        $.ajax({
+            url: url,
+            success:function(data){
+                // console.log(data);
+                div.append(data);
+                $('#patient_filter_modal').modal('show');
+            }
+        });
+    });
+
+    (function tx_providers_filters_charts()
+    {
+        const sample = document.getElementById('tx_providers_filters_charts');
+        const numberOfProviderFilterPass = "{{ lengthProviderFilterPass }}";
+        const numberOfProviderFilterFail = "{{ lengthProviderFilterFail }}";
+        const myChart = new Chart(sample, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pass', 'Fail'],
+                datasets: [{
+                    data: [numberOfProviderFilterPass, numberOfProviderFilterFail],
+                    backgroundColor: [
+                        'rgba(38, 144, 244, 1)',
+                        'rgba(246, 51, 21, 1)',
+                        
+                    ],
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    })();
+
+
+    (function tx_procedures_filters_charts()
+    {
+        const sample = document.getElementById('tx_procedures_filters_charts');
+        const numberOfProcedureFilterPass = "{{ lengthProcedureFilterPass }}";
+        const numberOfProcedureFilterFail = "{{ lengthProcedureFilterFail }}";
+        const myChart = new Chart(sample, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pass', 'Fail'],
+                datasets: [{
+                    data: [numberOfProcedureFilterPass, numberOfProcedureFilterFail],
+                    backgroundColor: [
+                        'rgba(38, 144, 244, 1)',
+                        'rgba(246, 51, 21, 1)',
+                    ],
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true 
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    })();
+
+    (function tx_patients_filters_charts()
+    {
+        const sample = document.getElementById('tx_patients_filters_charts');
+        const numberOfPatientFilterPass = "{{ lengthPatientFilterPass }}";
+        const numberOfPatientFilterFail = "{{ lengthPatientFilterFail }}";
+        const myChart = new Chart(sample, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pass', 'Fail'],
+                datasets: [{
+                    data: [numberOfPatientFilterPass, numberOfPatientFilterFail],
+                    backgroundColor: [
+                        'rgba(38, 144, 244, 1)',
+                        'rgba(246, 51, 21, 1)',
+                    ],
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true 
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    })();
+
+</script>
+{% endblock chart %}

@@ -11,49 +11,27 @@
                  <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
-                            <th>Search Procedure</th>
-                            <th>Test Patient</th>
-                            <th>Procedure Exist?</th>
+                            <th>Month Breakdown</th>
+                            <th>Proc Code Filtered</th>
+                            <th>Proc Desc Filtered</th>
+                            <th>Proc Code Breakdown</th>
+                            <th>Proc Desc Breakdown</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>D0120 </td>
-                            <td>Abbott, Cordie</td>
-                            <td>Yes</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>D0140</td>
-                            <td>Abbott, Delphia</td>
-                            <td>No</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>D0145</td>
-                            <td>Altenwerth, Fernando</td>
-                            <td>Yes</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>D0210</td>
-                            <td>Altenwerth, Jaime</td>
-                            <td>No</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>D0230</td>
-                            <td>Auer, Christopher</td>
-                            <td>Yes</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>D0270</td>
-                            <td>Abbott, Delphia</td>
-                            <td>No</td>
-                            <td>Fail</td>
-                        </tr>
+                        {% if fetchTxMinerProcedureFilter is defined %}
+                            {% for fetchTxMinerProcedureFilter in fetchTxMinerProcedureFilter %}
+                            <tr>
+                                <td>{{fetchTxMinerProcedureFilter['month_breakdown']}}</td>
+                                <td>{{fetchTxMinerProcedureFilter['procedure_code_filtered']}}</td>
+                                <td>{{fetchTxMinerProcedureFilter['procedure_desc_filtered']}}</td>
+                                <td>{{fetchTxMinerProcedureFilter['procedure_code_table']}}</td>
+                                <td>{{fetchTxMinerProcedureFilter['procedure_desc_table']}}</td>
+                                <td>{{fetchTxMinerProcedureFilter['status']}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
 

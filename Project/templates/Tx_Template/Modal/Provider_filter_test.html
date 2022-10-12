@@ -11,49 +11,25 @@
                  <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
+                            <th>Month Breakdown</th>
+                            <th>Breakdown Patient Name</th>
                             <th>Search Provider</th>
-                            <th>Test Patient</th>
-                            <th>Provider Exist?</th>
+                            <th>Breakdown Patient Provider</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Abshire, Ambrose </td>
-                            <td>Abbott, Cordie</td>
-                            <td>Yes</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Aufderhar, Lisa</td>
-                            <td>Abbott, Delphia</td>
-                            <td>No</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>Cassin, Monserrat </td>
-                            <td>Altenwerth, Fernando</td>
-                            <td>Yes</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Deckow, Noe</td>
-                            <td>Altenwerth, Jaime</td>
-                            <td>No</td>
-                            <td>Fail</td>
-                        </tr>
-                        <tr>
-                            <td>Effertz, Judson</td>
-                            <td>Auer, Christopher</td>
-                            <td>Yes</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>Aufderhar, Lisa</td>
-                            <td>Abbott, Delphia</td>
-                            <td>No</td>
-                            <td>Fail</td>
-                        </tr>
+                        {% if fetchTxMinerProviderFilter is defined %}
+                            {% for fetchTxMinerProviderFilter in fetchTxMinerProviderFilter %}
+                            <tr>
+                                <td>{{fetchTxMinerProviderFilter['month_breakdown']}}</td>
+                                <td>{{fetchTxMinerProviderFilter['pt_name']}}</td>
+                                <td>{{fetchTxMinerProviderFilter['provider_filtered']}}</td>
+                                <td>{{fetchTxMinerProviderFilter['provider_pt_table']}}</td>
+                                <td>{{fetchTxMinerProviderFilter['status']}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
 
