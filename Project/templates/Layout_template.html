@@ -117,12 +117,16 @@
                         <li>
                             <a href="{{ url_for('dash.dashboard') }}" class="waves-effect"><i class="fas fa-chart-line"></i><span> Dashboard </span></a>
                         </li>
+
+                        <li>
+                            <a href="{{ url_for('dboard.dashboardv2') }}" class="waves-effect"><i class="fas fa-chart-line"></i><span> Dashboard V2</span></a>
+                        </li>
                         
                         <li>
                             <a href="{{ url_for('eod.eodForm') }}" class="waves-effect"><i class="mdi mdi-weather-sunset"></i><span> EOD Form </span></a>
                         </li>
                         <li>
-                            <a href="#" class="waves-effect"><i class="fab fa-megaport"></i><span> Front Office </span></a>
+                            <a href="{{ url_for('fo.frontOffice') }}" class="waves-effect"><i class="fab fa-megaport"></i><span> Front Office </span></a>
                         </li>
                         <li>
                             <a href="{{ url_for('mh.morning_huddle') }}" class="waves-effect"><i class="fas fa-cloud-sun"></i><span> Morning Huddle </span></a>

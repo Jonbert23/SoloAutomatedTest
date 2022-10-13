@@ -1,0 +1,60 @@
+{% extends "Layout_template.html" %}
+
+{% block header %}
+    Dashboard
+{% endblock header%}
+
+{% block test_button %} 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dash_test_modal">
+        Run Test
+    </button>
+{% endblock test_button %}
+
+{% block content%}
+    <!-- Search section -->
+    {% include "DashboardV2_Template/Sections/Search_section.html" %}
+
+    <!--Info Section  section -->
+    {% include "DashboardV2_Template/Sections/Info_section.html" %}
+    
+
+    <!-- Breakdown Test Result section -->
+    {% include "DashboardV2_Template/Sections/Breakdown_test.html" %}
+
+    <div class="row">
+        <!-- Production figures Test Result section -->
+        {% include "DashboardV2_Template/Sections/Production_figures_matching.html" %}
+
+        <!-- Services Test Result section -->
+        {% include "DashboardV2_Template/Sections/Services_test.html" %}
+
+    </div> <!-- end row -->
+
+    <!-- LOB Test Result section -->
+    {% include "DashboardV2_Template/Sections/Lob_filter.html" %}
+
+    <!--Test Modal-->
+    {% include "DashboardV2_Template/Modals/Dashboard_test_modal.html" %}
+
+    <!-- Modals -->
+    {% include "DashboardV2_Template/Modals/Breakdown_test_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Production_figures_test_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Count_breakdown_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Search_prosedure_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Lob_doctor_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Lob_os_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Lob_endo_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Lob_hyg_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Lob_invisalign_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Lob_ortho_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Lob_pedo_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Lob_perio_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Lob_prosthe_modal.html" %}
+    {% include "DashboardV2_Template/Modals/Lob_others_modal.html" %}
+    <!-- Modals -->
+    
+{% endblock content%}
+
+{% block chart %}
+    <script src="{{ url_for('static', filename='charts/dashboard_chart.js') }}"></script>
+{% endblock chart %}

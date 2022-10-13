@@ -40,6 +40,7 @@ def create_app():
     from .Controller.Testcode_Controller.Testcode_routes import tcc as test_blueprint
     app.register_blueprint(test_blueprint)
 
+
     # blueprint for calendar
     from .Controller.Calendar_Controller.Calendar_routes import cal as main_blueprint
     app.register_blueprint(main_blueprint)
@@ -60,8 +61,18 @@ def create_app():
     
     from .Controller.Figures_Controller.Figures_routes import fm as main_blueprint
     app.register_blueprint(main_blueprint)
-    
+
     from .Controller.PP_Controller.Pp_routes import pp as main_blueprint
     app.register_blueprint(main_blueprint)
+
+    from .Controller.Fo_Controller.Fo_routes import fo as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    from .Controller.DashboardV2_Controller.d_routes import dboard as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    
+
+    
 
     return app
