@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, request, redirect
 from flask_login import login_required, current_user
 from array import *
-import numpy as np
+# import numpy as np
 from ..Tx_Controller import Tx_selenium
 from ...models import TestCodes
 from ...models import TxMinerDefaultTest

@@ -70,6 +70,14 @@
         {% include "PP_Template/Filters/LastHygVisit.html" %}
     {% endif %}
 
+    {% if perio_care_exist == 'Yes' %}
+        {% include "PP_Template/Filters/PerioCare.html" %}
+    {% endif %}
+
+    {% if visit_filter_exist == 'Yes' %}
+        {% include "PP_Template/Filters/Visit.html" %}
+    {% endif %}
+
     {% include "PP_Template/Modals/Pp_modal.html" %}
 
 {% endblock content %}
@@ -84,6 +92,7 @@
             $('#SIRfilter').DataTable();
             $('#Genderfilter').DataTable(); 
             $('#Schedfilter').DataTable();
+            $('#PerioCarefilter').DataTable();
         });
         
     </script>
@@ -145,6 +154,14 @@
     {% if lhv_filter_exist == 'Yes' %}
         {% include "PP_Template/Charts/LastHygVisit_filter_chart.html" %}
     {% endif %} 
+
+    {% if perio_care_exist == 'Yes' %}
+        {% include "PP_Template/Charts/PerioCare_filter_chart.html" %}
+    {% endif %}
+
+    {% if visit_filter_exist == 'Yes' %}
+        {% include "PP_Template/Charts/Visit_filter_chart.html" %}
+    {% endif %}
 
     {% include "PP_Template/Charts/PP_modal_script.html" %}
 {% endblock chart %}

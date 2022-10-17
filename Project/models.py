@@ -723,3 +723,17 @@ class PpPerioCareFilter(UserMixin, db.Model):
     patient_pc = db.Column(db.String(100), nullable=True)
     Condition = db.Column(db.String(100), nullable=True)
     status = db.Column(db.String(100), nullable=True)
+    
+    
+class PpVisitFilter(UserMixin, db.Model): 
+    id = db.Column(db.Integer, primary_key=True)    
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    patient_name = db.Column(db.String(100), nullable=True)
+    patient_id = db.Column(db.String(100), nullable=True)
+    number_of_visit = db.Column(db.String(100), nullable=True)
+    patient_gender = db.Column(db.String(100), nullable=True)
+    patient_email = db.Column(db.String(100), nullable=True)
+    Condition = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)

@@ -9,6 +9,7 @@
     document.getElementById("pir_conditions").hidden = true;
     document.getElementById("rb_conditions").hidden = true;
     document.getElementById("sir_conditions").hidden = true;
+    document.getElementById("visit_conditions").hidden = true;
     
     function modal_script() {
         var age = document.getElementById("age_cb");
@@ -21,6 +22,7 @@
         var pir = document.getElementById("pir_cb");
         var rb =  document.getElementById("rb_cb");
         var sir =  document.getElementById("sir_cb");
+        var visit =  document.getElementById("visit_cb");
 
         if (age.checked == true)
         {
@@ -192,6 +194,46 @@
             document.getElementById('sir_between_first').required = false;
             document.getElementById('sir_between_second').required = false;
         }
+
+        if(visit.checked == true)
+        {
+            document.getElementById("visit_conditions").hidden = false;
+            document.getElementById('visit_greater').required = true;
+            document.getElementById('visit_less').required = true;
+            document.getElementById('visit_equal').required = true;
+            document.getElementById('visit_between_first').required = true;
+            document.getElementById('visit_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById("visit_conditions").hidden = true;
+            document.getElementById('visit_greater').required = false;
+            document.getElementById('visit_less').required = false;
+            document.getElementById('visit_equal').required = false;
+            document.getElementById('visit_between_first').required = false;
+            document.getElementById('visit_between_second').required = false;
+        }
+
+        if(fv.checked == true)
+        {
+            document.getElementById("fv_conditions").hidden = false;
+            document.getElementById('fv_after').required = true;
+            document.getElementById('fv_before').required = true;
+            document.getElementById('fv_on').required = true;
+            document.getElementById('fv_between_first').required = true;
+            document.getElementById('fv_between_second').required = true;
+        }
+        else
+        {
+            document.getElementById("fv_conditions").hidden = true;
+            document.getElementById('fv_after').required = false;
+            document.getElementById('fv_before').required = false;
+            document.getElementById('fv_on').required = false;
+            document.getElementById('fv_between_first').required = false;
+            document.getElementById('fv_between_second').required = false;
+        }
+
+       
 
 
         

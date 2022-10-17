@@ -30,6 +30,7 @@ from Project.Controller.PP_Controller.Filters.FutureVisit import FutureVisitFilt
 from Project.Controller.PP_Controller.Filters.FutureHygVisit import FutureHygVisitFilter
 from Project.Controller.PP_Controller.Filters.LastHygVisit import LastHygVisitFilter
 from Project.Controller.PP_Controller.Filters.PerioCareFilter import PerioCareFilter
+from Project.Controller.PP_Controller.Filters.Visit import VisitFilter
 
 from Project.models import PpTestcodeLogs
 from Project.models import PpAgeFilter
@@ -46,6 +47,9 @@ from Project.models import PpLastSeenFilter
 from Project.models import PpFutureHygVisitFilter
 from Project.models import PpFutureVisitFilter
 from Project.models import PpLastHygVisitFilter
+from Project.models import PpPerioCareFilter
+from Project.models import PpVisitFilter
+
 
 from Project import db
 
@@ -187,6 +191,17 @@ def patient_portal():
             
             if pp_filter == 'perio_care':
                 PerioCareFilter.PerioCare_filter(driver, test_code)
+                
+            
+            if pp_filter == 'visit':
+                greater = request.form['visit_greater']
+                less = request.form['visit_less']
+                equal = request.form['visit_equal']
+                between_first = request.form['visit_between_first']
+                between_second = request.form['visit_between_second']
+                
+                VisitFilter.Visit_filter(driver, greater, less, equal, between_first, between_second, test_code)
+                
             
         driver.quit()
         
@@ -234,13 +249,19 @@ def patient_portal():
     lastseen_filter = PpLastSeenFilter.query.filter_by(test_code=latest_test).first()
     
     fhv_filter_exist = 'No'
-    fhv_filter = PpFutureHygVisitFilter.query.filter_by(test_code=latest_test).first();
+    fhv_filter = PpFutureHygVisitFilter.query.filter_by(test_code=latest_test).first()
     
     fv_filter_exist = 'No'
-    fv_filter = PpFutureVisitFilter.query.filter_by(test_code=latest_test).first();
+    fv_filter = PpFutureVisitFilter.query.filter_by(test_code=latest_test).first()
     
     lhv_filter_exist = 'No'
-    lhv_filter = PpLastHygVisitFilter.query.filter_by(test_code=latest_test).first();
+    lhv_filter = PpLastHygVisitFilter.query.filter_by(test_code=latest_test).first()
+    
+    perio_care_exist = 'No'
+    perio_care_filter = PpPerioCareFilter.query.filter_by(test_code=latest_test).first()
+    
+    visit_filter_exist = 'No'
+    visit_filter = PpVisitFilter.query.filter_by(test_code=latest_test).first()
     
     if age_filter:
         age_filter_exist = 'Yes'
@@ -297,6 +318,15 @@ def patient_portal():
     if lhv_filter:
         lhv_filter_exist = 'Yes'
         lhv_filter = PpLastHygVisitFilter.query.all()
+        
+    if perio_care_filter:
+        perio_care_exist = 'Yes'
+        perio_care_filter = PpPerioCareFilter.query.all()
+        
+    if visit_filter:
+        visit_filter_exist = 'Yes'
+        visit_filter = PpVisitFilter.query.all() 
+        
          
     return render_template('PP_Template/PP_index.html', 
         latest_test = latest_test,
@@ -314,4 +344,6 @@ def patient_portal():
         fhv_filter_exist = fhv_filter_exist, fhv_filter = fhv_filter,
         fv_filter_exist = fv_filter_exist, fv_filter = fv_filter,
         lhv_filter_exist = lhv_filter_exist, lhv_filter = lhv_filter,
+        perio_care_exist = perio_care_exist, perio_care_filter = perio_care_filter,
+        visit_filter_exist = visit_filter_exist, visit_filter = visit_filter,
     )

@@ -82,34 +82,42 @@ def figuresMatching():
         driver.quit()
         flash('Your Test Code: '+test_code, 'info')
     
+    
     data = FiguresMatching.query.order_by(FiguresMatching.id.desc()).first()
-    net_prod_data = [data.dash_netProd, data.cal_netProd, data.eod_netProd, data.mh_netProd]
-    net_prod_result = Result.result(net_prod_data)
+    has_data = 'No'
     
-    gross_prod_data = [data.dash_grossProd, data.cal_grossProd, data.eod_grossProd, data.mh_grossProd ]
-    gross_prod_result = Result.result(gross_prod_data)
+    if data:
+        has_data = 'Yes'
+        net_prod_data = [data.dash_netProd, data.cal_netProd, data.eod_netProd, data.mh_netProd]
+        net_prod_result = Result.result(net_prod_data)
+        
+        gross_prod_data = [data.dash_grossProd, data.cal_grossProd, data.eod_grossProd, data.mh_grossProd ]
+        gross_prod_result = Result.result(gross_prod_data)
+        
+        collection_data = [data.dash_collection, data.eod_collection, data.mh_collection]
+        collection_result = Result.result(collection_data)
+        
+        adjustment_data = [data.dash_adjusment, data.eod_adjusment]
+        adjustment_result = Result.result(adjustment_data)
+        
+        pts_data = [data.dash_pts, data.eod_pts]
+        pts_result = Result.result(pts_data)
+        
+        npt_data = [data.dash_npt, data.cal_npt, data.eod_npt, data.mh_npt]
+        npt_result = Result.result(npt_data)
     
-    collection_data = [data.dash_collection, data.eod_collection, data.mh_collection]
-    collection_result = Result.result(collection_data)
     
-    adjustment_data = [data.dash_adjusment, data.eod_adjusment]
-    adjustment_result = Result.result(adjustment_data)
-    
-    pts_data = [data.dash_pts, data.eod_pts]
-    pts_result = Result.result(pts_data)
-    
-    npt_data = [data.dash_npt, data.cal_npt, data.eod_npt, data.mh_npt]
-    npt_result = Result.result(npt_data)
-    
-    
-    return render_template('Figures_Template/Figures_index.html', 
-                           data = data, 
-                           net_prod_result = net_prod_result,
-                           gross_prod_result = gross_prod_result,
-                           collection_result = collection_result,
-                           adjustment_result = adjustment_result,
-                           pts_result = pts_result,
-                           npt_result = npt_result)
+        return render_template('Figures_Template/Figures_index.html', 
+                            data = data, 
+                            net_prod_result = net_prod_result,
+                            gross_prod_result = gross_prod_result,
+                            collection_result = collection_result,
+                            adjustment_result = adjustment_result,
+                            pts_result = pts_result,
+                            npt_result = npt_result,
+                            has_data = has_data)
+    else:
+        return render_template('Figures_Template/Figures_index.html',has_data = has_data)
 
 
 class Result:

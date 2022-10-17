@@ -23,7 +23,7 @@ from Project import db
 class FutureHygVisitFilter:
     
     def FutureHygVisit_filter(driver, test_code, after, before, on, between_first, between_second):
-        driver.implicitly_wait(5)
+        driver.implicitly_wait(10)
         
         wait = WebDriverWait(driver, 60)
         element = wait.until(EC.element_to_be_clickable((By.XPATH, Xpath.loader)))

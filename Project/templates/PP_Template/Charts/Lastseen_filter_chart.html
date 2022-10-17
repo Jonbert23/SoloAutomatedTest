@@ -1,13 +1,35 @@
 <script>
     (function breakdown_chart()
     {
+
+        let total = 0; 
+        let pass = 0;
+        let fail = 0;
+
+        {% for test in lastseen_filter %}
+            {% if test.test_code == latest_test %}
+                total++
+                {% if test.status == "Pass" %}
+                    pass++;
+                {% else %}
+                    fail++;
+                {% endif %}
+                
+            {% endif %}
+        {% endfor %}
+
+        pass = (pass / total) * 100;
+        fail = (fail / total) * 100;
+        pass = pass.toFixed();
+        fail = fail.toFixed();
+
         const sample = document.getElementById('lastseen_filter');
         const myChart = new Chart(sample, {
             type: 'doughnut',
             data: {
                 labels: ['Pass', 'Fail'],
                 datasets: [{
-                    data: [50, 50],
+                    data: [pass, fail],
                     backgroundColor: [
                         'rgba(38, 144, 244, 1)',
                         'rgba(246, 51, 21, 1)',

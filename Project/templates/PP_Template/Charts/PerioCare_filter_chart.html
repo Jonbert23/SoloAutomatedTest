@@ -5,7 +5,7 @@
         let pass = 0;
         let fail = 0;
 
-        {% for test in uninsured_filter %}
+        {% for test in perio_care_filter %}
             {% if test.test_code == latest_test %}
                 total++
                 {% if test.status == "Pass" %}
@@ -22,7 +22,7 @@
         pass = pass.toFixed();
         fail = fail.toFixed();
 
-        const sample = document.getElementById('uninsured_filter');
+        const sample = document.getElementById('perio_care_filter');
         const myChart = new Chart(sample, {
             type: 'doughnut',
             data: {

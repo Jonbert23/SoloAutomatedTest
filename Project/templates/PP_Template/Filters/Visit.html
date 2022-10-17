@@ -1,0 +1,53 @@
+<div class="row">
+
+    <div class="col-sm-12">
+        <h4 class="page-title">Perio Care Filter Result</h4>
+        <hr style="border-top: 7px solid #6c53d7">
+    </div>
+
+    <div class="col-md-4">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <h4 class="mt-0 header-title font-16">Perio Care Test Result</h4>
+                <hr>
+                <div style="height: 590px">
+                    <canvas id="visit_filter"></canvas>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+
+    <div class="col-8">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <table id="PerioCarefilter" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Patient Name - ID</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>Total Visits</th>
+                            <th>Condition</th>
+                            <th>Result</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for test in visit_filter %}
+                            {% if test.test_code == latest_test %}
+                                <tr>
+                                    <td>{{test.patient_name}} - {{test.patient_id}}</td>
+                                    <td>{{test['patient_gender']}}</td>
+                                    <td>{{test['patient_email']}}</td>
+                                    <td>{{test['number_of_visit']}}</td>
+                                    <td>{{test['Condition']}}</td>
+                                    <td>{{test['status']}}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->

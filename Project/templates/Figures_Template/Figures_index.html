@@ -10,19 +10,23 @@
 
 {% block content %}
 
-    <!--Seacrh Section-->
-    {% include "Figures_Template/Sections/Search_section.html" %}
-    <!--Infro Section-->
-    {% include "Figures_Template/Sections/Info_section.html" %}
-    <!--Figures Section-->
-    {% include "Figures_Template/Sections/Figures_section.html" %}
+    {% if has_data == 'Yes' %}
+        <!--Seacrh Section-->
+        {% include "Figures_Template/Sections/Search_section.html" %}
+        <!--Infro Section-->
+        {% include "Figures_Template/Sections/Info_section.html" %}
+        <!--Figures Section-->
+        {% include "Figures_Template/Sections/Figures_section.html" %}
+        <!--Test Modal-->
+        {% for data in dash_data%}
+        <p>{{  dash_data}}</p>
+        {% endfor %}
 
-    <!--Test Modal-->
+    {% else %}
+        {% include "Figures_Template/Sections/No_test.html" %}
+    {% endif %}
+
     {% include "Figures_Template/Modal/Fm_test_modal.html" %}
-
-    {% for data in dash_data%}
-       <p>{{  dash_data}}</p>
-    {% endfor %}
     
 {% endblock content %}
 
