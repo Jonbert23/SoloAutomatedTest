@@ -1,0 +1,269 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="page-title">Breakdown Test</h4>
+        <hr style="border-top: 7px solid #0066ff">
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    {% if  eod_result.pt_portion_col == 'Pass' %}
+                        <h5 class="font-12 one-line-text">PT portion collections % today collected<span class="float-right">Pass</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">PT portion collections % today collected<span class="float-right">Fail</span></h5>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                        <h3 class="text-center font-20">{{ eod_main.pt_portion_col }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                        <h3 class="text-center font-20">{{ eod_brk.pt_portion_col }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    {% if  eod_result.adjustments == 'Pass' %}
+                        <h5 class="font-12 one-line-text">Total adjustment<span class="float-right">Pass</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">Total adjustment<span class="float-right">Fail</span></h5>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                        <h3 class="text-center font-20">{{ eod_main.adjustments }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                        <h3 class="text-center font-20">{{ eod_brk.adjustments }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    {% if  eod_result.total_collection  == 'Pass' %}
+                        <h5 class="font-12 one-line-text">Total collection<span class="float-right">Pass</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">Total collection<span class="float-right">Fail</span></h5>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                        <h3 class="text-center font-20">{{ eod_main.total_collection }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                        <h3 class="text-center font-20">{{ eod_brk.total_collection }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    {% if  eod_result.daily_collection == 'Pass' %}
+                        <h5 class="font-12 one-line-text">Daily collection<span class="float-right">Pass</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">Daily collection<span class="float-right">Fail</span></h5>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                        <h3 class="text-center font-20">{{ eod_main.daily_collection }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                        <h3 class="text-center font-20">{{ eod_brk.daily_collection }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    {% if  eod_result.same_day_tx == 'Pass' %}
+                        <h5 class="font-12 one-line-text">Same day treatment<span class="float-right">Pass</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">Same day treatment<span class="float-right">Fail</span></h5>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                        <h3 class="text-center font-20">{{ eod_main.same_day_tx }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                        <h3 class="text-center font-20">{{ eod_brk.same_day_tx }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    {% if  eod_result.case_acceptance == 'Pass' %}
+                        <h5 class="font-12 one-line-text">Case acceptance (%)<span class="float-right">Pass</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">Case acceptance (%)<span class="float-right">Fail</span></h5>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                        <h3 class="text-center font-20">{{ eod_main.case_acceptance }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                        <h3 class="text-center font-20">{{ eod_brk.case_acceptance }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    {% if  eod_result.no_show == 'Pass' %}
+                        <h5 class="font-12 one-line-text">No Show<span class="float-right">Pass</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">No Show<span class="float-right">Fail</span></h5>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                        <h3 class="text-center font-20">{{ eod_main.no_show }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                        <h3 class="text-center font-20">{{ eod_brk.no_show }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    {% if  eod_result.new_patient == 'Pass' %}
+                        <h5 class="font-12 one-line-text">New Patient<span class="float-right">Pass</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">New Patient<span class="float-right">Fail</span></h5>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                        <h3 class="text-center font-20">{{ eod_main.new_patient }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                        <h3 class="text-center font-20">{{ eod_brk.new_patient }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    {% if  eod_result.pts_miss_referral == 'Pass' %}
+                        <h5 class="font-12 one-line-text">Patients w/ Missing Referral <span class="float-right">Pass</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">Patients w/ Missing Referral <span class="float-right">Fail</span></h5>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                        <h3 class="text-center font-20">{{ eod_main.pts_miss_referral }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                        <h3 class="text-center font-20">{{ eod_brk.pts_miss_referral }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-heading p-1 pl-4 pr-3">
+                <div>
+                    {% if  eod_result.hyg_reappt == 'Pass' %}
+                        <h5 class="font-12 one-line-text">Hyg Reappointment <span class="float-right">{{eod_result.hyg_reappt}}</span></h5>
+                    {% else %}
+                        <h5 class="font-12 one-line-text" style="color:red">Hyg Reappointment <span class="float-right">{{eod_result.hyg_reappt}}</span></h5>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                        <h3 class="text-center font-20">{{ eod_main.hyg_reappt }}</h3>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                        <h3 class="text-center font-20">{{ eod_brk.hyg_reappt }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+   

@@ -1,0 +1,39 @@
+{% extends "Layout_template.html" %}
+
+{% block header %}  EOD Form {% endblock header%}
+
+{% block test_button %} 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eod_test_modal">
+        Run Test
+    </button>
+{% endblock test_button %}
+
+{% block content %}
+    <!--Search Section-->
+    {% if empty_test == 'Yes' %}
+        {% include "EodV2_template/Sections/No_test.html" %}
+
+    {% else %}
+        {% include "EodV2_template/Sections/Search_section.html" %}
+        
+        <!--Info Section-->
+        {% include "EodV2_template/Sections/Info_section.html" %}
+
+        <!--Graph Section-->
+        {% include "EodV2_template/Sections/Graph_test_section.html" %}
+
+        <!--Breakdown Section-->
+        {% include "EodV2_template/Sections/Breakdown_test_section.html" %}
+    {% endif %}
+
+    <!--Test Modal-->
+    {% include "EodV2_template/Modal/Eod_modal.html" %}
+
+{% endblock content %}  
+
+{% block chart %}
+    
+    {% if empty_test == 'No' %}
+        {% include "EodV2_template/chart/Eod_graph.html" %}
+    {% endif %}
+{% endblock chart %}

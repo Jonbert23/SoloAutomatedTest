@@ -40,7 +40,6 @@ def create_app():
     from .Controller.Testcode_Controller.Testcode_routes import tcc as test_blueprint
     app.register_blueprint(test_blueprint)
 
-
     # blueprint for calendar
     from .Controller.Calendar_Controller.Calendar_routes import cal as main_blueprint
     app.register_blueprint(main_blueprint)
@@ -71,7 +70,8 @@ def create_app():
     from .Controller.DashboardV2_Controller.d_routes import dboard as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    
+    from .Controller.EodV2_Controller.Eod_routes import eod_v2 as main_blueprint
+    app.register_blueprint(main_blueprint)
 
     
 

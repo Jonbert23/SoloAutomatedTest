@@ -17,15 +17,12 @@
         {% include "Figures_Template/Sections/Info_section.html" %}
         <!--Figures Section-->
         {% include "Figures_Template/Sections/Figures_section.html" %}
-        <!--Test Modal-->
-        {% for data in dash_data%}
-        <p>{{  dash_data}}</p>
-        {% endfor %}
 
     {% else %}
         {% include "Figures_Template/Sections/No_test.html" %}
     {% endif %}
 
+     <!--Test Modal-->
     {% include "Figures_Template/Modal/Fm_test_modal.html" %}
     
 {% endblock content %}
