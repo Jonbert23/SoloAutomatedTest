@@ -9,6 +9,25 @@
 {% endblock test_button %}
 
 {% block content%}
+    <!--Info Section-->
+    {% include "Fo_Template/Sections/Search_section.html" %}
+
+    <!--Graph Section-->
+    {% include "Fo_Template/Sections/Info_section.html" %}
+
+    <!--Graph Section-->
+    {% include "Fo_Template/Sections/Graph_section.html" %}
+
+    <!--Brk Section-->
+    {% include "Fo_Template/Sections/Kpi_brk_section.html" %}
+
+     <!--Test Modal-->
+     {% include "Fo_Template/Modal/Fo_modal.html" %}
 
 
 {% endblock content%}
+
+{% block chart %}
+    {% include "Fo_Template/Chart/Fo_kpi_chart.html" %}
+    
+{% endblock chart %}
