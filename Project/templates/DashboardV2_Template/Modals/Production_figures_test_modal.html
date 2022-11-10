@@ -20,7 +20,44 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        {% if getProductionTest is defined %}
+                            <tr>
+                                <td>Provider Section</td>
+                                <td>{{getProductionTest.base_value}}</td>
+                                <td>{{getProductionTest.production_by_provider}}</td>
+                                <td>
+                                    {% if getProductionTest.base_value == getProductionTest.production_by_provider %}
+                                        Pass
+                                    {% else %}
+                                        Fail
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Table Section</td>
+                                <td>{{getProductionTest.base_value}}</td>
+                                <td>{{getProductionTest.table_production}}</td>
+                                <td>
+                                    {% if getProductionTest.base_value == getProductionTest.table_production %}
+                                        Pass
+                                    {% else %}
+                                        Fail
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Payor Score</td>
+                                <td>{{getProductionTest.base_value}}</td>
+                                <td>{{getProductionTest.payors_production}}</td>
+                                <td>
+                                    {% if getProductionTest.base_value == getProductionTest.payors_production %}
+                                        Pass
+                                    {% else %}
+                                        Fail
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endif %}
                     </tbody>
                 </table>
 

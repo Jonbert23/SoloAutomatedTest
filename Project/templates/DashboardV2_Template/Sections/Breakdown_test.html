@@ -4,23 +4,27 @@
             <div class="card-body">
                 <h4 class="mt-0 header-title">Breakdowwn Test Result</h4>
                 <div class="float-right header-title" style="margin-top: -20px">
-                    <a href="#" data-toggle="modal" data-target="#breakdown_test_modal"><i class="fas fa-external-link-alt"></i></a>
+                    <a href="#" data-url="{{ url_for('dboard.dashBreakdown', useTestCode=useTestCode) }}" class="breakdownDash"><i class="fas fa-external-link-alt"></i></a>
                 </div>
                 <hr>
 
                 <div class="row">
-                    <div class="col-md-2">
-                        <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                            <div class="card-heading p-1 pl-4 pr-3">
-                                <div>
-                                    <h5 class="font-16 one-line-text">Net Production</h5>
+                    {% if getBreakdown is defined %}
+                        {% for getBreakdown in getBreakdown %}
+                            <div class="col-md-2">
+                                <div class="card" style="box-shadow: 1px 1px 4px #000000;">
+                                    <div class="card-heading p-1 pl-4 pr-3">
+                                        <div>
+                                            <h5 class="font-16 one-line-text">{{getBreakdown['main_view_label']}}</h5>
+                                        </div>
+                                        <hr>
+                                        <p class="text-muted mt-2 mb-0 pb-2">Test Result : {{getBreakdown['status']}}<span> </span> </p>
+                                    </div>
                                 </div>
-                                <hr>
-                                <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> </span> </p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
+                        {% endfor %}
+                    {% endif %}
+                    <!-- <div class="col-md-2">
                         <div class="card" style="box-shadow: 1px 1px 4px #000000;">
                             <div class="card-heading p-1 pl-4 pr-3">
                                 <div>
@@ -74,12 +78,12 @@
                                 <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span>  </span> </p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-md-8">
                         <div class="card" style="box-shadow: 1px 1px 4px #000000;">
                             <div class="p-3" style="height: 400px">
-                                    <canvas id="brk_chart"></canvas>
+                                    <canvas id="brk_chart_cal1"></canvas>
                             </div>
                         </div>
                     </div>
@@ -87,7 +91,7 @@
                     <div class="col-md-4">
                         <div class="card" style="box-shadow: 1px 1px 4px #000000;">
                             <div class="p-3"style="height: 400px">
-                                <canvas id="brk_chart2"></canvas>
+                                <canvas id="brk_chart_cal2"></canvas>
                             </div>
                         </div>
                     </div>
@@ -96,3 +100,135 @@
         </div>
     </div> <!-- end col -->
 </div>
+
+<div class="append-breakdown-dash"> </div>
+
+{% block chart %}
+<script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/unmin.js') }}"></script> 
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/metismenu.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slimscroll.js') }}"></script>
+<script src="{{ url_for('static', filename='js/waves.min.js') }}"></script>
+
+<script type="text/javascript">
+    (function brk_chart_cal1(){
+        const ctx = document.getElementById('brk_chart_cal1');
+        const mainNetProd = "{{ getMainNetProductionValue }}";
+        const brkdwnNetProd = "{{ getBreakdownNetProductionValue }}";
+        const mainGrossProd = "{{ getMainGrossProductionValue }}";
+        const brkdwnGrossProd = "{{ getBreakdownGrossProductionValue }}";
+        const mainCollection = "{{ getMainCollectionValue }}";
+        const brkdwnCollection = "{{ getBreakdownCollectionValue }}";
+        const mainAdjustment = "{{ getMainAdjustmentValue }}";
+        const brkdwnAdjustment = "{{ getBreakdownAdjustmentValue }}";
+
+        const metric_chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Net Production', 'Gross Production', 'Collection', 'Adjustment'],
+                datasets: 
+                [
+                    {
+                        label: 'Base Data',
+                        data: [mainNetProd, mainGrossProd, mainCollection, mainAdjustment  ],
+                        backgroundColor: [
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(38, 144, 244, 1)',
+                        ],
+                    },
+                    {
+                        label: 'Breakdown Data',
+                        data: [brkdwnNetProd, brkdwnGrossProd, brkdwnCollection, brkdwnAdjustment  ],
+                        backgroundColor: [
+                            'rgba(222, 182, 23, 1)',
+                            'rgba(222, 182, 23, 1)',
+                            'rgba(222, 182, 23, 1)',
+                            'rgba(222, 182, 23, 1)',
+                        ],
+                    }
+                ],
+                
+            },
+            options: {
+                scales: 
+                {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    })();
+
+    (function brk_chart_cal2(){
+        const ctx = document.getElementById('brk_chart_cal2');
+        const mainNpt = "{{ getMainNptValue }}";
+        const brkdwnNpt = "{{ getBreakdownNptValue }}";
+        const mainEnpt = "{{ getMainEnptValue }}";
+        const brkdwnEnpt = "{{ getBreakdownEnptValue }}";
+        const metric_chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['New Patients Visits', 'Existing Patients Visits'],
+                datasets: 
+                [
+                    {
+                        label: 'Base Data',
+                        data: [mainNpt, mainEnpt ],
+                        backgroundColor: [
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(38, 144, 244, 1)',
+                        ],
+                    },
+                    {
+                        label: 'Breakdown Data',
+                        data: [brkdwnNpt, brkdwnEnpt  ],
+                        backgroundColor: [
+                            'rgba(222, 182, 23, 1)',
+                            'rgba(222, 182, 23, 1)',
+                        ],
+                    }
+                ],
+                
+            },
+            options: {
+                scales: 
+                {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    })();
+
+    $(".breakdownDash").click(function(){
+        var div = $('.append-breakdown-dash');
+        div.empty();
+        var url = $(this).data('url');
+        console.log(url)
+        $.ajax({
+            url: url,
+            success:function(data){
+                // console.log(data);
+                div.append(data);
+                $('#breakdown_test_modal').modal('show');
+            }
+        });
+    });
+
+    
+</script>
+
+{% endblock chart %}

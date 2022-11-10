@@ -266,6 +266,62 @@ class DashboardLOBSpecialityTest(UserMixin, db.Model):
     speciality_status = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
+class DashboardV2DefaultBreakdownTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    main_view_label = db.Column(db.String(100))
+    main_view_value = db.Column(db.String(100))
+    breakdown_view_label = db.Column(db.String(100))
+    breakdown_view_value = db.Column(db.String(100))
+    status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
+
+class DashboardV2DefaultProductionTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    base_value = db.Column(db.String(100))
+    production_by_provider = db.Column(db.String(100))
+    table_production = db.Column(db.String(100))
+    payors_production = db.Column(db.String(100))
+    status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
+
+class DashboardV2DefaultSearchProcedure(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    main_proc_code = db.Column(db.String(100))
+    breakdown_proc_code = db.Column(db.String(100))
+    status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
+    
+class DashboardV2DefaultCountTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    main_proc_code = db.Column(db.String(100))
+    main_count = db.Column(db.String(100))
+    breakdown_count = db.Column(db.String(100))
+    status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
+
+class DashboardV2DefaultLOBTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    lob_options = db.Column(db.String(100))
+    tbl_provider_name = db.Column(db.String(100))
+    brkdwn_provider_specialty = db.Column(db.String(100))
+    status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
+
 class FiguresMatching(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)

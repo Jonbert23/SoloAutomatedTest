@@ -12,7 +12,6 @@
                  <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
-                            <th>Provider</th>
                             <th>Procedure Code</th>
                             <th>Count Data</th>
                             <th>Breakdown Data</th>
@@ -20,13 +19,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Net Production</td>
-                            <td>Net Production</td>
-                            <td>Net Production</td>
-                            <td>Net Production</td>
-                            <td>Net Production</td>
-                        </tr>
+                        {% if getCountProcedure is defined %}
+                            {% for getCountProcedure in getCountProcedure %}
+                            <tr>
+                                <td>{{getCountProcedure['main_proc_code']}}</td>
+                                <td>{{getCountProcedure['main_count']}}</td>
+                                <td>{{getCountProcedure['breakdown_count']}}</td>
+                                <td>{{getCountProcedure['status']}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
 

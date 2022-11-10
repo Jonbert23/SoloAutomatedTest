@@ -12,46 +12,62 @@
 
 {% block content%}
     <!-- Search section -->
-    {% include "DashboardV2_Template/Sections/Search_section.html" %}
 
-    <!--Info Section  section -->
-    {% include "DashboardV2_Template/Sections/Info_section.html" %}
-    
+    {% if trigger == "On" %}
+        {% include "DashboardV2_Template/Sections/Search_section.html" %}
 
-    <!-- Breakdown Test Result section -->
-    {% include "DashboardV2_Template/Sections/Breakdown_test.html" %}
+        <!--Info Section  section -->
+        {% include "DashboardV2_Template/Sections/Info_section.html" %}
+        
 
-    <div class="row">
-        <!-- Production figures Test Result section -->
-        {% include "DashboardV2_Template/Sections/Production_figures_matching.html" %}
+        <!-- Breakdown Test Result section -->
+        {% include "DashboardV2_Template/Sections/Breakdown_test.html" %}
 
-        <!-- Services Test Result section -->
-        {% include "DashboardV2_Template/Sections/Services_test.html" %}
+        <div class="row">
+            <!-- Production figures Test Result section -->
+            {% include "DashboardV2_Template/Sections/Production_figures_matching.html" %}
 
-    </div> <!-- end row -->
+            <!-- Services Test Result section -->
+            {% include "DashboardV2_Template/Sections/Services_test.html" %}
 
-    <!-- LOB Test Result section -->
-    {% include "DashboardV2_Template/Sections/Lob_filter.html" %}
+        </div> <!-- end row -->
 
-    <!--Test Modal-->
-    {% include "DashboardV2_Template/Modals/Dashboard_test_modal.html" %}
+        <!-- LOB Test Result section -->
+        {% include "DashboardV2_Template/Sections/Lob_filter.html" %}
 
-    <!-- Modals -->
-    {% include "DashboardV2_Template/Modals/Breakdown_test_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Production_figures_test_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Count_breakdown_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Search_prosedure_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Lob_doctor_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Lob_os_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Lob_endo_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Lob_hyg_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Lob_invisalign_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Lob_ortho_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Lob_pedo_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Lob_perio_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Lob_prosthe_modal.html" %}
-    {% include "DashboardV2_Template/Modals/Lob_others_modal.html" %}
-    <!-- Modals -->
+        <!--Test Modal-->
+        {% include "DashboardV2_Template/Modals/Dashboard_test_modal.html" %}
+
+        <!-- Modals -->
+        {% include "DashboardV2_Template/Modals/Breakdown_test_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Production_figures_test_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Count_breakdown_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Search_prosedure_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Lob_doctor_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Lob_os_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Lob_endo_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Lob_hyg_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Lob_invisalign_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Lob_ortho_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Lob_pedo_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Lob_perio_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Lob_prosthe_modal.html" %}
+        {% include "DashboardV2_Template/Modals/Lob_others_modal.html" %}
+        <!-- Modals -->
+    {% else %}
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card m-b-30">
+                    <div class="card-body">  
+                        <h4>No tests has been stored in the database. Run some tests to see results.</h4>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+
+        <!--Test Modal-->
+        {% include "DashboardV2_Template/Modals/Dashboard_test_modal.html" %}
+    {% endif %}
     
 {% endblock content%}
 

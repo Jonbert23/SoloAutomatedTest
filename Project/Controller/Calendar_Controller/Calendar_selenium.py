@@ -23,7 +23,8 @@ def login(get_test_code, optional_test):
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome('/usr/local/bin/chromedriver', options=options)
     driver.implicitly_wait(1000000000) 
     driver.get(get_test_code.client_link)
 

@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body ">
                 
                  
                  <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -20,12 +20,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Net Production</td>
-                            <td>Net Production</td>
-                            <td>Net Production</td>
-                            <td>Net Production</td>
-                        </tr>
+                        {% if getBreakdown is defined %}
+                            {% for getBreakdown in getBreakdown %}
+                            <tr>
+                                <td>{{getBreakdown['main_view_label']}}</td>
+                                <td>{{getBreakdown['main_view_value']}}</td>
+                                <td>{{getBreakdown['breakdown_view_value']}}</td>
+                                <td>{{getBreakdown['status']}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
                         
                     </tbody>
                 </table>

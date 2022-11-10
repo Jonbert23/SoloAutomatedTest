@@ -12,9 +12,9 @@
                                 <h5 class="font-16 one-line-text">Search Procedure</h5>
                             </div>
                             <hr>
-                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span>  </span>
+                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> {{pendingSearchStatus}} </span>
                                 <span class="float-right">
-                                <a href="#" data-toggle="modal" data-target="#search_prosedure_modal"><i class="fas fa-external-link-alt"></i></a> 
+                                    <a href="#" data-url="{{ url_for('dboard.searchProc', useTestCode=useTestCode) }}" class="searchProcedure"><i class="fas fa-external-link-alt"></i></a> 
                                 </span>                                    
                             </p>
                         </div>
@@ -27,9 +27,9 @@
                                 <h5 class="font-16 one-line-text">Count Breakdown</h5>
                             </div>
                             <hr>
-                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span>  </span>
+                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span>  {{pendingCountStatus}} </span>
                                 <span class="float-right">
-                                <a href="#" data-toggle="modal" data-target="#count_breakdown_modal"><i class="fas fa-external-link-alt"></i></a> 
+                                <a href="#" data-url="{{ url_for('dboard.countProc', useTestCode=useTestCode) }}" class="countProcedure"><i class="fas fa-external-link-alt"></i></a> 
                                 </span>
                             </p>
                         </div>
@@ -38,7 +38,7 @@
                 <div class="col-md-12">
                     <div class="card" style="box-shadow: 1px 1px 4px #000000;"> 
                         <div class="p-3"style="height: 400px">
-                            <canvas id="services_test"></canvas>
+                            <canvas id="services_test_v2"></canvas>
                         </div>
                     </div>
                 </div>
@@ -46,3 +46,94 @@
         </div>
     </div>
 </div> <!-- end col -->
+
+<div class="append-procedure-search"></div>
+<div class="append-count-proc"></div>
+
+{% block chart %}
+<script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/unmin.js') }}"></script> 
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/metismenu.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slimscroll.js') }}"></script>
+<script src="{{ url_for('static', filename='js/waves.min.js') }}"></script>
+
+<script type="text/javascript">
+    (function services_test_v2(){
+        const ctx = document.getElementById('services_test_v2');
+        const countPassSearch = "{{ countPassSearchTest }}";
+        const countFailSearch = "{{ countFailSearchTest }}";
+        const countPassCount = "{{ countPassCountTest }}";
+        const countFailCount = "{{ countFailCountTest }}";
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Search Procedure', 'Count Breakdown'],
+                datasets: 
+                [
+                    {
+                        label: 'Pass',
+                        data: [countPassSearch, countPassCount],
+                        backgroundColor: [
+                            'rgba(38, 144, 244, 1)',
+                            'rgba(38, 144, 244, 1)',
+                        ],
+                    },
+                    {
+                        label: 'Fail',
+                        data: [countFailSearch, countFailCount],
+                        backgroundColor: [
+                            'rgba(246, 51, 21, 1)',
+                            'rgba(246, 51, 21, 1)',
+                        ],
+                    }
+                ],
+                
+            },
+            options: {
+                scales: 
+                {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    })();
+
+    $(".searchProcedure").click(function(){
+        var div = $('.append-procedure-search');
+        div.empty();
+        var url = $(this).data('url');
+        console.log(url)
+        $.ajax({
+            url: url,
+            success:function(data){
+                // console.log(data);
+                div.append(data);
+                $('#search_prosedure_modal').modal('show');
+            }
+        });
+    });
+
+    $(".countProcedure").click(function(){
+        var div = $('.append-count-proc');
+        div.empty();
+        var url = $(this).data('url');
+        console.log(url)
+        $.ajax({
+            url: url,
+            success:function(data){
+                // console.log(data);
+                div.append(data);
+                $('#count_breakdown_modal').modal('show');
+            }
+        });
+    });
+</script>
+
+{% endblock chart %}

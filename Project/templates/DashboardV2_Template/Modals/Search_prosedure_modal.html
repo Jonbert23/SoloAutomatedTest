@@ -13,13 +13,20 @@
                     <thead>
                         <tr>
                             <th>Search Procedure</th>
-                            <th>Type</th>
-                            <th>Unsearch Result</th>
+                            <th>Search Result</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        {% if getSearchProcedure is defined %}
+                            {% for getSearchProcedure in getSearchProcedure %}
+                            <tr>
+                                <td>{{getSearchProcedure['main_proc_code']}}</td>
+                                <td>{{getSearchProcedure['breakdown_proc_code']}}</td>
+                                <td>{{getSearchProcedure['status']}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
 

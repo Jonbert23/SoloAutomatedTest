@@ -8,40 +8,49 @@
                 </button>
             </div>
             <div class="modal-body">
-                 <form action="/dashboard" method="POST">
+                 <form action="{{ url_for('dboard.dashTest') }}" method="POST">
                     <div class="form-group">
                         <label>Test Code</label>
                         <div class="pb-3">
-                            <input type="text" class="form-control" required name="testcode" placeholder="Enter The Test Code"/>
+                            <input type="text" class="form-control" required name="test_code" placeholder="Enter The Test Code"/>
                         </div>
 
                         <label>Default Test</label>
                         <div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" checked disabled name="Default[]" value="breakdown"/>
-                                <label class="form-check-label">Breakdown Test</label>
+
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" checked class="custom-control-input" id="customCheck1" name="defaultTestDash[]" value="Breakdown Test" data-parsley-multiple="groups"
+                                        data-parsley-mincheck="2">
+                                <label class="custom-control-label" for="customCheck1">Breakdown Test</label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" checked disabled name="Default[]" value="production_figures"/>
-                                <label class="form-check-label">Production Figures Test</label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" checked class="custom-control-input" id="customCheck2" name="defaultTestDash[]" value="Production Figures Test" data-parsley-multiple="groups"
+                                        data-parsley-mincheck="2">
+                                <label class="custom-control-label" for="customCheck2">Production Figures Test</label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" checked disabled name="Default[]" value="count_breakdown"/>
-                                <label class="form-check-label">Services Test: Count Breakdown</label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" checked class="custom-control-input" id="customCheck3" name="defaultTestDash[]" value="Services Test: Count Breakdown" data-parsley-multiple="groups"
+                                        data-parsley-mincheck="2">
+                                <label class="custom-control-label" for="customCheck3">Services Test: Count Breakdown</label>
                             </div>
+
                         </div>
                         
                         <hr>
                         <label>Optional Test</label>
                         <div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="Optional" value="procedure_test"/>
-                                <label class="form-check-label">Services Test: Procedure Test</label>
+
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck4" name="optionalTestDash[]" value="Services Filter" data-parsley-multiple="groups"
+                                        data-parsley-mincheck="2">
+                                <label class="custom-control-label" for="customCheck4">Services Test: Procedure Test</label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input checkbox-lg" type="checkbox" name="Optional" value="lob"/>
-                                <label class="form-check-label">Line Of Business Test</label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck5" name="optionalTestDash[]" value="LOB Filter" data-parsley-multiple="groups"
+                                        data-parsley-mincheck="2">
+                                <label class="custom-control-label" for="customCheck5">Line Of Business Test</label>
                             </div>
+                            
                         </div>
                     </div>
 
