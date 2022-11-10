@@ -15,6 +15,8 @@
         {% include "Figures_Template/Sections/Search_section.html" %}
         <!--Infro Section-->
         {% include "Figures_Template/Sections/Info_section.html" %}
+        <!--Graph Section-->
+        {% include "Figures_Template/Sections/Graph_section.html" %}
         <!--Figures Section-->
         {% include "Figures_Template/Sections/Figures_section.html" %}
 
@@ -24,50 +26,60 @@
 
      <!--Test Modal-->
     {% include "Figures_Template/Modal/Fm_test_modal.html" %}
+    {% include "Figures_Template/Modal/Test_codes_modal.html" %}
     
 {% endblock content %}
 
 
 {% block swal %} 
-<script>
-    
-    function info()
-    {
-        Swal.fire
-        ({ 
-            title: 'Ways of Running Figures Matching Test', 
-            html:' <div class="text-left"><p class="text-muted mt-2 mb-0">1. Pull data from database using testcode</p> <p class="text-muted mt-2 mb-0">2. Manually run the automation test</p></div>',
-            icon: 'info'
-        })
-    }
-    document.getElementById("daily").hidden = true;
-    document.getElementById("monthly").hidden = true;
-
-    function type_of_test() {
-        var monthly_radio = document.getElementById("monthly_radio");
-        var daily_radio = document.getElementById("daily_radio");
+    <script>
         
-        if (monthly_radio.checked == true){
-            document.getElementById("morning_huddle").hidden = true;
-            document.getElementById("daily").hidden = true;
-            document.getElementById("monthly").hidden = false;
-            document.getElementById("test_month").required = true;
-            document.getElementById("test_date").required = false;
-            document.getElementById("daily_radio").checked = false;
-            document.getElementById("calendar").hidden = false;
-        } 
-        if (daily_radio.checked == true){
-            document.getElementById("morning_huddle").hidden = false;
-            document.getElementById("daily").hidden = false;
-            document.getElementById("test_date").required = true;
-            document.getElementById("monthly").hidden = true;
-            document.getElementById("test_month").required = false;
-            document.getElementById("monthly_radio").checked = false;
-            document.getElementById("calendar").hidden = true;
-            document.getElementById("calendar").checked = false;
-        } 
-    }
-</script>
+        function info()
+        {
+            Swal.fire
+            ({ 
+                title: 'Ways of Running Figures Matching Test', 
+                html:' <div class="text-left"><p class="text-muted mt-2 mb-0">1. Pull data from database using testcode</p> <p class="text-muted mt-2 mb-0">2. Manually run the automation test</p></div>',
+                icon: 'info'
+            })
+        }
+        document.getElementById("daily").hidden = true;
+        document.getElementById("monthly").hidden = true;
 
+        function type_of_test() {
+            var monthly_radio = document.getElementById("monthly_radio");
+            var daily_radio = document.getElementById("daily_radio");
+            
+            if (monthly_radio.checked == true){
+                document.getElementById("morning_huddle").hidden = true;
+                document.getElementById("daily").hidden = true;
+                document.getElementById("monthly").hidden = false;
+                document.getElementById("test_month").required = true;
+                document.getElementById("test_date").required = false;
+                document.getElementById("daily_radio").checked = false;
+                document.getElementById("calendar").hidden = false;
+            } 
+            if (daily_radio.checked == true){
+                document.getElementById("morning_huddle").hidden = false;
+                document.getElementById("daily").hidden = false;
+                document.getElementById("test_date").required = true;
+                document.getElementById("monthly").hidden = true;
+                document.getElementById("test_month").required = false;
+                document.getElementById("monthly_radio").checked = false;
+                document.getElementById("calendar").hidden = true;
+                document.getElementById("calendar").checked = false;
+            } 
+        }
+    </script>
 
+    
 {% endblock%}
+
+{% block chart %}
+    {% if has_data == 'Yes' %}
+        {% include "Figures_Template/Chart/Figures_matching_chart.html" %}
+    {% endif %}
+
+    
+{% endblock chart %}
+

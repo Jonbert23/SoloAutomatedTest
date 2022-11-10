@@ -84,6 +84,7 @@ def figuresMatching():
     
     
     data = FiguresMatching.query.order_by(FiguresMatching.id.desc()).first()
+    fm_test = FiguresMatching.query.all()
     has_data = 'No'
     
     if data:
@@ -109,6 +110,7 @@ def figuresMatching():
     
         return render_template('Figures_Template/Figures_index.html', 
                             data = data, 
+                            fm_test = fm_test,
                             net_prod_result = net_prod_result,
                             gross_prod_result = gross_prod_result,
                             collection_result = collection_result,
@@ -118,6 +120,76 @@ def figuresMatching():
                             has_data = has_data)
     else:
         return render_template('Figures_Template/Figures_index.html',has_data = has_data)
+    
+    
+
+
+@fm.route("/figures-matching/search",methods=['GET', 'POST'])
+def figures_matching_search():
+    
+    test_code = ''
+    if request.method == 'POST':
+        #Request-------------------------------------------------------------------------------------
+        test_code = request.form['test_code']
+        print("My Test Code: "+test_code)
+        
+    # fm_test = FiguresMatching.query.all()
+    
+    # for fm_tests in fm_test:
+    #     print(fm_tests.test_code)
+        
+    data = FiguresMatching.query.filter_by(test_code=test_code).first()
+    has_data = 'No'
+    
+    if data:
+        has_data = 'Yes'
+        net_prod_data = [data.dash_netProd, data.cal_netProd, data.eod_netProd, data.mh_netProd]
+        net_prod_result = Result.result(net_prod_data)
+        
+        gross_prod_data = [data.dash_grossProd, data.cal_grossProd, data.eod_grossProd, data.mh_grossProd ]
+        gross_prod_result = Result.result(gross_prod_data)
+        
+        collection_data = [data.dash_collection, data.eod_collection, data.mh_collection]
+        collection_result = Result.result(collection_data)
+        
+        adjustment_data = [data.dash_adjusment, data.eod_adjusment]
+        adjustment_result = Result.result(adjustment_data)
+        
+        pts_data = [data.dash_pts, data.eod_pts]
+        pts_result = Result.result(pts_data)
+        
+        npt_data = [data.dash_npt, data.cal_npt, data.eod_npt, data.mh_npt]
+        npt_result = Result.result(npt_data) 
+    
+        return render_template('Figures_Template/Figures_index.html', 
+                            data = data, 
+                            net_prod_result = net_prod_result,
+                            gross_prod_result = gross_prod_result,
+                            collection_result = collection_result,
+                            adjustment_result = adjustment_result,
+                            pts_result = pts_result,
+                            npt_result = npt_result,
+                            has_data = has_data)
+    else:
+        #return render_template('Figures_Template/Figures_index.html',has_data = has_data)
+        flash('Search Test Code Not Exist', 'info')
+        return redirect('/figures-matching')
+    
+    
+@fm.route("/figures-matching/all_test")
+def all_test_codes():
+    fm_test = FiguresMatching.query.all()
+    return render_template('Figures_Template/Modal/Test_codes_modal.html', fm_test=fm_test)
+
+
+
+
+
+
+
+
+
+
 
 
 class Result:
