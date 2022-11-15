@@ -139,6 +139,122 @@ def morning_huddle():
                            sc_chart = sc_chart,
                            sc_goal_prod_graph = sc_goal_prod_graph)
     
+    
+@mh.route("/morning-huddle/search", methods=['POST','GET'])
+def mh_serch():
+    test_code = ''
+    if request.method == 'POST':
+        #Request-------------------------------------------------------------------------------------
+        test_code = request.form['test_code']
+        print("My Test Code: "+test_code)
+        # return test_code
+
+    #Test Queries   
+    # mh_main = MhMain.query.order_by(MhMain.id.desc()).first()
+    # mh_brk = MhBreakdown.query.order_by(MhBreakdown.id.desc()).first()
+    # mh_sc = MhScorecard.query.order_by(MhScorecard.id.desc()).first()
+    
+    mh_data = MhMain.query.all()
+    
+    if mh_data:
+        for data in mh_data:
+            mh_all_test = TestCodes.query.filter_by(test_code=data.test_code).first()
+            print(mh_all_test.client_link)
+    
+    mh_main = MhMain.query.filter_by(test_code=test_code).first()
+    mh_brk = MhBreakdown.query.filter_by(test_code=test_code).first()
+    mh_sc = MhScorecard.query.filter_by(test_code=test_code).first()
+    # mh_mail = MhMail.query.order_by(MhMail.id.desc()).first()
+    mh_main_len = MhMain.query.order_by(MhMain.id.desc()).count()
+
+    if not mh_main:
+        flash('Search test code not exist', 'info')
+        return redirect('/morning-huddle')
+    
+    
+    #Test Results
+    if mh_main_len != 0:
+        brk_ytr_result = MhResult.brk_ytr_result(mh_main, mh_brk)
+        brk_tdy_result = MhResult.brk_tdy_result(mh_main, mh_brk)
+        brk_tmw_result = MhResult.brk_tmw_result(mh_main, mh_brk)
+        sc_result = MhResult.sc_result(mh_main, mh_sc)
+        # mail_ytr_result = MhResult.mail_ytr_result(mh_mail, mh_brk)
+        # mail_tdy_result = MhResult.mail_tdy_result(mh_mail, mh_brk)
+        # mail_tmw_result = MhResult.mail_tmw_result(mh_mail, mh_brk)
+        
+    else:
+        brk_ytr_result = 0
+        brk_tdy_result = 0
+        brk_tmw_result = 0
+        sc_result = 0
+        # mail_ytr_result = 0
+        # mail_tdy_result = 0
+        # mail_tmw_result = 0
+    
+    #Graph Data
+    if mh_main_len != 0:
+        brk_ytr_chart = Graph.brk_chart(brk_ytr_result)
+        brk_tdy_chart = Graph.brk_chart(brk_tdy_result)
+        brk_tmw_chart = Graph.brk_chart(brk_tmw_result)
+        sc_chart = Graph.brk_chart(sc_result)
+        sc_goal_prod_graph = Graph.sc_goal_prod_chart(mh_main, mh_sc)
+    else:
+        brk_ytr_chart = 0
+        brk_tdy_chart = 0
+        brk_tmw_chart = 0
+        sc_chart = 0
+        sc_goal_prod_graph =0
+    
+    if mh_main_len != 0: 
+        test = TestCodes.query.filter_by(test_code=mh_main.test_code).first()
+    else:
+        test = {
+            'client_name': 'No Performed Test',
+            'client_link': 'No Test',
+            'test_date': '--/--/--'
+        }
+
+    return render_template('Mh_Template/Mh_index.html',
+                           test = test,
+                           mh_main = mh_main,
+                           mh_brk = mh_brk,
+                           mh_sc = mh_sc,
+                           brk_ytr_result = brk_ytr_result,
+                           brk_tdy_result = brk_tdy_result,
+                           brk_tmw_result = brk_tmw_result,
+                           sc_result = sc_result,
+                           brk_ytr_chart = brk_ytr_chart,
+                           brk_tdy_chart = brk_tdy_chart,
+                           brk_tmw_chart = brk_tmw_chart,
+                           sc_chart = sc_chart,
+                           sc_goal_prod_graph = sc_goal_prod_graph)
+    
+
+@mh.route("/morning-huddle/all_test")
+def all_test():
+    mh_data = MhMain.query.all()
+    mh_all_test = []
+    
+    if mh_data:
+        for data in mh_data:
+            all_test = TestCodes.query.filter_by(test_code=data.test_code).first()
+            
+            data_dictionary = {
+                'url': all_test.client_link,
+                'client': all_test.client_name,
+                'date': all_test.test_date,
+                'test_code': all_test.test_code
+            }
+            mh_all_test.append(data_dictionary)
+    
+    data_len = len(mh_all_test)
+              
+    return render_template('Mh_Template/Modal/Mh_all_test_modal.html', mh_all_test=mh_all_test, data_len = data_len)
+    
+    
+
+
+    
 class Graph:
 
     def brk_chart(results):

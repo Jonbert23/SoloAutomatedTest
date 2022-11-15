@@ -1,4 +1,4 @@
-<div id="fm_test_code" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="mh_test_code" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,26 +8,26 @@
                 </button>
             </div>
             <div class="modal-body">
-                 <table id="fm_all_test" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                 <table id="mh_all_test" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
                             <th>Test Code</th>
-                            <th>Client URl</th>
-                            <th>Test Type</th>
+                            <th>Client Name</th>
+                            <th>Client URL</th>
                             <th>Test Date</th>
-                            <th>Test Param</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        {% for test in fm_test%}
+                        {% for i in range(data_len) %}
                             <tr>
-                                <td>{{test.test_code}}</td>
-                                <td>{{test.client_url}}</td>
-                                <td>{{test.test_type}}</td>
-                                <td>{{test.test_date}}</td>
-                                <td>{{test.query_param}}</td>
+                                <td>{{ mh_all_test[i]['test_code']}}</td>
+                                <td>{{ mh_all_test[i]['client']}}</td>
+                                <td>{{ mh_all_test[i]['url']}}</td>
+                                <td>{{ mh_all_test[i]['date']}}</td>
                             </tr>
-                        {% endfor %}
+                        {% endfor%}
+                        
                         
                     </tbody>
                 </table>
@@ -39,6 +39,6 @@
 
 <script>
     $(document).ready(function () {
-        $('#fm_all_test').DataTable();
+        $('#mh_all_test').DataTable();
     });
 </script>

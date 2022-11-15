@@ -44,6 +44,17 @@
 
 {% endblock content %}
 
+
+{% block datatable %}
+    <script>
+        $(document).ready(function () {
+            $('#mh_all_test').DataTable();
+        });
+        
+    </script>
+{% endblock datatable %}
+
+
 {% block chart %}
     <script src="{{ url_for('static', filename='charts/mh_display.js') }}"></script>
 
@@ -226,3 +237,5 @@
     </script>
 
 {% endblock chart %}
+
+

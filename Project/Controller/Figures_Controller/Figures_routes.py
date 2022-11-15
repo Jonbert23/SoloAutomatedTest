@@ -182,16 +182,6 @@ def all_test_codes():
     return render_template('Figures_Template/Modal/Test_codes_modal.html', fm_test=fm_test)
 
 
-
-
-
-
-
-
-
-
-
-
 class Result:
 
     def result(data_arary):
