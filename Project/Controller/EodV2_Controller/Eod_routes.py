@@ -73,3 +73,56 @@ def eodForm():
     else:
         return render_template("EodV2_template/Eod_index.html", 
                                empty_test = empty_test)
+        
+        
+@eod_v2.route("/eod-form-v2/search", methods=["POST", "GET"])
+@login_required
+def eodForm_search():
+    test_code = ''
+    if request.method == 'POST':
+        test_code = request.form['testcode']
+        
+    eod_main = EodMain.query.filter_by(test_code=test_code).first()
+    eod_brk = EodBrk.query.filter_by(test_code=test_code).first()
+    
+    empty_test = 'Yes'
+    if eod_main:
+        empty_test = 'No'
+        latest_test = TestCodes.query.filter_by(test_code=eod_main.test_code).first()
+        eod_result = EodResult.Brk_result(eod_main, eod_brk)
+        eod_graph = EodResult.eod_graph_result(eod_result)  
+
+        return render_template("EodV2_template/Eod_index.html",
+                               eod_main = eod_main,
+                               eod_brk = eod_brk,
+                               eod_result = eod_result,
+                               eod_graph = eod_graph,
+                               latest_test = latest_test,
+                               empty_test = empty_test)
+    else:
+        flash('Searched test code not exist', 'info')
+        return redirect('/eod-form-v2')
+    
+    
+@eod_v2.route("/eod-form-v2/all_test", methods=["POST", "GET"])
+@login_required
+def all_test_codes():
+    eod_data = EodMain.query.all()
+    eod_all_test = []
+    
+    if eod_data:
+        for data in eod_data:
+            all_test = TestCodes.query.filter_by(test_code=data.test_code).first()
+            
+            data_dictionary = {
+                'url': all_test.client_link,
+                'client': all_test.client_name,
+                'date': all_test.test_date,
+                'test_code': all_test.test_code
+            }
+            eod_all_test.append(data_dictionary)
+    
+    data_len = len(eod_all_test)
+              
+    return render_template('EodV2_template/Modal/Eod_all_test_modal.html', eod_all_test=eod_all_test, data_len=data_len)
+    

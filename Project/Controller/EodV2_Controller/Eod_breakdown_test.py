@@ -30,9 +30,6 @@ class EodBreakdown:
         loader = wait.until(EC.element_to_be_clickable((By.XPATH, EodXpath.update_btn)))
         action =  ActionChains(driver)
         
-       
-       
-        
         metric_counter = driver.find_elements(By.XPATH, EodXpath.metric_counter) 
         metric_counter = len(metric_counter)
         # print(metric_counter)
@@ -72,18 +69,18 @@ class EodBreakdown:
                 print(brk_data)
                 print()
                 
-            if metric_name == 'Adjustments' or metric_name == 'Total adjustment':
-                metric_data = driver.find_element(By.XPATH, EodXpath.metric_data(row+1)).get_attribute('value')
-                brk_data = EodBreakdown.collect_brk_data(driver, row, metric_name, action)
+            # if metric_name == 'Adjustments' or metric_name == 'Total adjustment':
+            #     metric_data = driver.find_element(By.XPATH, EodXpath.metric_data(row+1)).get_attribute('value')
+            #     brk_data = EodBreakdown.collect_brk_data(driver, row, metric_name, action)
                 
-                eod_main.adjustments = metric_data
-                eod_brk.adjustments = brk_data
-                db.session.commit()
+            #     eod_main.adjustments = metric_data
+            #     eod_brk.adjustments = brk_data
+            #     db.session.commit()
                 
-                print(metric_name)
-                print(metric_data)
-                print(brk_data)
-                print()
+            #     print(metric_name)
+            #     print(metric_data)
+            #     print(brk_data)
+            #     print()
                 
             if metric_name == 'Collection' or metric_name == 'Total collection':
                 metric_data = driver.find_element(By.XPATH, EodXpath.metric_data(row+1)).get_attribute('value')
