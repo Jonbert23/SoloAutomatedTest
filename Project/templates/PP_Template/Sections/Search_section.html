@@ -2,15 +2,53 @@
     <div class="col-xl-12">
     <div class="card m-b-30">
         <div class="card-body">  
-            <form class="form-inline">
+            <form class="form-inline" method="POST" action="/patient-portal/search">
                 <div class="form-group">
                     <label for="test_code">Search Test Result: </label> 
-                    <input type="text" class="form-control ml-4" id="test_code" placeholder="Enter Test Code Here">
+                    <input type="text" class="form-control ml-4" id="test_code" name="test_code" placeholder="Enter Test Code Here" required >
                 </div>
                 <button type="submit" class="btn btn-primary ml-2">Search</button>
                 
             </form>
+
+            <div class="float-right" style="margin-top: -40px">
+                <a href="#" data-url="{{url_for('pp.patient_portal_alltest')}}" class="pp_all_test">
+                  <button class="btn btn-primary ml-2">View Test Codes</button>
+                </a>
+            </div>
+
         </div>
     </div>
 </div>
 </div> <!-- end col -->
+
+<div class="append_pp_all_test"></div>
+
+{% block chart %}
+
+<script src="{{ url_for('static', filename='js/unmin.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/metismenu.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slimscroll.js') }}"></script>
+<script src="{{ url_for('static', filename='js/waves.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
+
+<script>
+  $(".pp_all_test").click(function () {
+    var div = $(".append_pp_all_test");
+    div.empty();
+    var url = $(this).data("url");
+    console.log(url);
+
+    $.ajax({
+      url: url,
+      success:function(data){
+          console.log(data);
+          div.append(data);
+          $("#pp_test_code").modal("show");
+      }
+  });
+  });
+</script>
+
+{% endblock chart %}

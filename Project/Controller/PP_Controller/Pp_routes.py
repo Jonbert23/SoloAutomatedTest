@@ -77,9 +77,11 @@ def patient_portal():
         GlobalLogin.Login(driver, client_url, client_username, client_password)
         
         #Saving Test Logs
+    
         save_test_logs = PpTestcodeLogs(
             user_id = current_user.id,
-            test_code = test_code 
+            test_code = test_code,
+            client_url = client_url,
         )
         db.session.add(save_test_logs)
         db.session.commit()
@@ -210,8 +212,15 @@ def patient_portal():
     latest_test = PpTestcodeLogs.query.order_by(PpTestcodeLogs.id.desc()).first()
     #print(latest_test.test_code)
     
+    all_test = PpTestcodeLogs.query.all()
+    
+    for test in all_test:
+        print(test.test_code)
+    
+    all_test = ''
     if latest_test:
         latest_test = latest_test.test_code
+        all_test = PpTestcodeLogs.query.order_by(PpTestcodeLogs.id.desc()).first()
     else:
         latest_test = "No Data"
     
@@ -329,6 +338,7 @@ def patient_portal():
         
          
     return render_template('PP_Template/PP_index.html', 
+        all_test = all_test,
         latest_test = latest_test,
         age_filter_exist = age_filter_exist, age_filter = age_filter, 
         pir_filter_exist = pir_filter_exist, pir_filter = pir_filter,
@@ -347,3 +357,168 @@ def patient_portal():
         perio_care_exist = perio_care_exist, perio_care_filter = perio_care_filter,
         visit_filter_exist = visit_filter_exist, visit_filter = visit_filter,
     )
+
+
+
+
+@pp.route("/patient-portal/search", methods=['POST','GET'])
+def patient_portal_search():
+   
+    test_code = 'no_test'
+    if request.method == 'POST':
+        test_code = request.form['test_code']
+        
+    all_test = PpTestcodeLogs.query.all()
+    #print(latest_test.test_code)
+    
+    if all_test:
+        latest_test = PpTestcodeLogs.query.filter_by(test_code=test_code).first()
+        latest_test = latest_test.test_code
+        all_test =  PpTestcodeLogs.query.filter_by(test_code=test_code).first()
+        
+        if not latest_test:
+            flash('Search test code not exist', 'info')
+            return redirect('/patient-portal')
+    else:
+        flash('No data to search', 'info')
+        return redirect('/patient-portal')
+    
+    age_filter_exist = 'No'
+    age_filter = PpAgeFilter.query.filter_by(test_code=latest_test).first()
+    
+    pir_filter_exist = 'No'
+    pir_filter = PpPIRFilter.query.filter_by(test_code=latest_test).first()
+    
+    balance_filter_exist = 'No'
+    balance_filter = PpBalanceFilter.query.filter_by(test_code=latest_test).first()
+    
+    sir_filter_exist = 'No'
+    sir_filter = PpSIRFilter.query.filter_by(test_code=latest_test).first()
+    
+    rb_filter_exist = 'No'
+    rb_filter = PpRemainingBenefits.query.filter_by(test_code=latest_test).first()
+    
+    gender_filter_exist = 'No'
+    gender_filter = PpGenderFilter.query.filter_by(test_code=latest_test).first()
+    
+    status_filter_exist = 'No'
+    status_filter = PpStatusFilter.query.filter_by(test_code=latest_test).first()
+    
+    sched_filter_exist = 'No'
+    sched_filter = PpScheduleFilter.query.filter_by(test_code=latest_test).first()
+    
+    uninsured_filter_exist = 'No'
+    uninsured_filter = PpUninsuredFilter.query.filter_by(test_code=latest_test).first()
+    
+    firstseen_filter_exist = 'No'
+    firstseen_filter = PpFirstseenFilter.query.filter_by(test_code=latest_test).first()
+    
+    lastseen_filter_exist = 'No'
+    lastseen_filter = PpLastSeenFilter.query.filter_by(test_code=latest_test).first()
+    
+    fhv_filter_exist = 'No'
+    fhv_filter = PpFutureHygVisitFilter.query.filter_by(test_code=latest_test).first()
+    
+    fv_filter_exist = 'No'
+    fv_filter = PpFutureVisitFilter.query.filter_by(test_code=latest_test).first()
+    
+    lhv_filter_exist = 'No'
+    lhv_filter = PpLastHygVisitFilter.query.filter_by(test_code=latest_test).first()
+    
+    perio_care_exist = 'No'
+    perio_care_filter = PpPerioCareFilter.query.filter_by(test_code=latest_test).first()
+    
+    visit_filter_exist = 'No'
+    visit_filter = PpVisitFilter.query.filter_by(test_code=latest_test).first()
+    
+    if age_filter:
+        age_filter_exist = 'Yes'
+        age_filter = PpAgeFilter.query.all()
+        
+    if pir_filter:
+        pir_filter_exist = 'Yes'
+        pir_filter = PpPIRFilter.query.all()
+        
+    if balance_filter:
+        balance_filter_exist = 'Yes'
+        balance_filter = PpBalanceFilter.query.all()
+        
+    if sir_filter:
+        sir_filter_exist = 'Yes'
+        sir_filter = PpSIRFilter.query.all()
+    
+    if rb_filter:
+        rb_filter_exist = 'Yes'
+        rb_filter = PpRemainingBenefits.query.all()
+        
+    if gender_filter:
+        gender_filter_exist = 'Yes'
+        gender_filter = PpGenderFilter.query.all()
+                
+    if status_filter:
+        status_filter_exist = 'Yes'
+        status_filter = PpStatusFilter.query.all()
+    
+    if sched_filter:
+        sched_filter_exist = 'Yes'
+        sched_filter = PpScheduleFilter.query.all()
+        
+    if uninsured_filter:
+        uninsured_filter_exist = 'Yes'
+        uninsured_filter = PpUninsuredFilter.query.all()
+   
+    if firstseen_filter:
+        firstseen_filter_exist = 'Yes'   
+        firstseen_filter = PpFirstseenFilter.query.all()
+        
+    if lastseen_filter:
+        lastseen_filter_exist = 'Yes'
+        lastseen_filter =  PpLastSeenFilter.query.all()
+        
+    if fhv_filter:
+        fhv_filter_exist = 'Yes'
+        fhv_filter = PpFutureHygVisitFilter.query.all()
+        
+    if fv_filter:
+        fv_filter_exist = 'Yes'
+        fv_filter = PpFutureVisitFilter.query.all()
+        
+    if lhv_filter:
+        lhv_filter_exist = 'Yes'
+        lhv_filter = PpLastHygVisitFilter.query.all()
+        
+    if perio_care_filter:
+        perio_care_exist = 'Yes'
+        perio_care_filter = PpPerioCareFilter.query.all()
+        
+    if visit_filter:
+        visit_filter_exist = 'Yes'
+        visit_filter = PpVisitFilter.query.all() 
+        
+         
+    return render_template('PP_Template/PP_index.html', 
+        all_test = all_test,
+        latest_test = latest_test,
+        age_filter_exist = age_filter_exist, age_filter = age_filter, 
+        pir_filter_exist = pir_filter_exist, pir_filter = pir_filter,
+        balance_filter_exist = balance_filter_exist, balance_filter = balance_filter,
+        sir_filter_exist = sir_filter_exist, sir_filter = sir_filter,
+        rb_filter_exist = rb_filter_exist, rb_filter = rb_filter,
+        gender_filter_exist = gender_filter_exist, gender_filter = gender_filter,
+        status_filter_exist = status_filter_exist, status_filter = status_filter,
+        sched_filter_exist = sched_filter_exist, sched_filter = sched_filter,
+        uninsured_filter_exist = uninsured_filter_exist, uninsured_filter = uninsured_filter,
+        firstseen_filter_exist = firstseen_filter_exist, firstseen_filter = firstseen_filter,
+        lastseen_filter_exist = lastseen_filter_exist, lastseen_filter = lastseen_filter, 
+        fhv_filter_exist = fhv_filter_exist, fhv_filter = fhv_filter,
+        fv_filter_exist = fv_filter_exist, fv_filter = fv_filter,
+        lhv_filter_exist = lhv_filter_exist, lhv_filter = lhv_filter,
+        perio_care_exist = perio_care_exist, perio_care_filter = perio_care_filter,
+        visit_filter_exist = visit_filter_exist, visit_filter = visit_filter,
+    )
+    
+    
+@pp.route("/patient-portal/all_test", methods=['POST','GET'])
+def patient_portal_alltest():
+    all_test = PpTestcodeLogs.query.all()
+    return render_template('PP_Template/Modals/all_test_modal.html', all_test=all_test)

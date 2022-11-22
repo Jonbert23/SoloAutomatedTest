@@ -578,6 +578,8 @@ class PpTestcodeLogs(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
     test_code = db.Column(db.String(100), nullable=True)
+    client_url = db.Column(db.String(100), nullable=True)
+    # filters = db.Column(db.String(100), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     
 class PpAgeFilter(UserMixin, db.Model):
