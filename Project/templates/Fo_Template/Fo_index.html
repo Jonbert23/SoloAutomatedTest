@@ -10,19 +10,37 @@
 
 {% block content%}
     <!--Info Section-->
-    {% include "Fo_Template/Sections/Search_section.html" %}
+    {% if trigger == "On" %}
+        {% include "Fo_Template/Sections/Search_section.html" %}
 
-    <!--Graph Section-->
-    {% include "Fo_Template/Sections/Info_section.html" %}
+        <!--Graph Section-->
+        {% include "Fo_Template/Sections/Info_section.html" %}
 
-    <!--Graph Section-->
-    {% include "Fo_Template/Sections/Graph_section.html" %}
+        <!--Graph Breakdown Section-->
+        {% include "Fo_Template/Sections/Graph_section.html" %}
 
-    <!--Brk Section-->
-    {% include "Fo_Template/Sections/Kpi_brk_section.html" %}
+        <!--Graph Calculation Section-->
+        {% include "Fo_Template/Sections/Graph_Calculation_section.html" %}
 
-     <!--Test Modal-->
-     {% include "Fo_Template/Modal/Fo_modal.html" %}
+        <!--Brk Section-->
+        {% include "Fo_Template/Sections/Kpi_brk_section.html" %}
+
+        <!--Test Modal-->
+        {% include "Fo_Template/Modal/Fo_modal.html" %}
+    {% else %}
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card m-b-30">
+                    <div class="card-body">  
+                        <h4>No tests has been stored in the database. Run some tests to see results.</h4>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+
+        <!--Test Modal-->
+        {% include "Fo_Template/Modal/Fo_modal.html" %}
+    {% endif %}
 
 
 {% endblock content%}

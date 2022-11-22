@@ -2,10 +2,10 @@
     <div class="col-md-12">
         <div class="card m-b-30">
             <div class="card-body">
-                <h4 class="mt-0 header-title">Breakdown Test Result</h4>
+                <h4 class="mt-0 header-title">Calculation Test Result</h4>
                 <hr>
                 <div style="height: 250px">
-                    <canvas id="breakdown_chart_pass_fail"></canvas>
+                    <canvas id="calculation_chart_pass_fail"></canvas>
                 </div>
                 
             </div>
@@ -35,11 +35,11 @@
 <script src="{{ url_for('static', filename='js/waves.min.js') }}"></script>
 
 <script type="text/javascript">
-    (function breakdown_chart_pass_fail()
+    (function calculation_chart_pass_fail()
     {
-        const sample = document.getElementById('breakdown_chart_pass_fail');
-        const pass = "{{ countPassBreakdownTest }}";
-        const fail = "{{ countFailBreakdownTest }}";
+        const sample = document.getElementById('calculation_chart_pass_fail');
+        const pass = "{{ countPassCalculationTest }}";
+        const fail = "{{ countFailCalculationTest }}";
 
         const myChart = new Chart(sample, {
             type: 'horizontalBar',

@@ -4,93 +4,40 @@
         <hr style="border-top: 7px solid #0066ff">
     </div>
     
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-heading p-1 pl-4 pr-3">
-                <div>
-                    <h5 class="font-12 one-line-text">Avg Production<span class="float-right">Pass</span></h5>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6 border-right">
-                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">$12,345</h3>
+    
+    {% if getAllKpisTestInTestCode is defined %}
+        {% for getAllKpisTestInTestCode in getAllKpisTestInTestCode %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-heading p-1 pl-4 pr-3">
+                    <div>
+                        {% if getAllKpisTestInTestCode['match_brkdwn_status'] == "Pass" %}
+                            <h5 class="font-12 one-line-text">{{getAllKpisTestInTestCode['tile_name']}}
+                                <span class="float-right">{{getAllKpisTestInTestCode['match_brkdwn_status']}}</span>
+                            </h5>
+                        {% else %}
+                            <h5 class="font-12 one-line-text" style="color:red">{{getAllKpisTestInTestCode['tile_name']}}<span class="float-right">{{getAllKpisTestInTestCode['match_brkdwn_status']}}</span></h5>
+                        {% endif %}
                     </div>
-                    
-                    <div class="col-md-6">
-                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">$12,345</h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6 border-right">
+                            <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
+                            <h3 class="text-center font-20">{{getAllKpisTestInTestCode['main_tile_current']}}</h3>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
+                            <h3 class="text-center font-20">{{getAllKpisTestInTestCode['breakdown_tile_current']}}</h3>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        {% endfor %}
+    {% endif %}
 
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-heading p-1 pl-4 pr-3">
-                <div>
-                    <h5 class="font-12 one-line-text">Avg Collection<span class="float-right">Pass</span></h5>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6 border-right">
-                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">$12,345</h3>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">$12,345</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-heading p-1 pl-4 pr-3">
-                <div>
-                    <h5 class="font-12 one-line-text" style="color:red">Avg Adjustment<span class="float-right">Fail</span></h5>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6 border-right">
-                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">$12,345</h3>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">$12,346</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-heading p-1 pl-4 pr-3">
-                <div>
-                    <h5 class="font-12 one-line-text">New Patine Per Day<span class="float-right">Pass</span></h5>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6 border-right">
-                        <p class="text-muted mt-2 mb-0 pb-2">Main View</p>
-                        <h3 class="text-center font-20">12</h3>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <p class="text-muted mt-2 mb-0 pb-2 one-line-text">Breakdown</p>
-                        <h3 class="text-center font-20">12</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
 </div>
 

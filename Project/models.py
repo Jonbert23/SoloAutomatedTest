@@ -322,6 +322,20 @@ class DashboardV2DefaultLOBTest(UserMixin, db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False)
 
+class FrontOfficeKpisTest(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    test_code = db.Column(db.String(100))
+    section_name = db.Column(db.String(100))
+    tile_name = db.Column(db.String(100))
+    main_tile_current = db.Column(db.String(100))
+    main_tile_goal = db.Column(db.String(100))
+    breakdown_tile_current = db.Column(db.String(100))
+    cal_status = db.Column(db.String(100))
+    match_brkdwn_status = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
+
 class FiguresMatching(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
