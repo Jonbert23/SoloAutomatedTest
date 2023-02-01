@@ -56,3 +56,10 @@ def foTest():
     allData = Fo_selenium.login(get_test_code)
 
     return redirect(url_for('fo.frontOffice'))
+
+@fo.route("/front-office-all-test")
+@login_required
+def foAllTestCode():
+    getFOKpisTesting = FrontOfficeKpisTest.query.join(TestCodes, TestCodes.test_code == FrontOfficeKpisTest.test_code).with_entities(FrontOfficeKpisTest.test_code, TestCodes.client_name, TestCodes.client_link, TestCodes.test_date).group_by(FrontOfficeKpisTest.test_code).all()
+    print(getFOKpisTesting) 
+    return render_template('Calendar_Template/Modals/all_test_modal.html', getFOKpisTesting=getFOKpisTesting)
